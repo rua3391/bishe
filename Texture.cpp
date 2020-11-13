@@ -13,6 +13,7 @@ bool Texture::init(std::string path, DWORD num)
 {
     if(num >= 16)
     {
+		
         error("纹理单元超出上限");//实际上最新glew支持32个
         return false;
     }
