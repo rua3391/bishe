@@ -122,7 +122,6 @@ bool Shader::_checkCompile(DWORD id, const std::string& type)
 
 void Shader::useProgram()
 {
-	
 	glUseProgram(_ID);
 }
 
