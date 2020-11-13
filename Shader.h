@@ -48,15 +48,12 @@ class Shader : public cModule
 		 */ 
 		void final();
 		/**
-		 * \brief 设置Shader中uniform vec4向量变量值
+		 * \brief 设置Shader中uniform SDWORD变量值
 		 * \param name uniform变量名字 
-		 * \param x x值 
-		 * \param y y值 
-		 * \param z z值 
-		 * \param w w值
+		 * \param num SDWORD值 
 		 * 
 		 */
-		void uniformSetvec4(const std::string &name, FLOAT x, FLOAT y, FLOAT z, FLOAT w);
+		void uniformSet1i(const std::string &name, SDWORD num);
 		/**
 		 * \brief 设置Shader中uniform float变量值
 		 * \param name uniform变量名字 
@@ -64,20 +61,42 @@ class Shader : public cModule
 		 * 
 		 */
 		void uniformSet1f(const std::string &name, FLOAT num);
-		/*
-		* \brief 设置Shader中uniform DWORD变量值
-		* \param name uniform变量名字 
-		* \param num DWORD值 
-		* 
-		*/
-		void uniformSet1i(const std::string &name, DWORD num);
 		/**
-		 * \brief 设置Shader中uniform mat4变量值
+		 * \brief 设置Shader中uniform bool类型变量值
 		 * \param name uniform变量名字 
-		 * \param matrix 四阶矩阵 
+		 * \param value value值
+		 *  
+		 */
+		void uniformSetBool(const std::string &name, bool value);
+		/**
+		 * \brief 设置Shader中uniform SDWORD变量值
+		 * \param name uniform变量名字 
+		 * \param num SDWORD值 
 		 * 
 		 */
-		void uniformSetmat4(const std::string &name, glm::mat4 &matrix);
+		void uniformSetInt(const std::string &name, SDWORD num);
+		/**
+		 * \brief 设置Shader中uniform float变量值
+		 * \param name uniform变量名字 
+		 * \param num float值 
+		 * 
+		 */
+		void uniformSetFloat(const std::string &name, FLOAT num);
+		/**
+		 * \brief 设置Shader中uniform vec2向量变量值
+		 * \param name uniform变量名字 
+		 * \param x x值 
+		 * \param y y值 
+		 * 
+		 */
+		void uniformSetvec2(const std::string &name, FLOAT x, FLOAT y);
+		/**
+		 * \brief 设置Shader中uniform vec2向量变量值
+		 * \param name uniform变量名字 
+		 * \param target vec2向量 
+		 * 
+		 */
+		void uniformSetvec2(const std::string &name, glm::vec2 &target);
 		/**
 		 * \brief 设置Shader中uniform vec3向量变量值
 		 * \param name uniform变量名字 
@@ -94,6 +113,44 @@ class Shader : public cModule
 		 * 
 		 */
 		void uniformSetvec3(const std::string &name, glm::vec3 &target);
+		/**
+		 * \brief 设置Shader中uniform vec4向量变量值
+		 * \param name uniform变量名字 
+		 * \param x x值 
+		 * \param y y值 
+		 * \param z z值 
+		 * \param w w值
+		 * 
+		 */
+		void uniformSetvec4(const std::string &name, FLOAT x, FLOAT y, FLOAT z, FLOAT w);
+		/**
+		 * \brief 设置Shader中uniform vec4向量变量值
+		 * \param name uniform变量名字
+		 * \param target vec4向量
+		 * 
+		 */ 
+		void uniformSetvec4(const std::string &name, glm::vec4 &target);
+		/**
+		 * \brief 设置Shader中uniform mat4变量值
+		 * \param name uniform变量名字 
+		 * \param matrix 二阶矩阵 
+		 * 
+		 */
+		void uniformSetmat2(const std::string &name, glm::mat2 &matrix);
+		/**
+		 * \brief 设置Shader中uniform mat4变量值
+		 * \param name uniform变量名字 
+		 * \param matrix 三阶矩阵 
+		 * 
+		 */
+		void uniformSetmat3(const std::string &name, glm::mat3 &matrix);
+		/**
+		 * \brief 设置Shader中uniform mat4变量值
+		 * \param name uniform变量名字 
+		 * \param matrix 四阶矩阵 
+		 * 
+		 */
+		void uniformSetmat4(const std::string &name, glm::mat4 &matrix);
 	private:
 		/**
 		 * \brief Shader program id

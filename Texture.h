@@ -51,10 +51,4 @@ class Texture : public cModule
         DWORD _ID; 
 };
 
-
-
-
-
-
-
 #endif

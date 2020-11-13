@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include "stb_image.h"
 
-Texture::Texture() : cModule("TEXTURE")
+Texture::Texture() : cModule("TEXTURE"), _ID(0)
 {
 }
 
@@ -43,6 +43,7 @@ bool Texture::init(std::string path, DWORD num)
         return false;
 	}
 	stbi_image_free(data);
+	debug("%u号纹理初始化成功", num);
     return true;
 }
 
