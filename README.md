@@ -1,4 +1,4 @@
-2020/11/10 新增-日志功能 zLog.h\n
+2020/11/10 新增-日志功能 zLog.h
 2020/11/10 新增-redis服务器客户端脚本 redisserver.sh
 2020/11/10 新增-redis客户端启动脚本 rediscli.sh 
 2020/11/11 新增-模块基类, 将shader和camera划为模块 cModule.h
