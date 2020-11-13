@@ -17,7 +17,7 @@ bool Texture::init(std::string path, DWORD num)
         return false;
     }
     DWORD Texture1;
-	glGenTextures(1, &_ID);
+	glGenTextures(1, &_ID);//测试git
     glActiveTexture(GL_TEXTURE0 + num);
 	glBindTexture(GL_TEXTURE_2D, _ID);
 
