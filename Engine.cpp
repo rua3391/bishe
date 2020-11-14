@@ -5,7 +5,12 @@
 #include "Shader.h"
 #include "Texture.h"
 
-Engine::Engine() : _first(true), _lastx(0.0), _lasty(0.0)
+Engine::Engine() : 
+	_first(true), 
+	_lastx(0.0), 
+	_lasty(0.0), 
+	screenx(1200), 
+	screeny(960)
 {
 
 }
@@ -202,14 +207,8 @@ int main(void)
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);
-
 		// glClearColor(0.2, 0.3, 0.3, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		// glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, Texture1);
-		// glActiveTexture(GL_TEXTURE2);
-		//glBindTexture(GL_TEXTURE_2D, Texture2);
-
 		FLOAT cur_time = glfwGetTime();
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
@@ -240,7 +239,6 @@ int main(void)
 		S.uniformSetvec3("L.diffuselight", diffuseColor);
 		S.uniformSetvec3("L.specularlight", 1.0f, 1.0f, 1.0f);
 		S.uniformSetvec3("camerapos", Camera::getInstance()->getCameraPosition());
-
 		S.uniformSetvec3("M.ambientcolor", 1.0f, 0.5f, 0.31f);
 		S.uniformSetvec3("M.diffuse", 1.0f, 0.5f, 0.31f);
 		S.uniformSetvec3("M.specular", 0.5f, 0.5f, 0.5f);
@@ -264,7 +262,6 @@ int main(void)
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
 	glfwTerminate();
 	Engine::getInstance()->final();
 	return 0;

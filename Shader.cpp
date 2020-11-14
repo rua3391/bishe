@@ -15,11 +15,10 @@ Shader::~Shader()
 {
 }
 
-bool Shader::init(std::string vertex_file, std::string fragment_file)
+bool Shader::init(const std::string &vertex_file, const std::string &fragment_file)
 {
 	std::fstream vshader_file, fragshader_file;//文件输入输出流
 	std::string vertex_code, fragment_code;//顶点着色器片元着色器代码
-
 	vshader_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fragshader_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 

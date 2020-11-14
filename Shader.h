@@ -31,7 +31,7 @@ class Shader : public cModule
 		 * \return 初始化是否成功
 		 * 
 		 */ 
-		bool init(std::string vertex_file, std::string fragment_file);
+		bool init(const std::string &vertex_file, const std::string &fragment_file);
 		/**
 		 * \brief 序列化 
 		 * 

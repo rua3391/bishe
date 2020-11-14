@@ -57,6 +57,17 @@ class Engine : public zSingletonBase<Engine>
          * 
          */  
         void final();
+    public:
+        /**
+         * \brief 屏幕宽度
+         * 
+         */
+        DWORD screenx;
+        /**
+         * \brief 屏幕高度
+         * 
+         */
+        DWORD screeny;  
     private:
         /**
          * \brief 第一次移动
@@ -73,7 +84,6 @@ class Engine : public zSingletonBase<Engine>
          * 
          */
         DFLOAT _lasty;
-          
 };
 
 #endif
