@@ -11,4 +11,6 @@
 2020/11/12 优化-主进程初始化逻辑调整, 补全日志  
 2020/11/13 优化-着色器类优化, 主函数优化  
 2020/11/13 新增-纹理类 Texture.h Texture.cpp  
-2020/11/13 功能调整-补全着色器uniform变量接口 Shader.cpp Shader.h
+2020/11/13 功能调整-补全着色器uniform变量接口 Shader.cpp Shader.h  
+2020/11/14 新增-新增光源类及物件类 Object.h Object.cpp Light.h Light.cpp  
+2020/11/14 功能调整-物件类功能调整, 优化主函数, 着色器纹理接入物件类 Object.cpp  

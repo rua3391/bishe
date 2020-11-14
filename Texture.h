@@ -42,13 +42,20 @@ class Texture : public cModule
          * \brief 释放资源
          * 
          */
-        void final(); 
-    private:
+        void final();
+    public:
         /**
-         * \brief 纹理id
+         * \brief 激活并绑定纹理单元
+         * \param num 第num个纹理单元
          * 
          */
-        DWORD _ID; 
+        void activeTexture(DWORD num);   
+    private:
+        /**
+         * \brief 激活纹理单元与纹理id映射关系
+         * 
+         */
+        std::map<DWORD, DWORD> _unit;
 };
 
 #endif

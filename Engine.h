@@ -4,8 +4,7 @@
 #include "zSdk.h"
 #include "zSingleton.h"
 
-class Shader;
-class Texture;
+class Object;
 class Engine : public zSingletonBase<Engine>
 {
     public:
@@ -21,10 +20,15 @@ class Engine : public zSingletonBase<Engine>
         ~Engine();
     public:
         /**
-         * \brief 着色器程序
+         * \brief 物件1 临时代码
          * 
          */
-        std::vector<Shader*> shader; 
+        Object *obj1;
+        /**
+         * \brief 物件2 临时代码
+         * 
+         */
+        Object *obj2; 
         /**
          * \brief 处理键盘输入消息
          * 
@@ -40,6 +44,11 @@ class Engine : public zSingletonBase<Engine>
          * 
          */ 
         void processScrollCallback(GLFWwindow* windows, DFLOAT xoffset, DFLOAT yoffset);
+        /**
+         * \brief 主进程
+         * 
+         */
+        int mainProcess(void); 
         /**
          * \brief 移动时间差
          * 
@@ -84,6 +93,11 @@ class Engine : public zSingletonBase<Engine>
          * 
          */
         DFLOAT _lasty;
+        /**
+         * \brief 窗口句柄
+         * 
+         */
+        GLFWwindow *window; 
 };
 
 #endif

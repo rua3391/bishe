@@ -24,3 +24,8 @@ void Light::final()
 {
 
 }
+
+const Lightcolor& Light::getLight()
+{
+    return _light;
+}

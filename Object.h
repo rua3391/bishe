@@ -11,6 +11,7 @@ struct material
     FLOAT       shiness;
 };
 
+struct Lightcolor;
 class Shader;
 class Texture;
 class Object : public cModule
@@ -29,9 +30,13 @@ class Object : public cModule
     public:
         /**
          * \brief 初始化
+         * \param buffer 顶点属性数组
+         * \param size 数组大小
+         * \param vertex_file v着色器文件路径
+         * \param fragment_file f着色器文件路径
          * 
          */
-        bool init(FLOAT *buffer, const std::string &vertex_file, const std::string &fragment_file);
+        bool init(FLOAT *buffer, DWORD size, const std::string &vertex_file, const std::string &fragment_file);
         /**
          * \brief 释放资源
          * 
@@ -49,20 +54,49 @@ class Object : public cModule
         void unserialize();
     public:
         /**
+         * \brief 初始化纹理
+         * \param path 纹理图片路径
+         * 
+         */ 
+        bool initTexture(std::string path);
+        /**
+         * \brief 应用纹理
+         * 
+         */
+        void avtiveTexture(); 
+        /**
          * \brief 绑定此物件
          * 
          */
         void bindObject(); 
         /**
          * \brief 设置材质
+         * \param ambient 环境光
+         * \param diffuse 漫反射光
+         * \param specular 镜面反射光
+         * \param shiness 反光度
          * 
          */
-        void setMaterial();
+        void setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, FLOAT shiness);
         /**
          * \brief 设置物件位置
          * 
          */
-        void setPosition();  
+        void setPosition();
+        /**
+         * \brief 更新model矩阵
+         * \param translation 位移向量
+         * \param radians 旋转角度
+         * \param rotation 旋转轴向量
+         * \param scale 缩放向量
+         * 
+         */
+        void updateModel(glm::vec3 translation, FLOAT radians, glm::vec3 rotation, glm::vec3 scale);
+        /**
+         * \brief 根据冯模型算出物体颜色 
+         * 
+         */
+        void setColor(Lightcolor &color); 
     private:
         /**
          * \brief 顶点属性数组对象
@@ -108,7 +142,12 @@ class Object : public cModule
          * \brief 摄像机位置
          * 
          */
-        glm::vec3 _position; 
+        glm::vec3 _position;
+        /**
+         * \brief 已激活纹理单元个数
+         * 
+         */
+        DWORD _activenum;  
 };
 
 #endif

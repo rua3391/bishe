@@ -4,6 +4,8 @@
 #include "Camera.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Object.h"
+#include "Light.h"
 
 Engine::Engine() : 
 	_first(true), 
@@ -12,7 +14,8 @@ Engine::Engine() :
 	screenx(1200), 
 	screeny(960)
 {
-
+	obj1 = new Object();
+	obj2 = new Object();
 }
 
 Engine::~Engine()
@@ -76,7 +79,7 @@ GLFWwindow* Engine::init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(1200, 960, "Engine", nullptr, nullptr);
+	window = glfwCreateWindow(screenx, screeny, "Engine", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouseCallback);
@@ -94,45 +97,8 @@ GLFWwindow* Engine::init()
     return window;
 }
 
-void Engine::final()
+int Engine::mainProcess(void)
 {
-    for(Shader *ptr : shader)
-    {
-        if(ptr)
-        {
-            ptr->final();
-            SAFE_DELETE(ptr);
-        }
-    }
-}
-
-int main(void)
-{
-    //todo 主逻辑进程
-	GLFWwindow *window = Engine::getInstance()->init();
-	if(!window)
-	{
-		FATAL("窗口句柄初始化失败");
-		return -1;
-	}
-	if(!Camera::getInstance()->init(glm::vec3(0, 0, 3.0f), -15.0f, 180.0f, glm::vec3(0, 1.0f, 0)))
-	{
-		FATAL("相机初始化失败");
-		return -1;
-	}
-	Shader S, LightCube;
-	if(!S.init("Shader/lighting.vert", "Shader/lighting.frag"))
-	{
-		FATAL("着色器初始化失败%s", "object");
-		return -1;
-	}
-	if(!LightCube.init("Shader/light.vert", "Shader/light.frag"))
-	{
-		FATAL("着色器初始化失败%s", "light");
-		return -1;
-	}
-
-	DEBUG("主进程初始化完毕");
 	FLOAT vertex[] =
 	{
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -177,33 +143,26 @@ int main(void)
 		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
-	
-	DWORD VAO, VBO;
-	DWORD LightVAO;
-	glGenVertexArrays(1, &VAO);
-	glGenVertexArrays(1, &LightVAO);
-	glGenBuffers(1, &VBO);
-	//glGenBuffers(1, &EBO);
-
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
+	DEBUG("初始化obj1");
+	if(!obj1->init(vertex, sizeof(vertex) / sizeof(FLOAT), "Shader/lighting.vert", "Shader/lighting.frag"))
+	{
+		FATAL("物体初始化失败");
+		return -1;
+	}
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-
-	glBindVertexArray(LightVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	DEBUG("初始化obj2");
+	if(!obj2->init(vertex, sizeof(vertex) / sizeof(FLOAT), "Shader/light.vert", "Shader/light.frag"))
+	{
+		FATAL("物体初始化失败");
+		return -1;
+	}
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
-
-	//S.uniformSet1i("Texture1", 0);
-	//S.uniformSet1i("Texture2", 2);
-	glm::mat4 model(1.0f);
-	glm::mat4 view(1.0f);
-	glm::mat4 projection(1.0f);
 	FLOAT last_time = 0.0;
+	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);
@@ -213,58 +172,65 @@ int main(void)
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
 
-		glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 		// lightPos.x = 1.0 + sin(glfwGetTime()) * 2.0f;
 		// lightPos.y = sin(glfwGetTime() / 2.0f) * 1.0f;
-
-		S.useProgram();
-		glBindVertexArray(VAO);
-		
-		projection = glm::perspective(glm::radians(Camera::getInstance()->getCameraZoom()), (float)1200 / (float)960, 0.1f, 100.0f);
-		view = Camera::getInstance()->getViewMatrix();
-
-		S.uniformSetmat4("model", model);
-		S.uniformSetmat4("view", view);
-		S.uniformSetmat4("projection", projection);
-
+		obj1->bindObject();
+		obj1->setPosition();
+		//临时代码---------------------
+		Lightcolor lightcolor;
 		glm::vec3 lightColor;
 		lightColor.x = sin(glfwGetTime() * 2.0f);
 		lightColor.y = sin(glfwGetTime() * 0.7f);
 		lightColor.z = sin(glfwGetTime() * 1.3f);
-
-		glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f); // 降低影响
-		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); // 很低的影响
-		S.uniformSetvec3("L.position", lightPos);
-		S.uniformSetvec3("L.ambientlight", ambientColor);
-		S.uniformSetvec3("L.diffuselight", diffuseColor);
-		S.uniformSetvec3("L.specularlight", 1.0f, 1.0f, 1.0f);
-		S.uniformSetvec3("camerapos", Camera::getInstance()->getCameraPosition());
-		S.uniformSetvec3("M.ambientcolor", 1.0f, 0.5f, 0.31f);
-		S.uniformSetvec3("M.diffuse", 1.0f, 0.5f, 0.31f);
-		S.uniformSetvec3("M.specular", 0.5f, 0.5f, 0.5f);
-		S.uniformSet1f("M.shiness", 32.0f);
-
+		glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f);
+		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
+		lightcolor.ambient = ambientColor;
+		lightcolor.diffuse = diffuseColor;
+		lightcolor.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+		lightcolor.position = lightPos;
+		//-------------------------------
+		obj1->setColor(lightcolor);
+		obj1->setMaterial(glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.5f, 0.5f, 0.5f), 32.0f);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		LightCube.useProgram();
-		glBindVertexArray(LightVAO);
-
-		glm::mat4 lightmodel(1.0f);
-		lightmodel = glm::translate(lightmodel, lightPos);
-		lightmodel = glm::scale(lightmodel, glm::vec3(0.2f));
-
-		LightCube.uniformSetmat4("model", lightmodel);
-		LightCube.uniformSetmat4("view", view);
-		LightCube.uniformSetmat4("projection", projection);
-
+		obj2->bindObject();
+		obj2->updateModel(lightPos, 0.0f, glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.2f));
+		obj2->setPosition();
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 	glfwTerminate();
-	Engine::getInstance()->final();
 	return 0;
 }
 
+void Engine::final()
+{
+	if(obj1)
+	{
+    	obj1->final();
+		SAFE_DELETE(obj1);
+	}
+	if(obj2)
+	{
+		obj2->final();
+		SAFE_DELETE(obj2);
+	}
+}
 
+int main(void)
+{
+	GLFWwindow *window = Engine::getInstance()->init();
+	if(!Camera::getInstance()->init(glm::vec3(0, 0, 3.0f), -15.0f, 180.0f, glm::vec3(0, 1.0f, 0)))
+	{
+		FATAL("相机初始化失败");
+		return -1;
+	}
+	DEBUG("主进程初始化完毕");
+	Engine::getInstance()->mainProcess();
+	DEBUG("主进程结束");
+	Engine::getInstance()->final();
+	DEBUG("资源释放完毕");
+	return 0;
+}

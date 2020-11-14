@@ -3,11 +3,16 @@
 
 #include "cModule.h"
 
+/**
+ * \brief 光照强度
+ * 
+ */ 
 struct Lightcolor
 {
     glm::vec3 ambient;
     glm::vec3 diffuse;
     glm::vec3 specular;
+    glm::vec3 position;
 };
 /**
  * \brief 光照
@@ -47,6 +52,12 @@ class Light : public cModule
          * 
          */
         void unserialize();
+    public:
+        /**
+         * \brief 返回光照结构体
+         * 
+         */
+        const Lightcolor& getLight(); 
     private:
         /**
          * \brief 光照

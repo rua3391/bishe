@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include "stb_image.h"
 
-Texture::Texture() : cModule("TEXTURE"), _ID(0)
+Texture::Texture() : cModule("TEXTURE")
 {
 }
 
@@ -16,10 +16,10 @@ bool Texture::init(std::string path, DWORD num)
         error("纹理单元超出上限");//实际上最新glew支持32个
         return false;
     }
-    DWORD Texture1;
-	glGenTextures(1, &_ID);
+    DWORD Texture;
+	glGenTextures(1, &Texture);
     glActiveTexture(GL_TEXTURE0 + num);
-	glBindTexture(GL_TEXTURE_2D, _ID);
+	glBindTexture(GL_TEXTURE_2D, Texture);
 
 	// 为当前绑定的纹理对象设置环绕、过滤方式
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -43,6 +43,7 @@ bool Texture::init(std::string path, DWORD num)
         return false;
 	}
 	stbi_image_free(data);
+	_unit[num] = Texture;
 	debug("%u号纹理初始化成功", num);
     return true;
 }
@@ -60,4 +61,10 @@ void Texture::unserialize()
 void Texture::final()
 {
     
+}
+
+void Texture::activeTexture(DWORD num)
+{
+	glActiveTexture(GL_TEXTURE0 + num);
+	glBindTexture(GL_TEXTURE_2D, _unit[num]);
 }
