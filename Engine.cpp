@@ -1,4 +1,4 @@
-#include "Proto/Common.pb.h"
+#include "Common.pb.h"
 
 #include "Engine.h"
 #include "Camera.h"
@@ -144,7 +144,7 @@ int Engine::mainProcess(void)
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
 	DEBUG("初始化obj1");
-	if(!obj1->init(vertex, sizeof(vertex) / sizeof(FLOAT), "Shader/lighting.vert", "Shader/lighting.frag"))
+	if(!obj1->init(vertex, sizeof(vertex) / sizeof(FLOAT), "shader/lighting.vert", "shader/lighting.frag"))
 	{
 		FATAL("物体初始化失败");
 		return -1;
@@ -154,7 +154,7 @@ int Engine::mainProcess(void)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 	DEBUG("初始化obj2");
-	if(!obj2->init(vertex, sizeof(vertex) / sizeof(FLOAT), "Shader/light.vert", "Shader/light.frag"))
+	if(!obj2->init(vertex, sizeof(vertex) / sizeof(FLOAT), "shader/light.vert", "shader/light.frag"))
 	{
 		FATAL("物体初始化失败");
 		return -1;
