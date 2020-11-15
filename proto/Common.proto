@@ -1,0 +1,18 @@
+syntax = "proto3";
+package Proto.Common;
+
+message EngineData
+{
+    Camera_Proto                    camera = 1;        //相机数据
+    Shader_Proto                    shader = 2;        //着色器数据
+}
+
+message Camera_Proto
+{
+    //todo
+}
+
+message Shader_Proto
+{
+    //todo
+}
