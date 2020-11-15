@@ -14,3 +14,4 @@
 2020/11/13 功能调整-补全着色器uniform变量接口 Shader.cpp Shader.h  
 2020/11/14 新增-新增光源类及物件类 Object.h Object.cpp Light.h Light.cpp  
 2020/11/14 功能调整-物件类功能调整, 优化主函数, 着色器纹理接入物件类 Object.cpp  
+2020/11/15 今日摸了-不更 之后更新zEntry.h zEntryManager.h管理全部物件光源  
