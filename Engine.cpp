@@ -17,6 +17,7 @@ Engine::Engine() :
 {
 	obj1 = new Object();
 	obj2 = new Object();
+	light = new Light(glm::vec3(1.2f, 1.0f, 2.0f));
 }
 
 Engine::~Engine()
@@ -154,6 +155,7 @@ int Engine::mainProcess(void)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+	
 	DEBUG("初始化obj2");
 	if(!obj2->init(vertex, sizeof(vertex) / sizeof(FLOAT), "shader/light.vert", "shader/light.frag"))
 	{
@@ -162,8 +164,8 @@ int Engine::mainProcess(void)
 	}
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
+
 	FLOAT last_time = 0.0;
-	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);
@@ -173,29 +175,19 @@ int Engine::mainProcess(void)
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
 
-		// lightPos.x = 1.0 + sin(glfwGetTime()) * 2.0f;
-		// lightPos.y = sin(glfwGetTime() / 2.0f) * 1.0f;
 		obj1->bindObject();
 		obj1->setPosition();
-		//临时代码---------------------
-		Lightcolor lightcolor;
-		glm::vec3 lightColor;
-		lightColor.x = sin(glfwGetTime() * 2.0f);
-		lightColor.y = sin(glfwGetTime() * 0.7f);
-		lightColor.z = sin(glfwGetTime() * 1.3f);
-		glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f);
-		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
-		lightcolor.ambient = ambientColor;
-		lightcolor.diffuse = diffuseColor;
-		lightcolor.specular = glm::vec3(1.0f, 1.0f, 1.0f);
-		lightcolor.position = lightPos;
-		//-------------------------------
-		obj1->setColor(lightcolor);
+		glm::vec3 lightColor(sin(cur_time * 2.0f), sin(cur_time * 0.7f), sin(cur_time * 1.3f));
+		light->setDiffuseLight(lightColor * glm::vec3(0.5f));
+		light->setAmbientLight(lightColor * glm::vec3(0.5f) * glm::vec3(0.2f));
+		light->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+		
+		obj1->setColor(light->getLight());
 		obj1->setMaterial(glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.5f, 0.5f, 0.5f), 32.0f);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		obj2->bindObject();
-		obj2->updateModel(lightPos, 0.0f, glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.2f));
+		obj2->updateModel(light->getPosition(), 0.0f, glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.2f));
 		obj2->setPosition();
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 

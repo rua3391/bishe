@@ -158,7 +158,7 @@ void Shader::uniformSetvec2(const std::string &name, FLOAT x, FLOAT y)
 	glUniform2f(location, x, y);
 }
 
-void Shader::uniformSetvec2(const std::string &name, glm::vec2 &target)
+void Shader::uniformSetvec2(const std::string &name, const glm::vec2 &target)
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());
 	glUniform2fv(location, 1, &target[0]);
@@ -170,7 +170,7 @@ void Shader::uniformSetvec3(const std::string &name, FLOAT x, FLOAT y, FLOAT z)
 	glUniform3f(location, x, y, z);
 }
 
-void Shader::uniformSetvec3(const std::string &name, glm::vec3 &target) 
+void Shader::uniformSetvec3(const std::string &name, const glm::vec3 &target) 
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());
 	glUniform3fv(location, 1, &target[0]);
@@ -182,25 +182,25 @@ void Shader::uniformSetvec4(const std::string &name, FLOAT x, FLOAT y, FLOAT z, 
 	glUniform4f(location, x, y, z, w);
 }
 
-void Shader::uniformSetvec4(const std::string &name, glm::vec4 &target)
+void Shader::uniformSetvec4(const std::string &name, const glm::vec4 &target)
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());
 	glUniform4fv(location, 1, &target[0]);
 }
 
-void Shader::uniformSetmat2(const std::string &name, glm::mat2 &matrix)
+void Shader::uniformSetmat2(const std::string &name, const glm::mat2 &matrix)
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]);
 }
 
-void Shader::uniformSetmat3(const std::string &name, glm::mat3 &matrix)
+void Shader::uniformSetmat3(const std::string &name, const glm::mat3 &matrix)
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]);
 }
 
-void Shader::uniformSetmat4(const std::string &name, glm::mat4 &matrix)
+void Shader::uniformSetmat4(const std::string &name, const glm::mat4 &matrix)
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]);

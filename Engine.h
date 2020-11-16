@@ -5,6 +5,7 @@
 #include "zSingleton.h"
 
 class Object;
+class Light;
 class Engine : public zSingletonBase<Engine>
 {
     public:
@@ -28,7 +29,12 @@ class Engine : public zSingletonBase<Engine>
          * \brief 物件2 临时代码
          * 
          */
-        Object *obj2; 
+        Object *obj2;
+        /**
+         * \brief 光源1 临时代码
+         * 
+         */
+        Light *light; 
         /**
          * \brief 处理键盘输入消息
          * 

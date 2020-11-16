@@ -96,7 +96,7 @@ class Object : public cModule
          * \brief 根据冯模型算出物体颜色 
          * 
          */
-        void setColor(Lightcolor &color); 
+        void setColor(const Lightcolor &color); 
     private:
         /**
          * \brief 顶点属性数组对象

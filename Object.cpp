@@ -146,7 +146,7 @@ void Object::setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specula
     _shader->uniformSet1f("M.shiness", shiness);
 }
 
-void Object::setColor(Lightcolor &color)
+void Object::setColor(const Lightcolor &color)
 {
     // bindObject();
     _shader->uniformSetvec3("L.position", color.position);

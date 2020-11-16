@@ -25,7 +25,7 @@ class Light : public cModule
          * \brief 构造函数
          * 
          */
-        Light();
+        Light(const glm::vec3 &pos);
         /**
          * \brief 析构函数
          * 
@@ -57,7 +57,37 @@ class Light : public cModule
          * \brief 返回光照结构体
          * 
          */
-        const Lightcolor& getLight(); 
+        const Lightcolor& getLight();
+        /**
+         * \brief 返回光照位置
+         * 
+         */
+        const glm::vec3& getPosition();
+        /**
+         * \brief 设置环境光照
+         * 
+         */
+        void setAmbientLight(const glm::vec3 &ambient);
+        /**
+         * \brief 设置漫反射光照
+         * 
+         */
+        void setDiffuseLight(const glm::vec3 &diffuse);
+        /**
+         * \brief 设置镜面高光
+         * 
+         */
+        void setSpecularLight(const glm::vec3 &specular); 
+        /**
+         * \brief 设置全部光照值
+         * 
+         */
+        void setLightColor(const Lightcolor &lightcolor);
+        /**
+         * \brief 设置光照位置
+         * 
+         */
+        void setLightPosition(const glm::vec3 &position);    
     private:
         /**
          * \brief 光照
