@@ -1,5 +1,5 @@
 .PHONY:clean
-OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o
+OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o GobjManager.o
 CC = g++
 STANDARD = -std=c++11
 TARGET = Engine
@@ -23,6 +23,8 @@ Texture.o: Texture.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Texture.cpp -o Texture.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Light.o: Light.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Light.cpp -o Light.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+GobjManager.o: GobjManager.cpp $(SDK)
+	$(cc) $(CC) -c GobjManager.cpp -o GobjManager.o -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Object.o: Object.cpp Shader.cpp Texture.cpp Light.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Object.cpp -o Object.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Engine.o: *.h *.cpp $(SDK) $(PROTO)

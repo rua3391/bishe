@@ -29,7 +29,7 @@ class zEntry
             DWORD id;
         };
         /**
-         * 
+         * \brief 物件名字
          * 
          */
         std::string name;
@@ -123,6 +123,7 @@ class zEntryManager
                 if(id == _collection[i]->id)
                     return _collection[i];
             }
+            return NULL;
         }
         /**
          * \brief 删除一个物件

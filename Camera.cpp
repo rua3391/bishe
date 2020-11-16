@@ -1,6 +1,4 @@
 #include "Camera.h"
-// sdk database 
-
 
 Camera::Camera() :
 	cModule("CAMERA"), 
