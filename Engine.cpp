@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "Object.h"
 #include "Light.h"
+#include "GobjManager.h"
 
 Engine::Engine() : 
 	_first(true), 

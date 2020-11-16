@@ -15,3 +15,4 @@
 2020/11/14 新增-新增光源类及物件类 Object.h Object.cpp Light.h Light.cpp  
 2020/11/14 功能调整-物件类功能调整, 优化主函数, 着色器纹理接入物件类 Object.cpp  
 2020/11/15 今日摸了-不更 之后更新zEntry.h zEntryManager.h管理全部物件光源  
+2020/11/16 新增-物件管理器 zEntry.h

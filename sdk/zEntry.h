@@ -1,0 +1,170 @@
+#ifndef Z_ENTRY_H
+#define Z_ENTRY_H
+
+#include "zSdk.h"
+
+class zEntry
+{
+    public:
+        /**
+         * \brief 物件id
+         * 
+         */ 
+        union
+        {
+            /**
+             * \brief 前2字节
+             * 
+             */ 
+            WORD id1;
+            /**
+             * \brief 后2字节
+             * 
+             */
+            WORD id2; 
+            /**
+             * \brief 物件id
+             * 
+             */ 
+            DWORD id;
+        };
+        /**
+         * 
+         * 
+         */
+        std::string name;
+        /**
+         * \brief 默认构造函数
+         * 
+         */
+        zEntry() {}  
+        /**
+         * \brief 构造函数
+         * \param id 物件id
+         * \param name 物件名称
+         * 
+         */
+        zEntry(DWORD id, const std::string &name) { this->id = id; this->name = name;}
+        /**
+         * \brief 构造函数
+         * \param id1 物件id1
+         * \param id2 物件id2
+         * \param name 物件名称
+         * 
+         */
+        zEntry(WORD id1, WORD id2, std::string &name) { this->id1 = id1; this->id2 = id2; this->name = name;} 
+        /**
+         * \brief 析构函数
+         * 
+         */
+        ~zEntry() {} 
+};
+
+/**
+ * \brief 遍历物件管理器规则
+ * 
+ */
+template<typename T>
+class zCallback
+{
+    public:
+        /**
+         * \brief 构造函数
+         * 
+         */ 
+        zCallback() {};
+        /**
+         * \brief 析构函数
+         * 
+         */ 
+        ~zCallback() {};
+        /**
+         * \brief 规则详细, 如果return false立刻停止遍历
+         * 
+         */ 
+        virtual bool exec(T* ) = 0;
+}; 
+
+/**
+ * \brief 物件管理器，用于管理物件
+ * 
+ */ 
+template <typename T>
+class zEntryManager
+{
+    public:
+        /**
+         * \brief 构造函数
+         * 
+         */
+        zEntryManager() { }
+        /**
+         * \brief 析构函数
+         * 
+         */
+        ~zEntryManager() {}
+        /**
+         * \brief 添加一个物件
+         * 
+         */
+        void add(T* obj)
+        {
+            _collection.push_back(obj);
+        }
+        /**
+         * \brief 获取一个物件
+         * \param id 物件id
+         * 
+         */ 
+        T* get(DWORD id)
+        {
+            for(DWORD i = 0; i < _collection.size(); ++i)
+            {
+                if(id == _collection[i]->id)
+                    return _collection[i];
+            }
+        }
+        /**
+         * \brief 删除一个物件
+         * 
+         */
+        void remove(T* obj)
+        {
+            for(DWORD i = 0; i < _collection.size(); ++i)
+            {
+                if(_collection[i] == obj)
+                    QUICK_RELEASE(_collection, i);
+            }
+        } 
+        /**
+         * \brief 按规则遍历物件
+         * 
+         */ 
+        void execEvery(zCallback<T> *rule)
+        {
+            for(DWORD i = 0; i < _collection.size(); ++i)
+            {
+                if(!rule->exec(_collection[i]))
+                    return;
+            }
+        }
+    private:
+        /**
+         * \brief 物体集合
+         * 
+         */
+        typedef std::vector<T* > zEntryVec;
+        /**
+         * \brief 存放物体的集合 
+         * 
+         */
+        zEntryVec _collection;
+        /**
+         * \brief 友元类
+         * 
+         */
+        friend class zCallback<T>; 
+};
+
+
+#endif
