@@ -21,15 +21,10 @@ class Engine : public zSingletonBase<Engine>
         ~Engine();
     public:
         /**
-         * \brief 物件1 临时代码
+         * \brief 物件id合集，方便取物件
          * 
          */
-        Object *obj1;
-        /**
-         * \brief 物件2 临时代码
-         * 
-         */
-        Object *obj2;
+        std::vector<DWORD> obj; 
         /**
          * \brief 光源1 临时代码
          * 
@@ -66,7 +61,12 @@ class Engine : public zSingletonBase<Engine>
          * \return 窗口句柄指针
          * 
          */ 
-        GLFWwindow* init();
+        GLFWwindow* initWindow();
+        /**
+         * \brief 初始化物件 
+         * 
+         */
+        bool initObj(const std::string &vertexfile, const std::string &fragmentfile);
         /**
          * \brief 销毁资源
          * 

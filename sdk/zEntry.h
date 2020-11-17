@@ -37,7 +37,7 @@ class zEntry
          * \brief 默认构造函数
          * 
          */
-        zEntry() {}  
+        zEntry() : id(0), name(""){}  
         /**
          * \brief 构造函数
          * \param id 物件id
@@ -82,7 +82,12 @@ class zCallback
          * \brief 规则详细, 如果return false立刻停止遍历
          * 
          */ 
-        virtual bool exec(T* ) = 0;
+        virtual bool exec(T* ) {}
+        /**
+         * \brief 规则详细, return true则删除该物件
+         * 
+         */
+        virtual bool isit(T* ) {} 
 }; 
 
 /**
@@ -107,9 +112,12 @@ class zEntryManager
          * \brief 添加一个物件
          * 
          */
-        void add(T* obj)
+        bool add(T* obj)
         {
+            if(get(obj->id))
+                return false;
             _collection.push_back(obj);
+            return true;
         }
         /**
          * \brief 获取一个物件
@@ -141,12 +149,24 @@ class zEntryManager
          * \brief 按规则遍历物件
          * 
          */ 
-        void execEvery(zCallback<T> *rule)
+        void execEvery(zCallback<T> &rule)
         {
             for(DWORD i = 0; i < _collection.size(); ++i)
             {
-                if(!rule->exec(_collection[i]))
+                if(!rule.exec(_collection[i]))
                     return;
+            }
+        }
+        void deleteEveryif(zCallback<T> &rule)
+        {
+            for(DWORD i = 0; i < _collection.size(); ++i)
+            {
+                T* obj = _collection[i];
+                if(rule.isit(obj))
+                {
+                    QUICK_RELEASE(_collection, i);
+                    SAFE_DELETE(obj);
+                }
             }
         }
     private:
@@ -160,11 +180,6 @@ class zEntryManager
          * 
          */
         zEntryVec _collection;
-        /**
-         * \brief 友元类
-         * 
-         */
-        friend class zCallback<T>; 
 };
 
 

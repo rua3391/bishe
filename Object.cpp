@@ -6,8 +6,10 @@
 #include "Texture.h"
 #include "Engine.h"
 #include "Light.h"
+#include "GObjManager.h"
 
 Object::Object() : 
+    zEntry(),
     cModule("OBJECT"),
     _vao(0),
     _vbo(0),
@@ -68,6 +70,8 @@ bool Object::init(FLOAT *buffer, DWORD size, const std::string &vertex_file, con
         return false;
     }
     debug("物件初始化成功");
+    this->id = _vao;
+    GObjManager::getInstance()->add(this);
     return true;
 }
 
@@ -154,4 +158,12 @@ void Object::setColor(const Lightcolor &color)
     _shader->uniformSetvec3("L.diffuselight", color.diffuse);
     _shader->uniformSetvec3("L.specularlight", color.specular);
     _shader->uniformSetvec3("camerapos", Camera::getInstance()->getCameraPosition());
+}
+
+void Object::fill(Proto::Common::ObjectProto &out)
+{
+    // Proto::Common::ShaderProto &tmp= *(out.mutable_shader());
+    // tmp.set_x(1);
+    // Proto::Common::TextureProto &tmp2 = *(out.add_texture());
+    // tmp2.set_x(2);
 }

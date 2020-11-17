@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include "cModule.h"
+#include "zEntry.h"
 
 struct material
 {
@@ -14,7 +15,7 @@ struct material
 struct Lightcolor;
 class Shader;
 class Texture;
-class Object : public cModule
+class Object : public cModule, public zEntry
 {
     public:
         /**
@@ -52,6 +53,11 @@ class Object : public cModule
          * 
          */    
         void unserialize();
+        /**
+         * \brief 填充消息 
+         * 
+         */
+        void fill(Proto::Common::ObjectProto &out); 
     public:
         /**
          * \brief 初始化纹理

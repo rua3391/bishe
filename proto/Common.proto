@@ -3,16 +3,34 @@ package Proto.Common;
 
 message EngineData
 {
-    Camera_Proto                    camera = 1;        //相机数据
-    Shader_Proto                    shader = 2;        //着色器数据
+    CameraProto                                camera = 1;         //相机数据
+    repeated ObjectProto                       object = 2;         //物件数据
 }
 
-message Camera_Proto
+message CameraProto
 {
     //todo
 }
 
-message Shader_Proto
+message ShaderProto
 {
-    //todo
+    uint32                                      x = 1;             //临时代码
+}
+
+message TextureProto
+{
+    uint32                                      x = 1;             //临时代码
+}
+
+message ObjectProto
+{
+    ShaderProto                                shader = 1;         //着色器数据
+    repeated TextureProto                      texture = 2;        //纹理数据
+}
+
+message LightProto
+{
+    uint32                                      x = 1;              //光照位置x,y,z坐标
+    uint32                                      y = 2;              //光照位置x,y,z坐标
+    uint32                                      z = 3;              //光照位置x,y,z坐标
 }

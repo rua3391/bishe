@@ -6,7 +6,7 @@
 #include "Texture.h"
 #include "Object.h"
 #include "Light.h"
-#include "GobjManager.h"
+#include "GObjManager.h"
 
 Engine::Engine() : 
 	_first(true), 
@@ -15,8 +15,6 @@ Engine::Engine() :
 	screenx(1200), 
 	screeny(960)
 {
-	obj1 = new Object();
-	obj2 = new Object();
 	light = new Light(glm::vec3(1.2f, 1.0f, 2.0f));
 }
 
@@ -74,7 +72,7 @@ void Engine::processInput(GLFWwindow* windows)
 	}
 }
 
-GLFWwindow* Engine::init()
+GLFWwindow* Engine::initWindow()
 {
     glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -99,7 +97,7 @@ GLFWwindow* Engine::init()
     return window;
 }
 
-int Engine::mainProcess(void)
+bool Engine::initObj(const std::string &vertexfile, const std::string &fragmentfile)
 {
 	FLOAT vertex[] =
 	{
@@ -145,27 +143,38 @@ int Engine::mainProcess(void)
 		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
-	DEBUG("初始化obj1");
-	if(!obj1->init(vertex, sizeof(vertex) / sizeof(FLOAT), "shader/lighting.vert", "shader/lighting.frag"))
+	DEBUG("初始化物体");
+	Object *object = new Object();
+	if(!object->init(vertex, sizeof(vertex) / sizeof(FLOAT), vertexfile, fragmentfile))
 	{
 		FATAL("物体初始化失败");
+		return false;
+	}
+	obj.push_back(object->id);
+	return true;
+}
+
+int Engine::mainProcess(void)
+{
+	if(!initObj("shader/lighting.vert", "shader/lighting.frag"))
+	{
 		return -1;
 	}
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	
-	DEBUG("初始化obj2");
-	if(!obj2->init(vertex, sizeof(vertex) / sizeof(FLOAT), "shader/light.vert", "shader/light.frag"))
+
+	if(!initObj("shader/light.vert", "shader/light.frag"))
 	{
-		FATAL("物体初始化失败");
 		return -1;
 	}
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
 
 	FLOAT last_time = 0.0;
+	Object *obj1 = GObjManager::getInstance()->get(obj[0]);
+	Object *obj2 = GObjManager::getInstance()->get(obj[1]);
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);
@@ -175,15 +184,15 @@ int Engine::mainProcess(void)
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
 
-		obj1->bindObject();
-		obj1->setPosition();
 		glm::vec3 lightColor(sin(cur_time * 2.0f), sin(cur_time * 0.7f), sin(cur_time * 1.3f));
 		light->setDiffuseLight(lightColor * glm::vec3(0.5f));
 		light->setAmbientLight(lightColor * glm::vec3(0.5f) * glm::vec3(0.2f));
 		light->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
-		
-		obj1->setColor(light->getLight());
+
+		obj1->bindObject();
 		obj1->setMaterial(glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.5f, 0.5f, 0.5f), 32.0f);
+		obj1->setColor(light->getLight());
+		obj1->setPosition();
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		obj2->bindObject();
@@ -200,21 +209,17 @@ int Engine::mainProcess(void)
 
 void Engine::final()
 {
-	if(obj1)
-	{
-    	obj1->final();
-		SAFE_DELETE(obj1);
-	}
-	if(obj2)
-	{
-		obj2->final();
-		SAFE_DELETE(obj2);
-	}
+	Camera::getInstance()->final();
+	GObjManager::getInstance()->final();
 }
 
 int main(void)
 {
-	GLFWwindow *window = Engine::getInstance()->init();
+	if(Engine::getInstance()->initWindow() == NULL)
+	{
+		FATAL("窗口初始化失败");
+		return -1;
+	}
 	if(!Camera::getInstance()->init(glm::vec3(0, 0, 3.0f), -15.0f, 180.0f, glm::vec3(0, 1.0f, 0)))
 	{
 		FATAL("相机初始化失败");
