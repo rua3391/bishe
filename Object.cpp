@@ -167,3 +167,8 @@ void Object::fill(Proto::Common::ObjectProto &out)
     // Proto::Common::TextureProto &tmp2 = *(out.add_texture());
     // tmp2.set_x(2);
 }
+
+Shader* Object::getShader()
+{
+    return _shader;
+}

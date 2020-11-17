@@ -103,6 +103,11 @@ class Object : public cModule, public zEntry
          * 
          */
         void setColor(const Lightcolor &color); 
+        /**
+         * \brief 获取物件shader
+         * 
+         */
+        Shader* getShader(); 
     private:
         /**
          * \brief 顶点属性数组对象

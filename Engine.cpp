@@ -198,6 +198,7 @@ int Engine::mainProcess(void)
 		obj2->bindObject();
 		obj2->updateModel(light->getPosition(), 0.0f, glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.2f));
 		obj2->setPosition();
+		obj2->getShader()->uniformSetvec3("color", lightColor);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
