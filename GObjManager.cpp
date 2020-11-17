@@ -30,7 +30,7 @@ void GObjManager::save(Proto::Common::EngineData &out)
         ~callback(){}
         bool exec(Object* obj)
         {
-            // obj->fill(*_target.add_object());
+            obj->fill(*_target.add_object());
             return true;
         }
     };

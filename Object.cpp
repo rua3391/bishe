@@ -1,4 +1,4 @@
-#include "Common.pb.h"
+#include "Common.pb.cc"
 
 #include "Object.h"
 #include "Shader.h"
@@ -162,10 +162,12 @@ void Object::setColor(const Lightcolor &color)
 
 void Object::fill(Proto::Common::ObjectProto &out)
 {
-    // Proto::Common::ShaderProto &tmp= *(out.mutable_shader());
-    // tmp.set_x(1);
-    // Proto::Common::TextureProto &tmp2 = *(out.add_texture());
-    // tmp2.set_x(2);
+    //--------------------测试用
+    Proto::Common::ShaderProto &tmp= *(out.mutable_shader());
+    tmp.set_x(1);
+    Proto::Common::TextureProto &tmp2 = *(out.add_texture());
+    tmp2.set_x(2);
+    //--------------------
 }
 
 Shader* Object::getShader()

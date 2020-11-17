@@ -3,7 +3,7 @@ OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o GObjManager.o
 CC = g++
 STANDARD = -std=c++11
 TARGET = Engine
-LIB = -lGLEW -lglfw -lGL -lprotobuf -lpthread
+LIB = -lGLEW -lglfw -lGL -lprotobuf -lpthread 
 SDK = sdk/*.h
 LOG = log/
 SHADER = shader/
@@ -23,16 +23,16 @@ Texture.o: Texture.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Texture.cpp -o Texture.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Light.o: Light.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Light.cpp -o Light.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
-GObjManager.o: GObjManager.cpp Object.cpp $(SDK)
-	$(cc) $(CC) -c GObjManager.cpp -o GObjManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+GObjManager.o: GObjManager.cpp Object.cpp $(PROTO)Common.pb.cc $(SDK)
+	$(CC) -c GObjManager.cpp -o GObjManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Object.o: Object.cpp Shader.cpp Texture.cpp Light.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Object.cpp -o Object.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Engine.o: *.h *.cpp $(SDK) $(PROTO)
 	$(CC) -c Engine.cpp -o Engine.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 proto:
-	protoc $(PROTO)*.proto --cpp_out=./
+	cd $(PROTO) && $(MAKE)
 clean:
-	rm -rf *.o Engine $(DESKTOP)code.tar.gz
+	rm -rf *.o Engine $(PROTO)*.h $(PROTO)*.cc $(DESKTOP)code.tar.gz
 rmtar:
 	rm -rf $(DESKTOP)code.tar.gz
 tar:
