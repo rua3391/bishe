@@ -68,14 +68,14 @@ bool Object::init(FLOAT *buffer, DWORD size, const std::string &vertex_file, con
         return false;
     }
     debug("物件初始化成功");
-    this->id = _vao;
+    this->id = (_vao << 16) + _vbo;
     if(!GObjManager::getInstance()->add(this))
     {
-        error("物体加入失败, id已存在->%u", _vao);
+        error("物体加入失败, id已存在->%u", this->id);
     }
     else
     {
-        debug("物体加入全局物件管理器完毕, id->%u, vbo->%u", _vao, _vbo);
+        debug("物体加入全局物件管理器完毕, id->%u, vao->%u, vbo->%u", this->id, _vao, _vbo);
     }
     return true;
 }

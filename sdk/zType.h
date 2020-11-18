@@ -10,7 +10,7 @@ typedef unsigned int DWORD;
  * \brief 8字节无符号数
  *
  */
-typedef unsigned long int QWORD;
+typedef unsigned long long QWORD;
 /**
  * \brief 1字节Byte
  *
@@ -25,7 +25,7 @@ typedef int SDWORD;
  * \brief 8字节有符号数
  * 
  */ 
-typedef long int SQWORD;
+typedef long long SQWORD;
 /**
  * \brief 单精度浮点数
  * 
