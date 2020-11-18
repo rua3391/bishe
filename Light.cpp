@@ -1,4 +1,5 @@
 #include "Light.h"
+#include "Common.pb.cc"
 
 Light::Light(const glm::vec3 &pos) : cModule("LIGHT")
 {

@@ -2,6 +2,7 @@
 #define LIGHT_H
 
 #include "cModule.h"
+#include "Common.pb.h"
 
 /**
  * \brief 光照强度

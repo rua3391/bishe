@@ -117,12 +117,12 @@ static inline void logFatal(const char* filename, const char* msg)
 
 static inline void debug(const char* format, ...)
 {
-    SDWORD size;
-    char * msg = NULL;
+    char *msg = NULL;
     va_list args;
     va_start(args, format);
-    size = vsnprintf(NULL, 0, format, args) + 1;
+    size_t size = sizeof(char) * 1024;
     msg = (char *)malloc(size);
+    memset(msg, 0, size);
     vsnprintf(msg, size, format, args);
     logDebug("NMODULE", msg);
     free(msg);
@@ -131,12 +131,12 @@ static inline void debug(const char* format, ...)
 
 static inline void info(const char* format, ...)
 {
-    SDWORD size;
-    char * msg = NULL;
+    char *msg = NULL;
     va_list args;
     va_start(args, format);
-    size = vsnprintf(NULL, 0, format, args) + 1;
+    size_t size = sizeof(char) * 1024;
     msg = (char *)malloc(size);
+    memset(msg, 0, size);
     vsnprintf(msg, size, format, args);
     logInfo("NMODULE", msg);
     free(msg);
@@ -145,12 +145,12 @@ static inline void info(const char* format, ...)
 
 static inline void error(const char* format, ...)
 {
-    SDWORD size;
-    char * msg = NULL;
+    char *msg = NULL;
     va_list args;
     va_start(args, format);
-    size = vsnprintf(NULL, 0, format, args) + 1;
+    size_t size = sizeof(char) * 1024;
     msg = (char *)malloc(size);
+    memset(msg, 0, size);
     vsnprintf(msg, size, format, args);
     logError("NMODULE", msg);
     free(msg);
@@ -159,12 +159,12 @@ static inline void error(const char* format, ...)
 
 static inline void fatal(const char* format, ...)
 {
-    SDWORD size;
-    char * msg = NULL;
+    char *msg = NULL;
     va_list args;
     va_start(args, format);
-    size = vsnprintf(NULL, 0, format, args) + 1;
+    size_t size = sizeof(char) * 1024;
     msg = (char *)malloc(size);
+    memset(msg, 0, size);
     vsnprintf(msg, size, format, args);
     logFatal("NMODULE", msg);
     free(msg);

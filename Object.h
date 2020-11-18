@@ -3,6 +3,7 @@
 
 #include "cModule.h"
 #include "zEntry.h"
+#include "Common.pb.h"
 
 struct material
 {

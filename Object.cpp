@@ -1,5 +1,3 @@
-#include "Common.pb.cc"
-
 #include "Object.h"
 #include "Shader.h"
 #include "Camera.h"
@@ -71,7 +69,14 @@ bool Object::init(FLOAT *buffer, DWORD size, const std::string &vertex_file, con
     }
     debug("物件初始化成功");
     this->id = _vao;
-    GObjManager::getInstance()->add(this);
+    if(!GObjManager::getInstance()->add(this))
+    {
+        error("物体加入失败, id已存在->%u", _vao);
+    }
+    else
+    {
+        debug("物体加入全局物件管理器完毕, id->%u, vbo->%u", _vao, _vbo);
+    }
     return true;
 }
 
