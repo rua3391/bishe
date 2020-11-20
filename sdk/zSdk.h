@@ -17,6 +17,7 @@
 #include <stack>
 #include <deque>
 #include <sstream>
+#include <sys/select.h>
 
 #include "zType.h"
 #include "zLog.h"
@@ -33,7 +34,16 @@ template<typename T>
 inline void QUICK_RELEASE(std::vector<T> &target, DWORD position)
 {
     target[position] = target.back();
-    target.pop_back(); 
+    target.pop_back();
+}
+
+//sleep毫秒级实现
+inline void sleep_ms(unsigned int secs)
+{
+    struct timeval tval;
+    tval.tv_sec = secs/1000;
+    tval.tv_usec = (secs * 1000) %1000000;
+    select(0,NULL,NULL,NULL,&tval);
 }
 
 #endif

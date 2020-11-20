@@ -15,7 +15,8 @@ Engine::Engine() :
 	screenx(1200), 
 	screeny(960)
 {
-	light = new Light(glm::vec3(1.2f, 1.0f, 2.0f));
+	light = new Light();
+	light->init(glm::vec3(1.2f, 1.0f, 2.0f));
 }
 
 Engine::~Engine()

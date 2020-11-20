@@ -3,6 +3,7 @@
 
 #include "cModule.h"
 #include "Common.pb.h"
+#include "zEntry.h"
 
 /**
  * \brief 光照强度
@@ -19,14 +20,19 @@ struct Lightcolor
  * \brief 光照
  * 
  */ 
-class Light : public cModule
+class Light : public cModule, public zEntry
 {
     public:
         /**
          * \brief 构造函数
          * 
          */
-        Light(const glm::vec3 &pos);
+        Light();
+        /**
+         * \brief 析构函数
+         * 
+         */
+        Light(DWORD id, const std::string &name);
         /**
          * \brief 析构函数
          * 
@@ -37,7 +43,7 @@ class Light : public cModule
          * \brief 初始化
          * 
          */
-        void init();
+        bool init(const glm::vec3 &pos);
         /**
          * \brief 释放资源
          * 
