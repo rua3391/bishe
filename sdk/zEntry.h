@@ -77,7 +77,7 @@ class zCallback
          * \brief 析构函数
          * 
          */ 
-        ~zCallback() {};
+        virtual ~zCallback() {};
         /**
          * \brief 规则详细, 如果return false立刻停止遍历
          * 
