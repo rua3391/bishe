@@ -1,9 +1,10 @@
 #include "Light.h"
 #include "Common.pb.cc"
+#include "zSnowFlake.h"
 
 Light::Light() : cModule("LIGHT")
 {
-
+    currentTimeMillisec();
 }
 
 Light::Light(DWORD id, const std::string &name) : zEntry(id, name), cModule("LIGHT")
