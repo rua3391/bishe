@@ -24,7 +24,7 @@ class Engine : public zSingletonBase<Engine>
          * \brief 物件id合集，方便取物件
          * 
          */
-        std::vector<DWORD> obj; 
+        std::vector<QWORD> obj; 
         /**
          * \brief 光源1 临时代码
          * 

@@ -27,7 +27,7 @@ class cModule
          * \param ... 可变参数列表
          * 
          */
-        void debug(const char* format, ...)
+        virtual void debug(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;
@@ -46,7 +46,7 @@ class cModule
          * \param ... 可变参数列表
          * 
          */
-        void error(const char* format, ...)
+        virtual void error(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;
@@ -65,7 +65,7 @@ class cModule
          * \param ... 可变参数列表
          * 
          */
-        void fatal(const char* format, ...)
+        virtual void fatal(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;
@@ -84,7 +84,7 @@ class cModule
          * \param ... 可变参数列表
          * 
          */
-        void info(const char* format, ...)
+        virtual void info(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;

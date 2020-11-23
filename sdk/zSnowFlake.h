@@ -4,7 +4,9 @@
 #include "zType.h"
 #include <sys/select.h>
 #include <sys/timeb.h>
+#include <ctime>
 #include <iostream>
+#include <unistd.h>
 
 //sleep毫秒级实现
 inline void sleepMs(DWORD secs)
@@ -18,8 +20,8 @@ inline void sleepMs(DWORD secs)
 //距离1970年时间戳
 inline QWORD currentTimeMillisec(){
 	struct timeb tb;
+    time_t t;
 	ftime(&tb);
-    std::cout<<tb.time * 1000 + tb.millitm<<std::endl;
 	return tb.time * 1000 + tb.millitm;
 }
 
@@ -31,7 +33,7 @@ inline QWORD getNextMsTimeStamp() {
 static QWORD lastTimeStamp;
 DWORD sequenceMask = 0b1111111111;
 
-inline QWORD getSnowflaksUid() {
+inline QWORD generateId() {
     static DWORD sequence;
     // 时间戳
     QWORD timeStamp = currentTimeMillisec();

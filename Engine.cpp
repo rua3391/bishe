@@ -175,7 +175,17 @@ int Engine::mainProcess(void)
 
 	FLOAT last_time = 0.0;
 	Object *obj1 = GObjManager::getInstance()->get(obj[0]);
+	if(!obj1)
+	{
+		ERROR("获取物件失败");
+		return -1;
+	}
 	Object *obj2 = GObjManager::getInstance()->get(obj[1]);
+	if(!obj2)
+	{
+		ERROR("获取物件失败");
+		return -1;
+	}
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);

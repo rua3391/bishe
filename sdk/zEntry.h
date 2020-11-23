@@ -16,17 +16,17 @@ class zEntry
              * \brief 前2字节
              * 
              */ 
-            WORD id1;
+            DWORD id1;
             /**
              * \brief 后2字节
              * 
              */
-            WORD id2; 
+            DWORD id2; 
             /**
              * \brief 物件id
              * 
              */ 
-            DWORD id;
+            QWORD id;
         };
         /**
          * \brief 物件名字
@@ -44,7 +44,7 @@ class zEntry
          * \param name 物件名称
          * 
          */
-        zEntry(DWORD id, const std::string &name) { this->id = id; this->name = name;}
+        zEntry(QWORD id, const std::string &name) { this->id = id; this->name = name;}
         /**
          * \brief 构造函数
          * \param id1 物件id1
@@ -52,7 +52,7 @@ class zEntry
          * \param name 物件名称
          * 
          */
-        zEntry(WORD id1, WORD id2, std::string &name) { this->id1 = id1; this->id2 = id2; this->name = name;} 
+        zEntry(DWORD id1, DWORD id2, std::string &name) { this->id1 = id1; this->id2 = id2; this->name = name;} 
         /**
          * \brief 析构函数
          * 
@@ -124,7 +124,7 @@ class zEntryManager
          * \param id 物件id
          * 
          */ 
-        T* get(DWORD id)
+        T* get(QWORD id)
         {
             for(DWORD i = 0; i < _collection.size(); ++i)
             {

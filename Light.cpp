@@ -2,9 +2,10 @@
 #include "Common.pb.cc"
 #include "zSnowFlake.h"
 
-Light::Light() : cModule("LIGHT")
+Light::Light() : zEntry(id, name), cModule("LIGHT")
 {
-    currentTimeMillisec();
+    this->id = generateId();
+    debug("生成id为%lld", this->id);
 }
 
 Light::Light(DWORD id, const std::string &name) : zEntry(id, name), cModule("LIGHT")
