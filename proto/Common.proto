@@ -5,6 +5,7 @@ message EngineData
 {
     CameraProto                                camera = 1;         //相机数据
     repeated ObjectProto                       object = 2;         //物件数据
+    repeated LightProto                        light  = 3;         //光源数据
 }
 
 message CameraProto

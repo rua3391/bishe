@@ -1,5 +1,5 @@
 .PHONY:clean proto
-OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o GObjManager.o
+OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o GObjManager.o GLightManager.o
 CC = g++
 STANDARD = -std=c++11
 TARGET = Engine
@@ -25,6 +25,8 @@ Light.o: Light.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Light.cpp -o Light.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 GObjManager.o: GObjManager.cpp Object.cpp $(PROTO)Common.pb.cc $(SDK)
 	$(CC) -c GObjManager.cpp -o GObjManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+GLightManager.o: GLightManager.cpp Light.cpp $(PROTO)Common.pb.cc $(SDK)
+	$(CC) -c GLightManager.cpp -o GLightManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Object.o: Object.cpp Shader.cpp Texture.cpp Light.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c Object.cpp -o Object.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Engine.o: *.h *.cpp $(SDK) $(PROTO)

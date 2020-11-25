@@ -26,10 +26,10 @@ class Engine : public zSingletonBase<Engine>
          */
         std::vector<QWORD> obj; 
         /**
-         * \brief 光源1 临时代码
+         * \brief 光源id合集
          * 
          */
-        Light *light; 
+        std::vector<QWORD> light;
         /**
          * \brief 处理键盘输入消息
          * 
@@ -67,6 +67,11 @@ class Engine : public zSingletonBase<Engine>
          * 
          */
         bool initObj(const std::string &vertexfile, const std::string &fragmentfile);
+        /**
+         * \brief 初始化光源
+         * 
+         */ 
+        bool initLight(const glm::vec3 &position);
         /**
          * \brief 销毁资源
          * 

@@ -94,7 +94,12 @@ class Light : public cModule, public zEntry
          * \brief 设置光照位置
          * 
          */
-        void setLightPosition(const glm::vec3 &position);    
+        void setLightPosition(const glm::vec3 &position);
+        /**
+         * \brief 填充光源信息
+         * 
+         */
+        void fill(Proto::Common::LightProto &out);     
     private:
         /**
          * \brief 光照

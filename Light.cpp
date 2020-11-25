@@ -1,11 +1,12 @@
-#include "Light.h"
 #include "Common.pb.cc"
+
+#include "Light.h"
 #include "zSnowFlake.h"
+#include "GLightManager.h"
 
 Light::Light() : zEntry(id, name), cModule("LIGHT")
 {
     this->id = generateId();
-    debug("生成id为%lld", this->id);
 }
 
 Light::Light(DWORD id, const std::string &name) : zEntry(id, name), cModule("LIGHT")
@@ -28,9 +29,17 @@ void Light::unserialize()
 
 }
 
+void Light::fill(Proto::Common::LightProto &out)
+{
+    out.set_x(_light.position.x);
+    out.set_y(_light.position.y);
+    out.set_z(_light.position.z);
+}
+
 bool Light::init(const glm::vec3 &pos)
 {
     _light.position = pos;
+    GLightManager::getInstance()->add(this);
 }
 
 void Light::final()
