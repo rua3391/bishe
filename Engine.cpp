@@ -240,6 +240,7 @@ void Engine::final()
 {
 	Camera::getInstance()->final();
 	GObjManager::getInstance()->final();
+	GLightManager::getInstance()->final();
 }
 
 int main(void)

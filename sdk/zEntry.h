@@ -171,7 +171,10 @@ class zEntryManager
                     QUICK_RELEASE(_collection, i);
                     SAFE_DELETE(obj);
                 }
-                ++i;
+                else
+                {
+                    ++i;
+                }
             }
         }
     private:
