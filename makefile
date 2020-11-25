@@ -38,5 +38,5 @@ clean:
 rmtar:
 	rm -rf $(DESKTOP)code.tar.gz
 tar:
-	tar -czvf $(DESKTOP)code.tar.gz --exclude=stb_image.h\
+	tar -zcvf $(DESKTOP)code.tar.gz --exclude=stb_image.h\
 		$(SDK) $(LOG) $(SHADER) $(COMMON) $(PROTO) *.h *.cpp makefile *.o Engine

@@ -32,7 +32,7 @@ class Light : public cModule, public zEntry
          * \brief 析构函数
          * 
          */
-        Light(DWORD id, const std::string &name);
+        Light(QWORD id, const std::string &name);
         /**
          * \brief 析构函数
          * 

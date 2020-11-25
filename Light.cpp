@@ -9,7 +9,7 @@ Light::Light() : zEntry(id, name), cModule("LIGHT")
     this->id = generateId();
 }
 
-Light::Light(DWORD id, const std::string &name) : zEntry(id, name), cModule("LIGHT")
+Light::Light(QWORD id, const std::string &name) : zEntry(id, name), cModule("LIGHT")
 {
 
 }

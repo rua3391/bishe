@@ -13,12 +13,12 @@ class zEntry
         union
         {
             /**
-             * \brief 前2字节
+             * \brief 前4字节
              * 
              */ 
             DWORD id1;
             /**
-             * \brief 后2字节
+             * \brief 后4字节
              * 
              */
             DWORD id2; 
@@ -157,9 +157,13 @@ class zEntryManager
                     return;
             }
         }
+        /**
+         * \brief 按规则删除物件
+         * 
+         */ 
         void deleteEveryif(zCallback<T> &rule)
         {
-            for(DWORD i = 0; i < _collection.size(); ++i)
+            for(DWORD i = 0; i < _collection.size();)
             {
                 T* obj = _collection[i];
                 if(rule.isit(obj))
@@ -167,6 +171,7 @@ class zEntryManager
                     QUICK_RELEASE(_collection, i);
                     SAFE_DELETE(obj);
                 }
+                ++i;
             }
         }
     private:
