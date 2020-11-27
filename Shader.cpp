@@ -155,6 +155,7 @@ void Shader::uniformSetFloat(const std::string &name, FLOAT num)
 void Shader::uniformSetvec2(const std::string &name, FLOAT x, FLOAT y)
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());
+	
 	glUniform2f(location, x, y);
 }
 
