@@ -218,14 +218,18 @@ int Engine::mainProcess(void)
 		light1->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
 
 		obj1->bindObject();
-		obj1->setMaterial(glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.5f, 0.5f, 0.5f), 32.0f);
+		obj1->setAmbient(glm::vec3(1.0f, 0.5f, 0.31f));
+		obj1->setDiffuse(glm::vec3(1.0f, 0.5f, 0.31f));
+		obj1->setSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
+		obj1->setShiness(32.0f);
 		obj1->setColor(light1->getLight());
-		obj1->setPosition();
+		obj1->reflectPosition();
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		obj2->bindObject();
-		obj2->updateModel(light1->getPosition(), 0.0f, glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.2f));
-		obj2->setPosition();
+		obj2->translate(light1->getPosition());//必须放循环外否则每次loop时会叠加位移
+		obj2->scaling(glm::vec3(0.2f));
+		obj2->reflectPosition();
 		obj2->getShader()->uniformSetvec3("color", lightColor);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 

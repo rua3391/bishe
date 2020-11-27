@@ -84,12 +84,36 @@ class Object : public cModule, public zEntry
          * \param shiness 反光度
          * 
          */
-        void setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, FLOAT shiness);
+        void setMaterial(const glm::vec3 &ambient, const glm::vec3 &diffuse, const glm::vec3 &specular, FLOAT shiness);
         /**
-         * \brief 设置物件位置
+         * \brief 设置物体环境光材质
+         * \param ambient 环境光
          * 
          */
-        void setPosition();
+        void setAmbient(const glm::vec3 &ambient); 
+        /**
+         * \brief 设置物体漫反射光
+         * \param diffuse 漫反射光
+         * 
+         */
+        void setDiffuse(const glm::vec3 &diffuse);
+        /**
+         * \brief 设置镜面高光
+         * \param specular 镜面光
+         * 
+         */
+        void setSpecular(const glm::vec3 &specular);
+        /**
+         * \brief 设置物体反光度
+         * \param shiness 反光度
+         * 
+         */
+        void setShiness(FLOAT shiness);   
+        /**
+         * \brief 反应物件在摄像机中展示位置
+         * 
+         */
+        void reflectPosition();
         /**
          * \brief 更新model矩阵
          * \param translation 位移向量
@@ -98,7 +122,26 @@ class Object : public cModule, public zEntry
          * \param scale 缩放向量
          * 
          */
-        void updateModel(glm::vec3 translation, FLOAT radians, glm::vec3 rotation, glm::vec3 scale);
+        void updateModel(const glm::vec3 &translation, FLOAT radians, const glm::vec3 &rotation, const glm::vec3 &scale);
+        /**
+         * \brief 位移物体
+         * \param translation 位移向量
+         * 
+         */
+        void translate(const glm::vec3 &translation);
+        /**
+         * \brief 旋转物体
+         * \param radians 旋转角度
+         * \param rotation 旋转轴
+         * 
+         */  
+        void rotate(FLOAT radians, const glm::vec3 &rotation);
+        /**
+         * \brief 缩放物体
+         * \param scale 缩放向量(x,y,z轴方向缩放)
+         * 
+         */
+        void scaling(const glm::vec3 &scale); 
         /**
          * \brief 根据冯模型算出物体颜色 
          * 

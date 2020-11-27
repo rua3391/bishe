@@ -124,7 +124,7 @@ void Object::bindObject()
     glBindVertexArray(_vao);
 }
 
-void Object::updateModel(glm::vec3 translation, FLOAT radians, glm::vec3 rotation, glm::vec3 scale)
+void Object::updateModel(const glm::vec3 &translation, FLOAT radians, const glm::vec3 &rotation, const glm::vec3 &scale)
 {
     _model = glm::translate(_model, translation);
     if(radians)
@@ -132,7 +132,23 @@ void Object::updateModel(glm::vec3 translation, FLOAT radians, glm::vec3 rotatio
     _model = glm::scale(_model, scale);
 }
 
-void Object::setPosition()
+void Object::translate(const glm::vec3 &translation)
+{
+    _model = glm::translate(_model, translation);
+}
+
+void Object::rotate(FLOAT radians, const glm::vec3 &rotation)
+{
+    if(radians)
+        _model = glm::rotate(_model, glm::radians(radians), rotation);
+}
+
+void Object::scaling(const glm::vec3 &scale)
+{
+    _model = glm::scale(_model, scale);
+}
+
+void Object::reflectPosition()
 {
     // bindObject();
     DWORD width = Engine::getInstance()->screenx;
@@ -146,12 +162,32 @@ void Object::setPosition()
     _model = reset;
 }
 
-void Object::setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, FLOAT shiness)
+void Object::setMaterial(const glm::vec3 &ambient, const glm::vec3 &diffuse, const glm::vec3 &specular, FLOAT shiness)
 {
     // bindObject();
     _shader->uniformSetvec3("M.ambientcolor", ambient);
     _shader->uniformSetvec3("M.diffuse", diffuse);
     _shader->uniformSetvec3("M.specular", specular);
+    _shader->uniformSet1f("M.shiness", shiness);
+}
+
+void Object::setAmbient(const glm::vec3 &ambient)
+{
+    _shader->uniformSetvec3("M.ambientcolor", ambient);
+}
+
+void Object::setDiffuse(const glm::vec3 &diffuse)
+{
+    _shader->uniformSetvec3("M.diffuse", diffuse);
+}
+
+void Object::setSpecular(const glm::vec3 &specular)
+{
+    _shader->uniformSetvec3("M.specular", specular);
+}
+
+void Object::setShiness(FLOAT shiness)
+{
     _shader->uniformSet1f("M.shiness", shiness);
 }
 
