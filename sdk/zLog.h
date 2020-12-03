@@ -28,12 +28,12 @@ class zLog
          * \brief 构造函数
          * 
          */
-        zLog() {};
+        zLog() {}
         /**
          * \brief 析构函数
          * 
          */
-        ~zLog() {};  
+        ~zLog() {}  
     public:
         /**
          * \brief 写debug日志
