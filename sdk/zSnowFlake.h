@@ -34,7 +34,7 @@ static QWORD lastTimeStamp;
 DWORD sequenceMask = 0b1111111111;
 
 inline QWORD generateId() {
-    static DWORD sequence;
+    static DWORD sequence = 0;
     // 时间戳
     QWORD timeStamp = currentTimeMillisec();
     if (lastTimeStamp == timeStamp) 
