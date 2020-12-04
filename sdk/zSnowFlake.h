@@ -16,7 +16,7 @@ class zSnowFlake : public zNoneCopy
          * \brief 构造函数
          * 
          */
-        zSnowFlake() {}
+        zSnowFlake() : _sequenceMask(0b1111111111111111111111) {}
         /**
          * \brief 析构函数
          * 
@@ -27,7 +27,7 @@ class zSnowFlake : public zNoneCopy
          * \brief 进程睡眠1ms
          * 
          */ 
-        static void sleepMs(DWORD secs)
+        void sleepMs(DWORD secs)
         {
             struct timeval tval;
             tval.tv_sec = secs / 1000;
@@ -39,7 +39,8 @@ class zSnowFlake : public zNoneCopy
          * \return 时间戳
          * 
          */ 
-        static QWORD currentTimeMillisec(){
+        QWORD currentTimeMillisec()
+        {
             struct timeb tb;
             time_t t;
             ftime(&tb);
@@ -49,7 +50,7 @@ class zSnowFlake : public zNoneCopy
          * \brief 获取下一毫秒时间戳
          * 
          */ 
-        static QWORD getNextMsTimeStamp() 
+        QWORD getNextMsTimeStamp() 
         {
             sleepMs(1);
             return currentTimeMillisec();
@@ -59,14 +60,14 @@ class zSnowFlake : public zNoneCopy
          * \return id号
          * 
          */ 
-        static QWORD generateId() {
-            static DWORD sequence = 0;
-            static QWORD lastTimeStamp = 0;
-            // 时间戳
+        QWORD generateId() 
+        {
+            DWORD sequence = 0;
+            static QWORD lastTimeStamp = 0;//静态无连接性变量
             QWORD timeStamp = currentTimeMillisec();
             if (lastTimeStamp == timeStamp) 
             {
-                sequence = (sequence + 1) & (sequenceMask); 
+                sequence = (sequence + 1) & (_sequenceMask); 
                 if (sequence == 0) 
                 {
                     timeStamp = getNextMsTimeStamp();
@@ -77,20 +78,24 @@ class zSnowFlake : public zNoneCopy
                 sequence = 0;
             }
             lastTimeStamp = timeStamp;
-            return (timeStamp << 10) | sequence;
+            return (timeStamp << 10) | sequence;    //64位id, 1位符号位, 41位时间戳, 10位主机号省去, 剩余22位全部作为id号
         }
     private:
         /**
          * \brief id最大序列号 超过则与操作结果为0
          * 
          */ 
-        static DWORD sequenceMask;
+        DWORD _sequenceMask;
 };
 
-DWORD zSnowFlake::sequenceMask = 0b1111111111;
+namespace 
+{
+    zSnowFlake idGenerator;
+}
 
 inline QWORD generateId()
 {
-    return zSnowFlake::generateId();
+    return idGenerator.generateId();
 }
+
 #endif

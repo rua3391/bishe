@@ -8,7 +8,7 @@
  * \brief module基类 
  * 
  */ 
-class cModule : public zLog
+class cModule
 {
     public:
         /**
@@ -36,7 +36,7 @@ class cModule : public zLog
             msg = (char *)malloc(size);
             memset(msg, 0, size);
             vsnprintf(msg, size, format, args);
-            zLog::logDebug(_type.c_str(), msg);
+            ZH.logDebug(_type.c_str(), msg);
             free(msg);
             va_end(args);
         }
@@ -55,7 +55,7 @@ class cModule : public zLog
             msg = (char *)malloc(size);
             memset(msg, 0, size);
             vsnprintf(msg, size, format, args);
-            zLog::logError(_type.c_str(), msg);
+            ZH.logError(_type.c_str(), msg);
             free(msg);
             va_end(args);
         }
@@ -74,7 +74,7 @@ class cModule : public zLog
             msg = (char *)malloc(size);
             memset(msg, 0, size);
             vsnprintf(msg, size, format, args);
-            zLog::logFatal(_type.c_str(), msg);
+            ZH.logFatal(_type.c_str(), msg);
             free(msg);
             va_end(args);
         }
@@ -93,7 +93,7 @@ class cModule : public zLog
             msg = (char *)malloc(size);
             memset(msg, 0, size);
             vsnprintf(msg, size, format, args);
-            zLog::logInfo(_type.c_str(), msg);
+            ZH.logInfo(_type.c_str(), msg);
             free(msg);
             va_end(args);
         }   

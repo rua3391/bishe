@@ -9,10 +9,10 @@
 #include "zType.h"
 
 #define LOGNAME "Engine.log"
-#define DEBUG(format, ...) zLog::debug(format, ##__VA_ARGS__)
-#define INFO(format, ...) zLog::info(format, ##__VA_ARGS__)
-#define ERROR(format, ...) zLog::error(format, ##__VA_ARGS__)
-#define FATAL(format, ...) zLog::fatal(format, ##__VA_ARGS__)
+#define DEBUG(format, ...) ZH.debug(format, ##__VA_ARGS__)
+#define INFO(format, ...) ZH.info(format, ##__VA_ARGS__)
+#define ERROR(format, ...) ZH.error(format, ##__VA_ARGS__)
+#define FATAL(format, ...) ZH.fatal(format, ##__VA_ARGS__)
 
 //gcc自带宏定义
 //__LINE__ 表示该行代码的所在行号
@@ -41,7 +41,7 @@ class zLog
          * \param ... 可变长参数列表
          * 
          */ 
-        static void debug(const char* format, ...)
+        void debug(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;
@@ -60,7 +60,7 @@ class zLog
          * \param ... 可变长参数列表
          * 
          */ 
-        static void info(const char* format, ...)
+        void info(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;
@@ -79,7 +79,7 @@ class zLog
          * \param ... 可变长参数列表
          * 
          */ 
-        static void error(const char* format, ...)
+        void error(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;
@@ -98,7 +98,7 @@ class zLog
          * \param ... 可变长参数列表
          * 
          */ 
-        static void fatal(const char* format, ...)
+        void fatal(const char* format, ...)
         {
             char *msg = NULL;
             va_list args;
@@ -111,14 +111,13 @@ class zLog
             free(msg);
             va_end(args);
         }
-    protected:
         /**
          * \brief 获取时间戳
          * \param path 是否是log文件时间戳
          * \return 规格化具体时间戳字符串
          * 
          */ 
-        static const char* getTime(bool path = false)
+        const char* getTime(bool path = false)
         {
             //时间
             char *logpath, *timestamp;
@@ -140,7 +139,7 @@ class zLog
          * \param msg 拼接完日志类型及所属模块的日志信息
          * 
          */ 
-        static void writeLog(const char* msg)
+        void writeLog(const char* msg)
         {
             FILE* logfile=NULL;
             char logpath[128] = {0};
@@ -179,7 +178,7 @@ class zLog
          * \param msg 日志具体信息
          * 
          */ 
-        static void logDebug(const char* filename, const char* msg)
+        void logDebug(const char* filename, const char* msg)
         {
             char str[2048];
             const char* time = getTime();
@@ -193,7 +192,7 @@ class zLog
          * \param msg 日志具体信息
          * 
          */ 
-        static void logInfo(const char* filename, const char* msg)
+        void logInfo(const char* filename, const char* msg)
         {
             char str[2048];
             const char* time = getTime();
@@ -207,7 +206,7 @@ class zLog
          * \param msg 日志具体信息
          * 
          */ 
-        static void logError(const char* filename, const char* msg)
+        void logError(const char* filename, const char* msg)
         {
             char str[2048];
             const char* time = getTime();
@@ -221,7 +220,7 @@ class zLog
          * \param msg 日志具体信息
          * 
          */ 
-        static void logFatal(const char* filename, const char* msg)
+        void logFatal(const char* filename, const char* msg)
         {
             char str[2048];
             const char* time = getTime();
@@ -230,5 +229,10 @@ class zLog
             printf("%s[FATAL] [%s] %s \n", time, filename, msg);
         }
 };
+
+namespace 
+{
+    zLog ZH;
+}
 
 #endif

@@ -134,7 +134,7 @@ void Object::updateModel(const glm::vec3 &translation, FLOAT radians, const glm:
 
 void Object::translate(const glm::vec3 &translation)
 {
-    _model = glm::translate(_model, translation);
+    _model = glm::translate(glm::mat4(1.0f), translation);//translate返回的是值，形参为const可以传右值临时构造变量
 }
 
 void Object::rotate(FLOAT radians, const glm::vec3 &rotation)
