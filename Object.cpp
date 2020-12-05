@@ -87,7 +87,7 @@ bool Object::initTexture(std::string path)
         _texture = new Texture();
         if(!_texture)
         {
-            ERROR("内存空间不足, Texture创建失败");
+            error("内存空间不足, Texture创建失败");
             return false;
         }
     }
@@ -158,8 +158,6 @@ void Object::reflectPosition()
     _shader->uniformSetmat4("model", _model);
     _shader->uniformSetmat4("view", _view);
     _shader->uniformSetmat4("projection", _projection);
-    glm::mat4 reset(1.0f);
-    _model = reset;
 }
 
 void Object::setMaterial(const glm::vec3 &ambient, const glm::vec3 &diffuse, const glm::vec3 &specular, FLOAT shiness)

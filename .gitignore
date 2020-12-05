@@ -31,3 +31,4 @@ protobuf/*
 log/*
 proto/*.cc
 proto/*.h
+assimp-5.0.1/*

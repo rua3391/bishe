@@ -35,7 +35,8 @@ void scrollCallback(GLFWwindow* windows, DFLOAT xoffset, DFLOAT yoffset)
 
 void Engine::processMouseCallback(GLFWwindow* windows, DFLOAT xpos, DFLOAT ypos)
 {
-    if (_first) {
+    if (_first) 
+	{
 		_lastx = xpos;
 		_lasty = ypos;
 		_first = false;
@@ -55,19 +56,24 @@ void Engine::processScrollCallback(GLFWwindow* windows, DFLOAT xoffset, DFLOAT y
 
 void Engine::processInput(GLFWwindow* windows)
 {
-    if (glfwGetKey(windows, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+    if (glfwGetKey(windows, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
+	{
 		glfwSetWindowShouldClose(windows, true);
 	}
-	if (glfwGetKey(windows, GLFW_KEY_W) == GLFW_PRESS) {
+	if (glfwGetKey(windows, GLFW_KEY_W) == GLFW_PRESS) 
+	{
 		Camera::getInstance()->processKeybordMovement(FORWARD, timepass);
 	}
-	else if (glfwGetKey(windows, GLFW_KEY_S) == GLFW_PRESS) {
+	else if (glfwGetKey(windows, GLFW_KEY_S) == GLFW_PRESS) 
+	{
 		Camera::getInstance()->processKeybordMovement(BACK, timepass);
 	}
-	else if (glfwGetKey(windows, GLFW_KEY_D) == GLFW_PRESS) {
+	else if (glfwGetKey(windows, GLFW_KEY_D) == GLFW_PRESS)
+	{
 		Camera::getInstance()->processKeybordMovement(RIGHT, timepass);
 	}
-	else if (glfwGetKey(windows, GLFW_KEY_A) == GLFW_PRESS) {
+	else if (glfwGetKey(windows, GLFW_KEY_A) == GLFW_PRESS) 
+	{
 		Camera::getInstance()->processKeybordMovement(LEFT, timepass);
 	}
 }
