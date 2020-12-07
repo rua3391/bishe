@@ -40,7 +40,7 @@ void Object::final()
     }
 }
 
-bool Object::init(FLOAT *buffer, DWORD size, const std::string &vertex_file, const std::string &fragment_file)
+bool Object::init(FLOAT *buffer, DWORD size)
 {
     if(!buffer)
     {
@@ -62,11 +62,6 @@ bool Object::init(FLOAT *buffer, DWORD size, const std::string &vertex_file, con
         }
     }
     
-    if(!_shader->init(vertex_file, fragment_file))
-    {
-        error("shader初始化失败");
-        return false;
-    }
     debug("物件初始化成功");
     this->id = QWORD(_vao) << 32 + QWORD(_vbo);
     if(!GObjManager::getInstance()->add(this))
@@ -80,7 +75,17 @@ bool Object::init(FLOAT *buffer, DWORD size, const std::string &vertex_file, con
     return true;
 }
 
-bool Object::initTexture(std::string path)
+bool Object::initShader(const std::string &vertex_file, const std::string &fragment_file)
+{
+    if(!_shader->init(vertex_file, fragment_file))
+    {
+        error("shader初始化失败");
+        return false;
+    }
+    return true;
+}
+
+bool Object::initTexture(const std::string &path)
 {
     if(!_texture)
     {

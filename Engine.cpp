@@ -151,9 +151,14 @@ bool Engine::initObj(const std::string &vertexfile, const std::string &fragmentf
 	};
 	DEBUG("初始化物体");
 	Object *object = new Object();
-	if(!object->init(vertex, sizeof(vertex) / sizeof(FLOAT), vertexfile, fragmentfile))
+	if(!object->init(vertex, sizeof(vertex) / sizeof(FLOAT)))
 	{
 		FATAL("物体初始化失败");
+		return false;
+	}
+	if(!object->initShader(vertexfile, fragmentfile))
+	{
+		FATAL("物体着色器初始化失败");
 		return false;
 	}
 	obj.emplace_back(object->id);

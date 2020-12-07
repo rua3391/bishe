@@ -34,11 +34,9 @@ class Object : public cModule, public zEntry
          * \brief 初始化
          * \param buffer 顶点属性数组
          * \param size 数组大小
-         * \param vertex_file v着色器文件路径
-         * \param fragment_file f着色器文件路径
          * 
          */
-        bool init(FLOAT *buffer, DWORD size, const std::string &vertex_file, const std::string &fragment_file);
+        bool init(FLOAT *buffer, DWORD size);
         /**
          * \brief 释放资源
          * 
@@ -65,7 +63,14 @@ class Object : public cModule, public zEntry
          * \param path 纹理图片路径
          * 
          */ 
-        bool initTexture(std::string path);
+        bool initTexture(const std::string &path);
+        /**
+         * \brief 初始化着色器
+         * \param vertex_file v着色器文件路径
+         * \param fragment_file f着色器文件路径 
+         * 
+         */
+        bool initShader(const std::string &vertex_file, const std::string &fragment_file); 
         /**
          * \brief 应用纹理
          * 
