@@ -20,6 +20,8 @@
 #include <stack>
 #include <deque>
 #include <sstream>
+#include <fstream>
+#include <sstream>
 
 #include "zType.h"
 #include "zLog.h"

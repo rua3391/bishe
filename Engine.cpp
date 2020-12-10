@@ -168,6 +168,11 @@ bool Engine::initObj(const std::string &vertexfile, const std::string &fragmentf
 bool Engine::initLight(const glm::vec3 &position)
 {
 	Light *_light = new Light();
+	if(!_light)
+	{
+		ERROR("内存不足, 初始化光源失败");
+		return false;
+	}
 	_light->init(position);
 	this->light.emplace_back(_light->id);
 	return true;

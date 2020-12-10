@@ -46,7 +46,7 @@ class Camera : public zSingletonBase<Camera>, public cModule
 		 * \param worldup 世界坐标系z(y)轴方向
 		 * 
 		 */ 
-		bool init(glm::vec3 position, glm::vec3 target, glm::vec3 upward);
+		bool init(const glm::vec3 &position, const glm::vec3 &target, const glm::vec3 &upward);
 		/**
 		 * \brief 初始化
 		 * \param position 摄像机位置 
@@ -55,7 +55,7 @@ class Camera : public zSingletonBase<Camera>, public cModule
 		 * \param worldup 世界坐标系z(y)轴方向
 		 * 
 		 */ 
-		bool init(glm::vec3 position, float pitch, float yaw, glm::vec3 upward);
+		bool init(const glm::vec3 &position, FLOAT pitch, FLOAT yaw, const glm::vec3 &upward);
 		/**
 		 * \brief 序列化
 		 * 

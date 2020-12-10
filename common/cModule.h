@@ -15,7 +15,7 @@ class cModule
          * \brief 构造函数
          * 
          */ 
-        cModule(std::string type) : _type(type), _redis(new zRedis()) { }
+        cModule(const std::string &type) : _type(type), _redis(new zRedis()) { }
         /**
          * \brief 析构函数
          * 
@@ -118,7 +118,7 @@ class cModule
          * \brief 保存资源到_redis数据库
          * 
          */
-        void saveTo_redis()
+        void saveToRedis()
         {
             _redis->createHandle();
             std::stringstream os;
@@ -135,7 +135,7 @@ class cModule
          * \brief 读取当前模块_redis数据库资源
          * 
          */
-        const char* readFromRedis()
+        char* readFromRedis()
         {
             _redis->createHandle();
             std::stringstream os;

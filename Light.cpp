@@ -1,5 +1,3 @@
-#include "Common.pb.cc"
-
 #include "Light.h"
 #include "zSnowFlake.h"
 #include "GLightManager.h"

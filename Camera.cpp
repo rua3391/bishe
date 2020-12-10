@@ -1,3 +1,5 @@
+#include "Common.pb.cc"
+
 #include "Camera.h"
 
 Camera::Camera() :
@@ -12,7 +14,7 @@ Camera::~Camera()
 {	
 }
 
-bool Camera::init(glm::vec3 position, glm::vec3 target, glm::vec3 upward)
+bool Camera::init(const glm::vec3 &position, const glm::vec3 &target, const glm::vec3 &upward)
 {
 	worldup = upward;
 	_position = position;
@@ -23,7 +25,7 @@ bool Camera::init(glm::vec3 position, glm::vec3 target, glm::vec3 upward)
 	return true;
 }
 
-bool Camera::init(glm::vec3 position, float pitch, float yaw, glm::vec3 upward)
+bool Camera::init(const glm::vec3 &position, FLOAT pitch, FLOAT yaw, const glm::vec3 &upward)
 {
 	worldup = upward;
 	_position = position;
@@ -42,12 +44,31 @@ bool Camera::init(glm::vec3 position, float pitch, float yaw, glm::vec3 upward)
 
 void Camera::serialize(void *out)
 {
-	//todo
+	Proto::Common::CameraProto camera;
+	camera.add_position(_position.x);
+	camera.add_position(_position.y);
+	camera.add_position(_position.z);
+	camera.add_worldup(worldup.x);
+	camera.add_worldup(worldup.y);
+	camera.add_worldup(worldup.z);
+	camera.set_pitch(_pitch);
+	camera.set_yaw(_yaw);
+
+	camera.SerializeToArray(out, MAX_SIZE);
 }
 
 void Camera::unserialize()
 {
-	//todo
+	char* buffer = NULL;
+	buffer = readFromRedis();
+	Proto::Common::CameraProto camera;
+	camera.ParseFromArray(buffer, MAX_SIZE);
+	
+	glm::vec3 pos(camera.position(0), camera.position(1), camera.position(2));
+	glm::vec3 worldup(camera.worldup(0), camera.worldup(1), camera.worldup(2));
+	FLOAT pitch = camera.pitch();
+	FLOAT yaw = camera.yaw();
+	this->init(pos, pitch, yaw, worldup);
 }
 
 void Camera::final()

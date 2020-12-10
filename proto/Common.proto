@@ -3,14 +3,17 @@ package Proto.Common;
 
 message EngineData
 {
-    CameraProto                                camera = 1;         //相机数据
-    repeated ObjectProto                       object = 2;         //物件数据
-    repeated LightProto                        light  = 3;         //光源数据
+    CameraProto                                 camera = 1;         //相机数据
+    repeated ObjectProto                        object = 2;         //物件数据
+    repeated LightProto                         light  = 3;         //光源数据
 }
 
 message CameraProto
 {
-    //todo
+    int32                                       pitch    = 1;       //仰角
+    int32                                       yaw      = 2;       //转角
+    repeated int32                              position = 3;       //相机位置
+    repeated int32                              worldup  = 4;       //世界坐标下上方方向
 }
 
 message ShaderProto
@@ -25,8 +28,8 @@ message TextureProto
 
 message ObjectProto
 {
-    ShaderProto                                shader = 1;         //着色器数据
-    repeated TextureProto                      texture = 2;        //纹理数据
+    ShaderProto                                 shader = 1;         //着色器数据
+    repeated TextureProto                       texture = 2;        //纹理数据
 }
 
 message LightProto

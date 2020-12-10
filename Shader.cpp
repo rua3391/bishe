@@ -1,6 +1,5 @@
 #include "Shader.h"
-#include<fstream>
-#include<sstream>
+
 
 //sdk database
 
