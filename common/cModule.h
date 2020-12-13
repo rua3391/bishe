@@ -15,7 +15,7 @@ class cModule
          * \brief 构造函数
          * 
          */ 
-        cModule(const std::string &type) : _type(type), _redis(new zRedis()) { }
+        cModule(const std::string &type) : _type(type) {_redis = new zRedis(); }
         /**
          * \brief 析构函数
          * 
