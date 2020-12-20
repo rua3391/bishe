@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <time.h>
+#include <iostream>
 
 #include "zType.h"
 
@@ -27,13 +28,26 @@ class zLog
         /**
          * \brief 构造函数
          * 
+         */ 
+        zLog(): _fout()
+        {
+        }
+        /**
+         * \brief 构造函数
+         * \param str 日志等级
+         * 
          */
-        zLog() {}
+        explicit zLog(const char* str): _fout(), _level(str)
+        {
+        } 
         /**
          * \brief 析构函数
          * 
          */
-        ~zLog() {}  
+        ~zLog() 
+        {
+            _fout.close();
+        }  
     public:
         /**
          * \brief 写debug日志
@@ -154,18 +168,8 @@ class zLog
             logfile = fopen(fname, "ab");
             if(logfile)
             {
-                // 判断文件大小
-                if (ftell(logfile) < 5*1024*1024)   // 5M
-                {
-                    //内容
-                    fwrite(msg, 1, strlen(msg), logfile);
-                    fclose(logfile);
-                }
-                else
-                {
-                    fclose(logfile);
-                    remove(fname);
-                }
+                fwrite(msg, 1, strlen(msg), logfile);
+                fclose(logfile);
             }
             else
             {
@@ -228,11 +232,167 @@ class zLog
             writeLog(str);
             printf("%s[FATAL] [%s] %s \n", time, filename, msg);
         }
+    public:
+        /**
+         * \brief 内核格式化 类似于cout
+         * 
+         */ 
+        zLog& operator <<(DWORD i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(SDWORD i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(QWORD i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(SQWORD i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(const char* str)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << str;
+            std::cout << str;
+            return *this;
+        }
+        zLog& operator <<(FLOAT i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(DFLOAT i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(char c)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << c;
+            std::cout << c;
+            return *this;
+        }
+        zLog& operator <<(WORD i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(SWORD i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        /**
+         * \brief 类似于std::cout<<std::endl;
+         * 
+         */ 
+        zLog& operator <<(zLog& end)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout<< '\n';
+            std::cout << std::endl;
+            _fout.close();
+            return *this;
+        }
+    private:
+        /**
+         * \brief 文件io流
+         * 
+         */
+        std::ofstream _fout;
+        /**
+         * \brief 日志类别
+         * 
+         */
+        std::string _level; 
+        /**
+         * \brief 是否初次打开文件流
+         * 
+         */ 
+        bool _firstOpen()
+        {
+            return _fout.is_open();
+        }
+        /**
+         * \brief 写入前缀
+         * 
+         */
+        void insertPerfix()
+        {
+            std::string log = "log/" + std::string(getTime(true)) + std::string(LOGNAME);
+            _fout.open(log.c_str(), std::ios_base::out | std::ios_base::app);
+            if(_fout.fail())
+            {
+                std::cout<<"打开失败";
+            }
+            _fout << getTime() << '[' << _level << "] ";
+            std::cout<< getTime() << '[' << _level << "] ";
+        } 
 };
 
-namespace 
-{
-    zLog ZH;
-}
+static zLog ZH;
+static zLog debug("DEBUG");
+static zLog error("ERROR");
+static zLog fatal("FATAL");
+static zLog info("INFO");
+static zLog end;
 
 #endif

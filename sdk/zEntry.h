@@ -82,12 +82,12 @@ class zCallback
          * \brief 规则详细, 如果return false立刻停止遍历
          * 
          */ 
-        virtual bool exec(T* ) {}
+        virtual bool exec(T* obj) {return false;}
         /**
          * \brief 规则详细, return true则删除该物件
          * 
          */
-        virtual bool isit(T* ) {} 
+        virtual bool isit(T* obj) {return true;} 
 }; 
 
 /**
@@ -146,7 +146,7 @@ class zEntryManager
             }
         } 
         /**
-         * \brief 按规则遍历物件
+         * \brief 遍历物件 返回false时立刻停止
          * 
          */ 
         void execEvery(zCallback<T> &rule)
@@ -156,6 +156,18 @@ class zEntryManager
                 if(!rule.exec(_collection[i]))
                     return;
             }
+        }
+        /**
+         * \brief 遍历物件, 但不满足时不停止
+         * 
+         */ 
+        void execEveryN(zCallback<T> &rule)
+        {
+            std::function<void(T*)> isit= [&](T* obj)->void
+            {
+                rule.exec(obj);
+            };
+            std::for_each(_collection.begin(), _collection.end(), isit);
         }
         /**
          * \brief 按规则删除物件
@@ -176,6 +188,38 @@ class zEntryManager
                     ++i;
                 }
             }
+        }
+        /**
+         * \brief 获取所有物件
+         * 
+         */
+        void getEveryId(std::vector<QWORD > &idvec)
+        {
+            std::function<void(T*)> fun = [&](T* obj)
+            {
+                idvec.push_back(obj->id);
+            };
+            std::for_each(_collection.begin(), _collection.end(), fun);
+        } 
+        /**
+         * \brief 返回物件管理器size
+         * 
+         */
+        DWORD size()
+        {
+            return _collection.size();
+        } 
+    public:
+        /**
+         * \brief 随机访问 debug用
+         * 
+         */
+        T* operator[](DWORD i)
+        {
+            if(i < size())
+                return _collection[i];
+            else
+                return NULL;
         }
     private:
         /**

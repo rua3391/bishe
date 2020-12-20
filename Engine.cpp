@@ -94,7 +94,7 @@ GLFWwindow* Engine::initWindow()
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK) 
 	{
-		ERROR("glew inited failed");
+		error << "glew inited failed" << end;
 		glfwTerminate();
 		return NULL;
 	}
@@ -149,16 +149,16 @@ bool Engine::initObj(const std::string &vertexfile, const std::string &fragmentf
 		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
-	DEBUG("初始化物体");
+	debug << "初始化物体" << end;
 	Object *object = new Object();
 	if(!object->init(vertex, sizeof(vertex) / sizeof(FLOAT)))
 	{
-		FATAL("物体初始化失败");
+		error << "物体初始化失败" << end;
 		return false;
 	}
 	if(!object->initShader(vertexfile, fragmentfile))
 	{
-		FATAL("物体着色器初始化失败");
+		error << "物体着色器初始化失败" << end;
 		return false;
 	}
 	obj.emplace_back(object->id);
@@ -170,10 +170,14 @@ bool Engine::initLight(const glm::vec3 &position)
 	Light *_light = new Light();
 	if(!_light)
 	{
-		ERROR("内存不足, 初始化光源失败");
+		error << "内存不足, 初始化光源失败" << end;
 		return false;
 	}
-	_light->init(position);
+	if(!_light->init(position))
+	{
+		error << "光源初始化失败" << end;
+		return false;
+	}
 	this->light.emplace_back(_light->id);
 	return true;
 }
@@ -201,22 +205,25 @@ int Engine::mainProcess(void)
 		return -1;
 	}
 	FLOAT last_time = 0.0;
-	Object *obj1 = GObjManager::getInstance()->get(obj[0]);
+	// std::vector<QWORD> id;
+	// GObjManager::getInstance()->getEveryId(id);
+	// std::copy(id.begin(), id.end(), std::ostream_iterator<QWORD, char>(std::cout, " "));
+	Object *obj1 = GObjManager::getInstance()->operator[](0);
 	if(!obj1)
 	{
-		ERROR("获取物件失败");
+		error << "获取物件失败" << end;
 		return -1;
 	}
-	Object *obj2 = GObjManager::getInstance()->get(obj[1]);
+	Object *obj2 = GObjManager::getInstance()->operator[](1);
 	if(!obj2)
 	{
-		ERROR("获取物件失败");
+		error << "获取物件失败" << end;
 		return -1;
 	}
-	Light *light1 = GLightManager::getInstance()->get(light[0]);
+	Light *light1 = GLightManager::getInstance()->operator[](0);
 	if(!light1)
 	{
-		ERROR("获取光源失败");
+		error << "获取光源失败" << end;
 		return -1;
 	}
 	while (!glfwWindowShouldClose(window)) 
@@ -267,18 +274,18 @@ int main(void)
 {
 	if(Engine::getInstance()->initWindow() == NULL)
 	{
-		FATAL("窗口初始化失败");
+		fatal << "窗口初始化失败" << end;
 		return -1;
 	}
 	if(!Camera::getInstance()->init(glm::vec3(0, 0, 3.0f), -15.0f, 180.0f, glm::vec3(0, 1.0f, 0)))
 	{
-		FATAL("相机初始化失败");
+		fatal << "相机初始化失败" << end;
 		return -1;
 	}
-	DEBUG("主进程初始化完毕");
+	debug << "主进程初始化完毕" << end;
 	Engine::getInstance()->mainProcess();
-	DEBUG("主进程结束");
+	debug << "主进程结束" << end;
 	Engine::getInstance()->final();
-	DEBUG("资源释放完毕");
+	debug << "资源释放完毕" << end;
 	return 0;
 }

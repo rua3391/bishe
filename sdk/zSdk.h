@@ -11,6 +11,9 @@
 #include <assimp/postprocess.h>
 
 #include <iostream>
+#include <algorithm>
+#include <functional>
+#include <iterator>
 #include <unordered_map>
 #include <string>
 #include <set>

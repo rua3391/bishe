@@ -44,10 +44,6 @@ void GObjManager::final()
     {
         callback(){}
         ~callback(){}
-        bool isit(Object *obj)
-        {
-            return true;
-        }
     };
     callback call;
     this->deleteEveryif(call);
