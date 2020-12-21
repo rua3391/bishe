@@ -64,9 +64,21 @@ class Engine : public zSingletonBase<Engine>
         GLFWwindow* initWindow();
         /**
          * \brief 初始化物件 
+         * \param path 物件模型顶点属性数据
+         * \param vertexfile 顶点着色器路径
+         * \param fragmentfile 片元着色器路径
+         * \return 初始化是否成功
          * 
          */
-        bool initObj(const std::string &vertexfile, const std::string &fragmentfile);
+        bool initObj(const std::string& path, const std::string &vertexfile, const std::string &fragmentfile);
+        /**
+         * \brief 加载物件模型信息
+         * \param path 模型路径
+         * \param container 存放模型信息的容器
+         * \return 加载物件模型是否成功
+         * 
+         */
+        bool loadObj(const std::string &path, std::vector<FLOAT> &container);
         /**
          * \brief 初始化光源
          * 

@@ -103,55 +103,13 @@ GLFWwindow* Engine::initWindow()
     return window;
 }
 
-bool Engine::initObj(const std::string &vertexfile, const std::string &fragmentfile)
+bool Engine::initObj(const std::string& path, const std::string &vertexfile, const std::string &fragmentfile)
 {
-	FLOAT vertex[] =
-	{
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-
-		0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-		0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-		0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-		0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-		0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-		0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
-	};
-	debug << "初始化物体" << end;
+	debug << "初始化物体" << path.c_str() << end;
 	Object *object = new Object();
-	if(!object->init(vertex, sizeof(vertex) / sizeof(FLOAT)))
+	std::vector<FLOAT> buf;
+	loadObj(path, buf);
+	if(!object->init(buf))
 	{
 		error << "物体初始化失败" << end;
 		return false;
@@ -162,6 +120,27 @@ bool Engine::initObj(const std::string &vertexfile, const std::string &fragmentf
 		return false;
 	}
 	obj.emplace_back(object->id);
+	return true;
+}
+
+bool Engine::loadObj(const std::string& path, std::vector<FLOAT> &container)
+{
+	std::ifstream fin;
+	fin.open(path, std::ios_base::in);
+	if(!fin.is_open())
+	{
+		error << "物件模型路径不存在, 加载模型失败" << end;
+		return false;
+	}
+	FLOAT tmp;
+	fin >> tmp;
+	container.push_back(tmp);
+	while(!fin.eof())
+	{
+		fin >> tmp;
+		container.push_back(tmp);
+	}
+	fin.close();
 	return true;
 }
 
@@ -184,7 +163,7 @@ bool Engine::initLight(const glm::vec3 &position)
 
 int Engine::mainProcess(void)
 {
-	if(!initObj("shader/lighting.vert", "shader/lighting.frag"))
+	if(!initObj("model/cube", "shader/lighting.vert", "shader/lighting.frag"))
 	{
 		return -1;
 	}
@@ -193,7 +172,7 @@ int Engine::mainProcess(void)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	if(!initObj("shader/light.vert", "shader/light.frag"))
+	if(!initObj("model/cube","shader/light.vert", "shader/light.frag"))
 	{
 		return -1;
 	}

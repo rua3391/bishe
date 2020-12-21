@@ -29,7 +29,7 @@ class zLog
          * \brief 构造函数
          * 
          */ 
-        zLog(): _fout()
+        zLog()
         {
         }
         /**
@@ -37,7 +37,7 @@ class zLog
          * \param str 日志等级
          * 
          */
-        explicit zLog(const char* str): _fout(), _level(str)
+        explicit zLog(const char* str):_level(str)
         {
         } 
         /**
@@ -328,6 +328,16 @@ class zLog
             return *this;
         }
         zLog& operator <<(SWORD i)
+        {
+            if(!_firstOpen())
+            {
+                insertPerfix();
+            }
+            _fout << i;
+            std::cout << i;
+            return *this;
+        }
+        zLog& operator <<(unsigned long i)
         {
             if(!_firstOpen())
             {

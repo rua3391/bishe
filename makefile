@@ -34,7 +34,7 @@ Engine.o: *.h *.cpp $(SDK) $(PROTO)
 proto:
 	cd $(PROTO) && $(MAKE)
 clean:
-	rm -rf *.o Engine $(PROTO)*.h $(PROTO)*.cc $(DESKTOP)code.tar.gz
+	rm -rf *.o Engine $(DESKTOP)code.tar.gz
 rmtar:
 	rm -rf $(DESKTOP)code.tar.gz
 tar:

@@ -40,18 +40,14 @@ void Object::final()
     }
 }
 
-bool Object::init(FLOAT *buffer, DWORD size)
+bool Object::init(const std::vector<FLOAT> &buf)
 {
-    if(!buffer)
-    {
-        error("空指针");
-        return false;
-    }
     glGenVertexArrays(1, &_vao);
     glGenBuffers(1, &_vbo);
     glBindVertexArray(_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	glBufferData(GL_ARRAY_BUFFER, size * sizeof(FLOAT), buffer, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, buf.size() * sizeof(FLOAT), (void *)buf.begin().base(), GL_STATIC_DRAW);
+
     if(!_shader)
     {
         _shader = new Shader();
@@ -61,7 +57,6 @@ bool Object::init(FLOAT *buffer, DWORD size)
             return false;    
         }
     }
-    
     debug("物件初始化成功");
     this->id = QWORD(_vao) << 32 + QWORD(_vbo);
     if(!GObjManager::getInstance()->add(this))

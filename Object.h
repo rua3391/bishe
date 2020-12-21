@@ -32,11 +32,11 @@ class Object : public cModule, public zEntry
     public:
         /**
          * \brief 初始化
-         * \param buffer 顶点属性数组
-         * \param size 数组大小
+         * \param buf 顶点属性数组
+         * \return 初始化是否成功
          * 
          */
-        bool init(FLOAT *buffer, DWORD size);
+        bool init(const std::vector<FLOAT> &buf); 
         /**
          * \brief 释放资源
          * 
