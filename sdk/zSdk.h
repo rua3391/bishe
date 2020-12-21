@@ -24,6 +24,8 @@
 #include <deque>
 #include <sstream>
 #include <fstream>
+#include <initializer_list>
+#include <typeinfo>
 
 #include "zType.h"
 #include "zLog.h"
