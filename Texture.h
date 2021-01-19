@@ -27,7 +27,7 @@ class Texture : public cModule
          * \return 初始化是否成功
          * 
          */
-        bool init(std::string path, DWORD num); 
+        bool init(const std::string& path, DWORD num); 
         /**
          * \brief 序列化
          * 
@@ -49,7 +49,13 @@ class Texture : public cModule
          * \param num 第num个纹理单元
          * 
          */
-        void activeTexture(DWORD num);   
+        bool activeTexture(DWORD num);
+        /**
+         * \brief 获取num号单元纹理id
+         * \param num 第num个纹理单元
+         * 
+         */
+        SDWORD getTextureId(DWORD num);    
     private:
         /**
          * \brief 激活纹理单元与纹理id映射关系

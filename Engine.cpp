@@ -103,7 +103,7 @@ GLFWwindow* Engine::initWindow()
     return window;
 }
 
-bool Engine::initObj(const std::string& path, const std::string &vertexfile, const std::string &fragmentfile)
+Object* Engine::initObj(const std::string& path, const std::string &vertexfile, const std::string &fragmentfile)
 {
 	debug << "初始化物体" << path.c_str() << end;
 	Object *object = new Object();
@@ -112,15 +112,14 @@ bool Engine::initObj(const std::string& path, const std::string &vertexfile, con
 	if(!object->init(buf))
 	{
 		error << "物体初始化失败" << end;
-		return false;
+		return nullptr;
 	}
 	if(!object->initShader(vertexfile, fragmentfile))
 	{
 		error << "物体着色器初始化失败" << end;
-		return false;
+		return nullptr;
 	}
-	obj.emplace_back(object->id);
-	return true;
+	return object;
 }
 
 bool Engine::loadObj(const std::string& path, std::vector<FLOAT> &container)
@@ -132,79 +131,61 @@ bool Engine::loadObj(const std::string& path, std::vector<FLOAT> &container)
 		error << "物件模型路径不存在, 加载模型失败" << end;
 		return false;
 	}
-	FLOAT tmp;
-	fin >> tmp;
-	container.push_back(tmp);
-	while(!fin.eof())
+	std::istream_iterator<FLOAT> in(fin), eof;
+	while(in != eof)
 	{
-		fin >> tmp;
-		container.push_back(tmp);
+		container.push_back(*in++);
 	}
 	fin.close();
 	return true;
 }
 
-bool Engine::initLight(const glm::vec3 &position)
+Light* Engine::initLight(const glm::vec3 &position)
 {
 	Light *_light = new Light();
 	if(!_light)
 	{
 		error << "内存不足, 初始化光源失败" << end;
-		return false;
+		return nullptr;
 	}
 	if(!_light->init(position))
 	{
 		error << "光源初始化失败" << end;
-		return false;
+		return nullptr;
 	}
-	this->light.emplace_back(_light->id);
-	return true;
+	return _light;
 }
 
 int Engine::mainProcess(void)
 {
-	if(!initObj("model/cube", "shader/lighting.vert", "shader/lighting.frag"))
+	Object *obj1 = initObj("model/cube", "shader/lighting.vert", "shader/lighting.frag");
+	if(!obj1)
 	{
 		return -1;
 	}
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	obj1->initTexture("pic/box.png", 0);
+	obj1->initTexture("pic/box_specular.png", 1);
 
-	if(!initObj("model/cube","shader/light.vert", "shader/light.frag"))
+	Object *obj2 = initObj("model/cube","shader/light.vert", "shader/light.frag");
+	if(!obj2)
 	{
 		return -1;
 	}
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(FLOAT), (void *)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
 
-	if(!initLight(glm::vec3(1.2f, 1.0f, 2.0f)))
+	Light *light1 = initLight(glm::vec3(1.2f, 1.0f, 2.0f));
+	if(!light1)
 	{
 		return -1;
 	}
 	FLOAT last_time = 0.0;
-	// std::vector<QWORD> id;
-	// GObjManager::getInstance()->getEveryId(id);
-	// std::copy(id.begin(), id.end(), std::ostream_iterator<QWORD, char>(std::cout, " "));
-	Object *obj1 = GObjManager::getInstance()->operator[](0);
-	if(!obj1)
-	{
-		error << "获取物件失败" << end;
-		return -1;
-	}
-	Object *obj2 = GObjManager::getInstance()->operator[](1);
-	if(!obj2)
-	{
-		error << "获取物件失败" << end;
-		return -1;
-	}
-	Light *light1 = GLightManager::getInstance()->operator[](0);
-	if(!light1)
-	{
-		error << "获取光源失败" << end;
-		return -1;
-	}
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);
@@ -214,7 +195,8 @@ int Engine::mainProcess(void)
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
 
-		glm::vec3 lightColor(sin(cur_time * 2.0f), sin(cur_time * 0.7f), sin(cur_time * 1.3f));
+		// glm::vec3 lightColor(sin(cur_time * 2.0f), sin(cur_time * 0.7f), sin(cur_time * 1.3f));
+		glm::vec3 lightColor(1.0f);
 		light1->setDiffuseLight(lightColor * glm::vec3(0.5f));
 		light1->setAmbientLight(lightColor * glm::vec3(0.5f) * glm::vec3(0.2f));
 		light1->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -226,6 +208,8 @@ int Engine::mainProcess(void)
 		obj1->setShiness(32.0f);
 		obj1->setColor(light1->getLight());
 		obj1->reflectPosition();
+		obj1->activeTexture("M.texture", 0);
+		obj1->activeTexture("M.specular", 1);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		obj2->bindObject();

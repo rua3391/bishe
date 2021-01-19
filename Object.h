@@ -61,9 +61,11 @@ class Object : public cModule, public zEntry
         /**
          * \brief 初始化纹理
          * \param path 纹理图片路径
+         * \param name 纹理名
+         * \param num 纹理id
          * 
          */ 
-        bool initTexture(const std::string &path);
+        bool initTexture(const std::string &path, DWORD num);
         /**
          * \brief 初始化着色器
          * \param vertex_file v着色器文件路径
@@ -73,9 +75,11 @@ class Object : public cModule, public zEntry
         bool initShader(const std::string &vertex_file, const std::string &fragment_file); 
         /**
          * \brief 应用纹理
+         * \param name 着色器内部目标sampler变量名
+         * \param id 激活纹理单元
          * 
          */
-        void avtiveTexture(); 
+        void activeTexture(const std::string& name, DWORD id); 
         /**
          * \brief 绑定此物件
          * 
@@ -202,12 +206,7 @@ class Object : public cModule, public zEntry
          * \brief 摄像机位置
          * 
          */
-        glm::vec3 _position;
-        /**
-         * \brief 已激活纹理单元个数
-         * 
-         */
-        DWORD _activenum;  
+        glm::vec3 _position;  
 };
 
 #endif

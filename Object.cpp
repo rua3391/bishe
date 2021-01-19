@@ -15,8 +15,7 @@ Object::Object() :
     _texture(NULL),
     _model(1.0f),
     _view(1.0f),
-    _projection(1.0f),
-    _activenum(0)
+    _projection(1.0f)
 {
 
 }
@@ -80,7 +79,7 @@ bool Object::initShader(const std::string &vertex_file, const std::string &fragm
     return true;
 }
 
-bool Object::initTexture(const std::string &path)
+bool Object::initTexture(const std::string &path, DWORD num)
 {
     if(!_texture)
     {
@@ -91,7 +90,7 @@ bool Object::initTexture(const std::string &path)
             return false;
         }
     }
-    if(!_texture->init(path, _activenum++))
+    if(!_texture->init(path, num))
     {
         error("texture初始化失败");
         return false;
@@ -99,12 +98,15 @@ bool Object::initTexture(const std::string &path)
     return true;
 }
 
-void Object::avtiveTexture()
+void Object::activeTexture(const std::string& name, DWORD id)
 {
-    for(DWORD i = 0; i < _activenum; ++i)
+    if(_texture->activeTexture(id))
     {
-        _texture->activeTexture(i);
-        _shader->uniformSet1i("Texture" + std::to_string(i), i);
+        DWORD tid = _texture->getTextureId(id);
+        if(tid == -1)
+            return;
+        glBindTexture(GL_TEXTURE_2D, tid);
+        _shader->uniformSet1i(name, id);
     }
 }
 
@@ -134,7 +136,7 @@ void Object::updateModel(const glm::vec3 &translation, FLOAT radians, const glm:
 
 void Object::translate(const glm::vec3 &translation)
 {
-    _model = glm::translate(glm::mat4(1.0f), translation);//translate返回的是值，形参为const可以传右值临时构造变量
+    _model = glm::translate(glm::mat4(1.0f), translation);
 }
 
 void Object::rotate(FLOAT radians, const glm::vec3 &rotation)

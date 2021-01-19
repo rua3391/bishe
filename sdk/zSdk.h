@@ -26,11 +26,11 @@
 #include <fstream>
 #include <initializer_list>
 #include <typeinfo>
+#include <bitset>
 
 #include "zType.h"
 #include "zLog.h"
 
-#define STB_IMAGE_IMPLEMENTATION
 #define GLEW_STATIC
 #define MAX_SIZE 2048
 //安全删除指针

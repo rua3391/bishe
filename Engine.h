@@ -21,16 +21,6 @@ class Engine : public zSingletonBase<Engine>
         ~Engine();
     public:
         /**
-         * \brief 物件id合集，方便取物件
-         * 
-         */
-        std::vector<QWORD> obj; 
-        /**
-         * \brief 光源id合集
-         * 
-         */
-        std::vector<QWORD> light;
-        /**
          * \brief 处理键盘输入消息
          * 
          */
@@ -67,10 +57,10 @@ class Engine : public zSingletonBase<Engine>
          * \param path 物件模型顶点属性数据
          * \param vertexfile 顶点着色器路径
          * \param fragmentfile 片元着色器路径
-         * \return 初始化是否成功
+         * \return 物件id
          * 
          */
-        bool initObj(const std::string& path, const std::string &vertexfile, const std::string &fragmentfile);
+        Object* initObj(const std::string& path, const std::string &vertexfile, const std::string &fragmentfile);
         /**
          * \brief 加载物件模型信息
          * \param path 模型路径
@@ -83,7 +73,7 @@ class Engine : public zSingletonBase<Engine>
          * \brief 初始化光源
          * 
          */ 
-        bool initLight(const glm::vec3 &position);
+        Light* initLight(const glm::vec3 &position);
         /**
          * \brief 销毁资源
          * 

@@ -44,10 +44,6 @@ void GLightManager::final()
     {
         callback(){}
         ~callback(){}
-        bool isit(Light *light)
-        {
-            return true;
-        }
     };
     callback call;
     this->deleteEveryif(call);
