@@ -140,9 +140,9 @@ bool Engine::loadObj(const std::string& path, std::vector<FLOAT> &container)
 	return true;
 }
 
-Light* Engine::initLight(const glm::vec3 &position)
+Light* Engine::initLight(const glm::vec3 &position, LightType type)
 {
-	Light *_light = new Light();
+	Light *_light = new Light(type);
 	if(!_light)
 	{
 		error << "内存不足, 初始化光源失败" << end;
@@ -169,8 +169,8 @@ int Engine::mainProcess(void)
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
-	obj1->initTexture("pic/box.png", 0);
-	obj1->initTexture("pic/box_specular.png", 1);
+	obj1->initDiffuseTexture("pic/box.png", 0);
+	obj1->initSpecularTexture("pic/box_specular.png", 1);
 
 	Object *obj2 = initObj("model/cube","shader/light.vert", "shader/light.frag");
 	if(!obj2)
@@ -180,43 +180,61 @@ int Engine::mainProcess(void)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
 
-	Light *light1 = initLight(glm::vec3(1.2f, 1.0f, 2.0f));
+	Light *light1 = initLight(glm::vec3(1.2f, 1.0f, 2.0f), Point);
 	if(!light1)
 	{
 		return -1;
 	}
 	FLOAT last_time = 0.0;
+	glm::vec3 cubePositions[] = {
+        glm::vec3( 0.0f,  0.0f,  0.0f),
+        glm::vec3( 2.0f,  5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3( 2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f,  3.0f, -7.5f),
+        glm::vec3( 1.3f, -2.0f, -2.5f),
+        glm::vec3( 1.5f,  2.0f, -2.5f),
+        glm::vec3( 1.5f,  0.2f, -1.5f),
+        glm::vec3(-1.3f,  1.0f, -1.5f)
+    };
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);
-		// glClearColor(0.2, 0.3, 0.3, 1.0);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		FLOAT cur_time = glfwGetTime();
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
 
-		// glm::vec3 lightColor(sin(cur_time * 2.0f), sin(cur_time * 0.7f), sin(cur_time * 1.3f));
-		glm::vec3 lightColor(1.0f);
-		light1->setDiffuseLight(lightColor * glm::vec3(0.5f));
-		light1->setAmbientLight(lightColor * glm::vec3(0.5f) * glm::vec3(0.2f));
+		light1->setDiffuseLight(glm::vec3(0.2f, 0.2f, 0.2f));
+		light1->setAmbientLight(glm::vec3(0.5f, 0.5f, 0.5f));
 		light1->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+		light1->setLightConstant(1.0f);
+		light1->setLightLinear(0.09f);
+		light1->setLightQuadratic(0.032f);
 
 		obj1->bindObject();
 		obj1->setAmbient(glm::vec3(1.0f, 0.5f, 0.31f));
 		obj1->setDiffuse(glm::vec3(1.0f, 0.5f, 0.31f));
 		obj1->setSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
 		obj1->setShiness(32.0f);
-		obj1->setColor(light1->getLight());
-		obj1->reflectPosition();
-		obj1->activeTexture("M.texture", 0);
-		obj1->activeTexture("M.specular", 1);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		for (DWORD i = 0; i < 10; i++)
+        {
+            obj1->translate(cubePositions[i]);
+            obj1->rotate(20.0f * i, glm::vec3(1.0f, 0.3f, 0.5f));
+			obj1->reflectPosition();
+			obj1->refelctMaterial();
+			obj1->refelctLight(light1);
+
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
 
 		obj2->bindObject();
 		obj2->translate(light1->getPosition());
 		obj2->scaling(glm::vec3(0.2f));
 		obj2->reflectPosition();
-		obj2->getShader()->uniformSetvec3("color", lightColor);
+		obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);

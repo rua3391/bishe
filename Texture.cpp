@@ -4,6 +4,8 @@
 #endif
 #include "stb_image.h"
 
+#include "Shader.h"
+
 Texture::Texture() : cModule("TEXTURE")
 {
 }
@@ -12,7 +14,7 @@ Texture::~Texture()
 {
 }
 
-bool Texture::init(const std::string& path, DWORD num)
+bool Texture::init(const std::string& path, DWORD num, TextureType type)
 {
     if(num >= 16)
     {
@@ -62,6 +64,7 @@ bool Texture::init(const std::string& path, DWORD num)
 	}
 	stbi_image_free(data);
 	_unit[num] = Texture;
+	_type[num] = type;
 	debug("%u号纹理初始化成功, 纹理id%d", num, Texture);
     return true;
 }
@@ -81,14 +84,41 @@ void Texture::final()
     
 }
 
-bool Texture::activeTexture(DWORD num)
+bool Texture::activeTexture(Shader *shader)
 {
-	if(!_unit.count(num))
+	for(const auto &i : _unit)
 	{
-		error("激活纹理单元非法, %d号纹理单元未绑定纹理", num);
-		return false;
+		DWORD num = i.first;
+		SDWORD tid = i.second;
+		TextureType type = _type[num];
+		if(type >= TextureMax || type < 0)
+		{
+			error("纹理类型不符, 激活失败");
+			return false;
+		}
+		if(tid == -1)
+		{
+			error("获取%u号纹理id失败, 激活失败", num);
+			return false;
+		}
+		glActiveTexture(GL_TEXTURE0 + num);
+		glBindTexture(GL_TEXTURE_2D, tid);
+		std::string name, s;
+		switch(type)
+		{
+			case Diffuse:
+				name = "M.difftexture"; s = "M.diffuseTexture"; break;
+			case Specular:
+				name = "M.specspecular"; s = "M.specularTexture"; break;
+			default:
+				break;
+		}
+		if(!name.empty())
+		{
+			shader->uniformSet1i(name, num);
+			shader->uniformSetBool(s, true);
+		}
 	}
-	glActiveTexture(GL_TEXTURE0 + num);
 	return true;
 }
 

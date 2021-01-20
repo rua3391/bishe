@@ -129,6 +129,12 @@ void Shader::uniformSet1i(const std::string &name, SDWORD num)
 	glUniform1i(location, num);
 }
 
+void Shader::uniformSet1ui(const std::string &name, DWORD num)
+{
+	DWORD location = glGetUniformLocation(_ID, name.c_str());
+	glUniform1ui(location, num);
+}
+
 void Shader::uniformSet1f(const std::string& name, FLOAT num) 
 {
 	DWORD location = glGetUniformLocation(_ID, name.c_str());

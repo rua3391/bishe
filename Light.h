@@ -6,7 +6,19 @@
 #include "zEntry.h"
 
 /**
- * \brief 光照强度
+ * \brief 光照类型枚举
+ * 
+ */ 
+enum LightType
+{
+    Simple = 1000,
+    Direction = 1001,
+    Point = 1002,
+
+    LightMax = 1003
+};
+/**
+ * \brief 光照结构体
  * 
  */ 
 struct Lightcolor
@@ -15,6 +27,10 @@ struct Lightcolor
     glm::vec3 diffuse;
     glm::vec3 specular;
     glm::vec3 position;
+    FLOAT constant;
+    FLOAT linear;
+    FLOAT quadratic;
+    LightType type;
 };
 /**
  * \brief 光照
@@ -27,7 +43,7 @@ class Light : public cModule, public zEntry
          * \brief 构造函数
          * 
          */
-        Light();
+        explicit Light(LightType type = LightType::Simple);
         /**
          * \brief 析构函数
          * 
@@ -71,6 +87,11 @@ class Light : public cModule, public zEntry
          */
         const glm::vec3& getPosition();
         /**
+         * \brief 返回光照类型
+         * 
+         */ 
+        const SDWORD getType();
+        /**
          * \brief 设置环境光照
          * 
          */
@@ -96,11 +117,26 @@ class Light : public cModule, public zEntry
          */
         void setLightPosition(const glm::vec3 &position);
         /**
+         * \brief 设置光照衰减
+         * 
+         */ 
+        void setLightConstant(FLOAT num);
+        /**
+         * \brief 设置光照衰减
+         * 
+         */ 
+        void setLightLinear(FLOAT num);
+        /**
+         * \brief 设置光照衰减
+         * 
+         */ 
+        void setLightQuadratic(FLOAT num);
+        /**
          * \brief 填充光源信息
          * 
          */
         void fill(Proto::Common::LightProto &out);     
-    private:
+    protected:
         /**
          * \brief 光照
          * 

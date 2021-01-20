@@ -3,6 +3,19 @@
 
 #include "cModule.h"
 /**
+ * \brief 纹理类型
+ * 
+ */ 
+enum TextureType
+{
+    Normal = 1,
+    Diffuse = 2,
+    Specular = 3,
+
+    TextureMax = 4
+};
+class Shader;
+/**
  * \brief 纹理类
  *
  */
@@ -27,7 +40,7 @@ class Texture : public cModule
          * \return 初始化是否成功
          * 
          */
-        bool init(const std::string& path, DWORD num); 
+        bool init(const std::string& path, DWORD num, TextureType type = Normal); 
         /**
          * \brief 序列化
          * 
@@ -49,7 +62,7 @@ class Texture : public cModule
          * \param num 第num个纹理单元
          * 
          */
-        bool activeTexture(DWORD num);
+        bool activeTexture(Shader *shader);
         /**
          * \brief 获取num号单元纹理id
          * \param num 第num个纹理单元
@@ -62,6 +75,11 @@ class Texture : public cModule
          * 
          */
         std::map<DWORD, DWORD> _unit;
+        /**
+         * \brief 纹理单元与纹理类型映射
+         * 
+         */ 
+        std::map<DWORD, TextureType> _type;
 };
 
 #endif

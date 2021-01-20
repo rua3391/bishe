@@ -3,9 +3,9 @@
 
 #include "zSdk.h"
 #include "zSingleton.h"
+#include "Light.h"
 
 class Object;
-class Light;
 class Engine : public zSingletonBase<Engine>
 {
     public:
@@ -73,7 +73,7 @@ class Engine : public zSingletonBase<Engine>
          * \brief 初始化光源
          * 
          */ 
-        Light* initLight(const glm::vec3 &position);
+        Light* initLight(const glm::vec3 &position, LightType type = Simple);
         /**
          * \brief 销毁资源
          * 

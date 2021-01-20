@@ -79,7 +79,7 @@ bool Object::initShader(const std::string &vertex_file, const std::string &fragm
     return true;
 }
 
-bool Object::initTexture(const std::string &path, DWORD num)
+bool Object::initNormalTexture(const std::string &path, DWORD num)
 {
     if(!_texture)
     {
@@ -98,15 +98,53 @@ bool Object::initTexture(const std::string &path, DWORD num)
     return true;
 }
 
-void Object::activeTexture(const std::string& name, DWORD id)
+bool Object::initDiffuseTexture(const std::string &path, DWORD num)
 {
-    if(_texture->activeTexture(id))
+    if(!_texture)
     {
-        DWORD tid = _texture->getTextureId(id);
-        if(tid == -1)
-            return;
-        glBindTexture(GL_TEXTURE_2D, tid);
-        _shader->uniformSet1i(name, id);
+        _texture = new Texture();
+        if(!_texture)
+        {
+            error("内存空间不足, Texture创建失败");
+            return false;
+        }
+    }
+    if(!_texture->init(path, num, Diffuse))
+    {
+        error("texture初始化失败");
+        return false;
+    }
+    return true;
+}
+
+bool Object::initSpecularTexture(const std::string &path, DWORD num)
+{
+    if(!_texture)
+    {
+        _texture = new Texture();
+        if(!_texture)
+        {
+            error("内存空间不足, Texture创建失败");
+            return false;
+        }
+    }
+    if(!_texture->init(path, num, Specular))
+    {
+        error("texture初始化失败");
+        return false;
+    }
+    return true;
+}
+
+bool Object::activeTexture()
+{
+    if(_texture->activeTexture(_shader))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
@@ -152,7 +190,6 @@ void Object::scaling(const glm::vec3 &scale)
 
 void Object::reflectPosition()
 {
-    // bindObject();
     DWORD width = Engine::getInstance()->screenx;
     DWORD height = Engine::getInstance()->screeny;
 	_view = Camera::getInstance()->getViewMatrix();
@@ -164,41 +201,57 @@ void Object::reflectPosition()
 
 void Object::setMaterial(const glm::vec3 &ambient, const glm::vec3 &diffuse, const glm::vec3 &specular, FLOAT shiness)
 {
-    // bindObject();
-    _shader->uniformSetvec3("M.ambientcolor", ambient);
-    _shader->uniformSetvec3("M.diffuse", diffuse);
-    _shader->uniformSetvec3("M.specular", specular);
-    _shader->uniformSet1f("M.shiness", shiness);
+    _material.ambient = ambient;
+    _material.diffuse = diffuse;
+    _material.specular = specular;
+    _material.shiness = shiness;
 }
 
 void Object::setAmbient(const glm::vec3 &ambient)
 {
-    _shader->uniformSetvec3("M.ambientcolor", ambient);
+    _material.ambient = ambient;
 }
 
 void Object::setDiffuse(const glm::vec3 &diffuse)
 {
-    _shader->uniformSetvec3("M.diffuse", diffuse);
+    _material.diffuse = diffuse;
 }
 
 void Object::setSpecular(const glm::vec3 &specular)
 {
-    _shader->uniformSetvec3("M.specular", specular);
+    _material.specular = specular;
 }
 
 void Object::setShiness(FLOAT shiness)
 {
-    _shader->uniformSet1f("M.shiness", shiness);
+    _material.shiness = shiness;
 }
 
-void Object::setColor(const Lightcolor &color)
+void Object::refelctLight(Light* light)
 {
     // bindObject();
+    const auto &color = light->getLight();
     _shader->uniformSetvec3("L.position", color.position);
     _shader->uniformSetvec3("L.ambientlight", color.ambient);
     _shader->uniformSetvec3("L.diffuselight", color.diffuse);
     _shader->uniformSetvec3("L.specularlight", color.specular);
+    _shader->uniformSet1i("L.type", color.type);
+    _shader->uniformSet1f("L.constant", color.constant);
+    _shader->uniformSet1f("L.linear", color.linear);
+    _shader->uniformSet1f("L.quadratic", color.quadratic);
     _shader->uniformSetvec3("camerapos", Camera::getInstance()->getCameraPosition());
+}
+
+void Object::refelctMaterial()
+{
+    _shader->uniformSetvec3("M.ambientcolor", _material.ambient);
+    _shader->uniformSetvec3("M.diffuse", _material.diffuse);
+    _shader->uniformSetvec3("M.specular", _material.specular);
+    _shader->uniformSet1f("M.shiness", _material.shiness);
+    if(_texture)
+    {
+        activeTexture();
+    }
 }
 
 void Object::fill(Proto::Common::ObjectProto &out)

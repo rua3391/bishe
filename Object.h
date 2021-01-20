@@ -5,6 +5,10 @@
 #include "zEntry.h"
 #include "Common.pb.h"
 
+/**
+ * \brief 物件材质
+ * 
+ */ 
 struct material
 {
     glm::vec3   ambient;
@@ -12,8 +16,7 @@ struct material
     glm::vec3   specular;
     FLOAT       shiness;
 };
-
-struct Lightcolor;
+class Light;
 class Shader;
 class Texture;
 class Object : public cModule, public zEntry
@@ -59,13 +62,29 @@ class Object : public cModule, public zEntry
         void fill(Proto::Common::ObjectProto &out); 
     public:
         /**
-         * \brief 初始化纹理
+         * \brief 初始化普通纹理
          * \param path 纹理图片路径
          * \param name 纹理名
          * \param num 纹理id
          * 
          */ 
-        bool initTexture(const std::string &path, DWORD num);
+        bool initNormalTexture(const std::string &path, DWORD num);
+        /**
+         * \brief 初始化漫反射纹理
+         * \param path 纹理图片路径
+         * \param name 纹理名
+         * \param num 纹理id
+         * 
+         */ 
+        bool initDiffuseTexture(const std::string &path, DWORD num);
+        /**
+         * \brief 初始化镜面光纹理
+         * \param path 纹理图片路径
+         * \param name 纹理名
+         * \param num 纹理id
+         * 
+         */ 
+        bool initSpecularTexture(const std::string &path, DWORD num);
         /**
          * \brief 初始化着色器
          * \param vertex_file v着色器文件路径
@@ -79,7 +98,7 @@ class Object : public cModule, public zEntry
          * \param id 激活纹理单元
          * 
          */
-        void activeTexture(const std::string& name, DWORD id); 
+        bool activeTexture(); 
         /**
          * \brief 绑定此物件
          * 
@@ -155,7 +174,12 @@ class Object : public cModule, public zEntry
          * \brief 根据冯模型算出物体颜色 
          * 
          */
-        void setColor(const Lightcolor &color); 
+        void refelctLight(Light *light);
+        /**
+         * \brief 设置shader中物件材质
+         * 
+         */
+        void refelctMaterial();
         /**
          * \brief 获取物件shader
          * 

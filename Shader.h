@@ -55,6 +55,13 @@ class Shader : public cModule
 		 */
 		void uniformSet1i(const std::string &name, SDWORD num);
 		/**
+		 * \brief 设置Shader中uniform SDWORD变量值
+		 * \param name uniform变量名字 
+		 * \param num DWORD值
+		 *  
+		 */
+		void uniformSet1ui(const std::string& name, DWORD num); 
+		/**
 		 * \brief 设置Shader中uniform float变量值
 		 * \param name uniform变量名字 
 		 * \param num float值 
