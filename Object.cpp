@@ -232,19 +232,22 @@ void Object::refelctLight(Light* light)
     // bindObject();
     const auto &color = light->getLight();
     _shader->uniformSetvec3("L.position", color.position);
-    _shader->uniformSetvec3("L.ambientlight", color.ambient);
-    _shader->uniformSetvec3("L.diffuselight", color.diffuse);
-    _shader->uniformSetvec3("L.specularlight", color.specular);
+    _shader->uniformSetvec3("L.ambient", color.ambient);
+    _shader->uniformSetvec3("L.diffuse", color.diffuse);
+    _shader->uniformSetvec3("L.specular", color.specular);
     _shader->uniformSet1i("L.type", color.type);
     _shader->uniformSet1f("L.constant", color.constant);
     _shader->uniformSet1f("L.linear", color.linear);
     _shader->uniformSet1f("L.quadratic", color.quadratic);
+    _shader->uniformSetvec3("L.direction", color.direction);
+    _shader->uniformSet1f("L.cutoff", color.cutoff);
+    _shader->uniformSet1f("L.outcutoff", color.outcutoff);
     _shader->uniformSetvec3("camerapos", Camera::getInstance()->getCameraPosition());
 }
 
 void Object::refelctMaterial()
 {
-    _shader->uniformSetvec3("M.ambientcolor", _material.ambient);
+    _shader->uniformSetvec3("M.ambient", _material.ambient);
     _shader->uniformSetvec3("M.diffuse", _material.diffuse);
     _shader->uniformSetvec3("M.specular", _material.specular);
     _shader->uniformSet1f("M.shiness", _material.shiness);

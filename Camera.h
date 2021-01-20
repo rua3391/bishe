@@ -35,11 +35,6 @@ class Camera : public zSingletonBase<Camera>, public cModule
 		~Camera();
 	public: 
 		/**
-		 * \brief 摄像机目标方向
-		 * 
-		 */
-		glm::vec3 forward;
-		/**
 		 * \brief 初始化
 		 * \param position 摄像机位置 
 		 * \param target 目标物件位置 
@@ -73,21 +68,6 @@ class Camera : public zSingletonBase<Camera>, public cModule
 		void final();
 	public:   
 		/**
-		 * \brief 摄像机右方
-		 * 
-		 */
-		glm::vec3 right;
-		/**
-		 * \brief 摄像机的上方
-		 * 
-		 */
-		glm::vec3 up;
-		/**
-		 * \brief 世界坐标系
-		 * 
-		 */
-		glm::vec3 worldup;
-		/**
 		 * \brief 获取摄像头变换矩阵
 		 * 
 		 */
@@ -119,6 +99,11 @@ class Camera : public zSingletonBase<Camera>, public cModule
 		 */ 
 		glm::vec3& getCameraPosition();
 		/**
+		 * \brief 获取摄像机正对方向
+		 * 
+		 */
+		glm::vec3& getCameraForward(); 
+		/**
 		 * \brief 获取摄像机焦距
 		 * \return zoom值
 		 * 
@@ -135,6 +120,26 @@ class Camera : public zSingletonBase<Camera>, public cModule
 		 */
 		inline void setSpeed(FLOAT speed) {_speed = speed;}  
 	private:
+		/**
+		 * \brief 摄像机右方
+		 * 
+		 */
+		glm::vec3 _right;
+		/**
+		 * \brief 摄像机的上方
+		 * 
+		 */
+		glm::vec3 _up;
+		/**
+		 * \brief 世界坐标系
+		 * 
+		 */
+		glm::vec3 _worldup;
+		/**
+		 * \brief 摄像机目标方向
+		 * 
+		 */
+		glm::vec3 _forward;
 		/**
 		 * \brief 更新摄像机向量
 		 * 

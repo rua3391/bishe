@@ -180,7 +180,8 @@ int Engine::mainProcess(void)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
 
-	Light *light1 = initLight(glm::vec3(1.2f, 1.0f, 2.0f), Point);
+	// Light *light1 = initLight(glm::vec3(1.2f, 1.0f, 2.0f), Point);
+	Light *light1 = initLight(Camera::getInstance()->getCameraPosition(), Spot);
 	if(!light1)
 	{
 		return -1;
@@ -207,12 +208,16 @@ int Engine::mainProcess(void)
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
 
-		light1->setDiffuseLight(glm::vec3(0.2f, 0.2f, 0.2f));
-		light1->setAmbientLight(glm::vec3(0.5f, 0.5f, 0.5f));
+		light1->setAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
+		light1->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
 		light1->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
 		light1->setLightConstant(1.0f);
 		light1->setLightLinear(0.09f);
 		light1->setLightQuadratic(0.032f);
+		light1->setLightCutoff(glm::cos(glm::radians(12.5f)));
+		light1->setLightOutCutoff(glm::cos(glm::radians(17.5f)));
+		light1->setLightDirection(Camera::getInstance()->getCameraForward());
+		light1->setLightPosition(Camera::getInstance()->getCameraPosition());
 
 		obj1->bindObject();
 		obj1->setAmbient(glm::vec3(1.0f, 0.5f, 0.31f));
@@ -230,12 +235,12 @@ int Engine::mainProcess(void)
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
-		obj2->bindObject();
-		obj2->translate(light1->getPosition());
-		obj2->scaling(glm::vec3(0.2f));
-		obj2->reflectPosition();
-		obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		// obj2->bindObject();
+		// obj2->translate(light1->getPosition());
+		// obj2->scaling(glm::vec3(0.2f));
+		// obj2->reflectPosition();
+		// obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
+		// glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

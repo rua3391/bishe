@@ -11,11 +11,12 @@
  */ 
 enum LightType
 {
-    Simple = 1000,
-    Direction = 1001,
-    Point = 1002,
+    Simple = 1000,      //简易光源
+    Direction = 1001,   //平行光    特点在无关光源位置，且强度不会衰减
+    Point = 1002,       //点光源    特点在于光源位置参与计算漫反射光，且强度会衰减
+    Spot = 1003,   //聚光      特点在于切光角决定了聚光的半径，在半径之外的不应显示颜色或应显示暗色
 
-    LightMax = 1003
+    LightMax = 1004
 };
 /**
  * \brief 光照结构体
@@ -27,9 +28,12 @@ struct Lightcolor
     glm::vec3 diffuse;
     glm::vec3 specular;
     glm::vec3 position;
+    glm::vec3 direction;
     FLOAT constant;
     FLOAT linear;
     FLOAT quadratic;
+    FLOAT cutoff;
+    FLOAT outcutoff;
     LightType type;
 };
 /**
@@ -131,6 +135,21 @@ class Light : public cModule, public zEntry
          * 
          */ 
         void setLightQuadratic(FLOAT num);
+        /**
+         * \brief 设置光照方向
+         * 
+         */ 
+        void setLightDirection(const glm::vec3 &dir);
+        /**
+         * \brief 设置切光角
+         * 
+         */ 
+        void setLightCutoff(FLOAT num);
+        /**
+         * \brief 设置外圆锥切光角
+         * 
+         */
+        void setLightOutCutoff(FLOAT num); 
         /**
          * \brief 填充光源信息
          * 

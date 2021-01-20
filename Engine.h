@@ -71,6 +71,8 @@ class Engine : public zSingletonBase<Engine>
         bool loadObj(const std::string &path, std::vector<FLOAT> &container);
         /**
          * \brief 初始化光源
+         * \param position 光源位置
+         * \param type 光源类型
          * 
          */ 
         Light* initLight(const glm::vec3 &position, LightType type = Simple);

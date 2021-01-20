@@ -91,6 +91,21 @@ void Light::setLightQuadratic(FLOAT num)
     _light.quadratic = num;
 }
 
+void Light::setLightDirection(const glm::vec3& dir)
+{
+    _light.direction = dir;
+}
+
+void Light::setLightCutoff(FLOAT num)
+{
+    _light.cutoff = num;
+}
+
+void Light::setLightOutCutoff(FLOAT num)
+{
+    _light.outcutoff = num;
+}
+
 void Light::setLightColor(const Lightcolor& lightcolor)
 {
     _light.ambient = lightcolor.ambient;

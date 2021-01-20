@@ -16,28 +16,28 @@ Camera::~Camera()
 
 bool Camera::init(const glm::vec3 &position, const glm::vec3 &target, const glm::vec3 &upward)
 {
-	worldup = upward;
+	_worldup = upward;
 	_position = position;
-	forward = glm::normalize(target - position);
-	right = glm::normalize(glm::cross(forward, worldup));
-	up = glm::normalize(glm::cross(forward, right));
+	_forward = glm::normalize(target - position);
+	_right = glm::normalize(glm::cross(_forward, _worldup));
+	_up = glm::normalize(glm::cross(_forward, _right));
 	debug("摄像机初始化成功");
 	return true;
 }
 
 bool Camera::init(const glm::vec3 &position, FLOAT pitch, FLOAT yaw, const glm::vec3 &upward)
 {
-	worldup = upward;
+	_worldup = upward;
 	_position = position;
 	_pitch = pitch;
 	_yaw = yaw;
 
-	forward.x = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
-	forward.y = glm::sin(glm::radians(_pitch));
-	forward.z = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
+	_forward.x = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
+	_forward.y = glm::sin(glm::radians(_pitch));
+	_forward.z = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
 
-	right = glm::normalize(glm::cross(worldup, forward));
-	up = glm::normalize(glm::cross(right, forward));
+	_right = glm::normalize(glm::cross(_worldup, _forward));
+	_up = glm::normalize(glm::cross(_right, _forward));
 	debug("摄像机初始化成功");
 	return true;
 }
@@ -48,9 +48,9 @@ void Camera::serialize(void *out)
 	camera.add_position(_position.x);
 	camera.add_position(_position.y);
 	camera.add_position(_position.z);
-	camera.add_worldup(worldup.x);
-	camera.add_worldup(worldup.y);
-	camera.add_worldup(worldup.z);
+	camera.add_worldup(_worldup.x);
+	camera.add_worldup(_worldup.y);
+	camera.add_worldup(_worldup.z);
 	camera.set_pitch(_pitch);
 	camera.set_yaw(_yaw);
 
@@ -78,7 +78,7 @@ void Camera::final()
 
 glm::mat4 Camera::getViewMatrix() 
 {
-	return glm::lookAt(_position, _position + forward, worldup);
+	return glm::lookAt(_position, _position + _forward, _worldup);
 }
 
 void Camera::processMouseMovement(DFLOAT xoffset, DFLOAT yoffset) 
@@ -117,30 +117,30 @@ void Camera::processKeybordMovement(CameraMove direction, FLOAT delta_time)
 	}
 	if (direction == FORWARD) 
 	{
-		_position += forward * v;
+		_position += _forward * v;
 	}
 	else if (direction == BACK) 
 	{
-		_position -= forward * v;
+		_position -= _forward * v;
 	}
 	else if (direction == LEFT) 
 	{
-		_position += right * v;
+		_position += _right * v;
 	}
 	else 
 	{
-		_position -= right * v;
+		_position -= _right * v;
 	}
 	//Position.y = 0.0f;//这条让这个摄像机固定在xoz平面，成为一个fps类型摄像头，不能随意飞行
 }
 
 void Camera::_updateCameraVector() 
 {
-	forward.x = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
-	forward.y = glm::sin(glm::radians(_pitch));						  
-	forward.z = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
-	right = glm::normalize(glm::cross(worldup, forward));
-	up = glm::normalize(glm::cross(right, forward));
+	_forward.x = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
+	_forward.y = glm::sin(glm::radians(_pitch));						  
+	_forward.z = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
+	_right = glm::normalize(glm::cross(_worldup, _forward));
+	_up = glm::normalize(glm::cross(_right, _forward));
 }
 
 glm::vec3& Camera::getCameraPosition()
@@ -151,4 +151,9 @@ glm::vec3& Camera::getCameraPosition()
 FLOAT Camera::getCameraZoom()
 {
 	return _zoom;
+}
+
+glm::vec3& Camera::getCameraForward()
+{
+	return _forward;
 }
