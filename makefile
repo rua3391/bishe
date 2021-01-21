@@ -2,7 +2,7 @@
 OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o GObjManager.o GLightManager.o
 CC = g++
 STANDARD = -std=c++11
-TARGET = Engine
+TARGET = Engine.out
 LIB = -lGLEW -lglfw -lGL -lprotobuf -lpthread -lhiredis
 SDK = sdk/*.h
 LOG = log/
