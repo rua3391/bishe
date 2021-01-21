@@ -1,0 +1,642 @@
+[2021-01-20 16:50][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 16:50][DEBUG] 主进程初始化完毕
+[2021-01-20 16:50][DEBUG] 初始化物体model/cube
+[2021-01-20 16:50][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 16:50][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 16:50][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 16:50][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 16:50][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:72(8): error: syntax error, unexpected '=', expecting ',' or ';'
+ 
+ ---------------------------------------- 
+[2021-01-20 16:50][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 16:50][ERROR] 物体着色器初始化失败
+[2021-01-20 16:50][DEBUG] 主进程结束
+[2021-01-20 16:50][DEBUG] 资源释放完毕
+[2021-01-20 16:51][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 16:51][DEBUG] 主进程初始化完毕
+[2021-01-20 16:51][DEBUG] 初始化物体model/cube
+[2021-01-20 16:51][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 16:51][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 16:51][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 16:51][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 16:51][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:57(5): error: cannot access field `diffuselight' of structure
+0:57(5): error: type mismatch
+0:57(5): error: if-statement condition must be scalar boolean
+0:69(13): error: operands to arithmetic operators must be numeric
+0:73(5): error: operands of `==' must have the same type
+ 
+ ---------------------------------------- 
+[2021-01-20 16:51][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 16:51][ERROR] 物体着色器初始化失败
+[2021-01-20 16:51][DEBUG] 主进程结束
+[2021-01-20 16:51][DEBUG] 资源释放完毕
+[2021-01-20 16:51][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 16:51][DEBUG] 主进程初始化完毕
+[2021-01-20 16:51][DEBUG] 初始化物体model/cube
+[2021-01-20 16:51][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 16:51][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 16:51][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 16:51][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 16:51][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:69(13): error: operands to arithmetic operators must be numeric
+0:73(5): error: operands of `==' must have the same type
+ 
+ ---------------------------------------- 
+[2021-01-20 16:51][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 16:51][ERROR] 物体着色器初始化失败
+[2021-01-20 16:51][DEBUG] 主进程结束
+[2021-01-20 16:51][DEBUG] 资源释放完毕
+[2021-01-20 16:53][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 16:53][DEBUG] 主进程初始化完毕
+[2021-01-20 16:53][DEBUG] 初始化物体model/cube
+[2021-01-20 16:53][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 16:53][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 16:53][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 16:53][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 16:53][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:74(5): error: operands of `==' must have the same type
+ 
+ ---------------------------------------- 
+[2021-01-20 16:53][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 16:53][ERROR] 物体着色器初始化失败
+[2021-01-20 16:53][DEBUG] 主进程结束
+[2021-01-20 16:53][DEBUG] 资源释放完毕
+[2021-01-20 16:54][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 16:54][DEBUG] 主进程初始化完毕
+[2021-01-20 16:54][DEBUG] 初始化物体model/cube
+[2021-01-20 16:54][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 16:54][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 16:54][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 16:54][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 16:54][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 16:54][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 16:54][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 16:54][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 16:54][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 16:54][DEBUG] 初始化物体model/cube
+[2021-01-20 16:54][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 16:54][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 16:54][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 16:54][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 16:54][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 16:54][DEBUG] 主进程结束
+[2021-01-20 16:54][DEBUG] 资源释放完毕
+[2021-01-20 17:07][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 17:07][DEBUG] 主进程初始化完毕
+[2021-01-20 17:07][DEBUG] 初始化物体model/cube
+[2021-01-20 17:07][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:07][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 17:07][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:07][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:07][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:57(5): error: `type' undeclared
+0:57(5): error: operands of `==' must have the same type
+ 
+ ---------------------------------------- 
+[2021-01-20 17:07][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 17:07][ERROR] 物体着色器初始化失败
+[2021-01-20 17:07][DEBUG] 主进程结束
+[2021-01-20 17:07][DEBUG] 资源释放完毕
+[2021-01-20 17:07][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 17:07][DEBUG] 主进程初始化完毕
+[2021-01-20 17:07][DEBUG] 初始化物体model/cube
+[2021-01-20 17:07][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:07][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 17:07][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:07][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:07][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:07][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:07][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 17:07][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:07][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 17:07][DEBUG] 初始化物体model/cube
+[2021-01-20 17:07][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:07][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 17:07][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:07][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:07][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:08][DEBUG] 主进程结束
+[2021-01-20 17:08][DEBUG] 资源释放完毕
+[2021-01-20 17:20][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 17:20][DEBUG] 主进程初始化完毕
+[2021-01-20 17:20][DEBUG] 初始化物体model/cube
+[2021-01-20 17:20][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:20][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 17:20][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:20][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:20][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:20][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:20][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 17:20][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:20][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 17:20][DEBUG] 初始化物体model/cube
+[2021-01-20 17:20][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:20][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 17:20][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:20][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:20][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:20][DEBUG] 主进程结束
+[2021-01-20 17:20][DEBUG] 资源释放完毕
+[2021-01-20 17:25][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 17:25][DEBUG] 主进程初始化完毕
+[2021-01-20 17:25][DEBUG] 初始化物体model/cube
+[2021-01-20 17:25][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:25][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 17:25][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:25][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:25][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:25][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:25][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 17:25][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:25][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 17:25][DEBUG] 初始化物体model/cube
+[2021-01-20 17:25][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:25][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 17:25][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:25][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:25][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:25][DEBUG] 主进程结束
+[2021-01-20 17:25][DEBUG] 资源释放完毕
+[2021-01-20 17:26][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 17:26][DEBUG] 主进程初始化完毕
+[2021-01-20 17:26][DEBUG] 初始化物体model/cube
+[2021-01-20 17:26][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:26][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 17:26][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:26][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:26][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:26][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:26][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 17:26][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:26][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 17:26][DEBUG] 初始化物体model/cube
+[2021-01-20 17:26][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:26][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 17:26][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:26][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:26][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:27][DEBUG] 主进程结束
+[2021-01-20 17:27][DEBUG] 资源释放完毕
+[2021-01-20 17:28][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 17:28][DEBUG] 主进程初始化完毕
+[2021-01-20 17:28][DEBUG] 初始化物体model/cube
+[2021-01-20 17:28][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:28][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 17:28][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:28][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:28][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:28][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:28][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 17:28][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 17:28][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 17:28][DEBUG] 初始化物体model/cube
+[2021-01-20 17:28][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 17:28][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 17:28][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 17:28][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 17:28][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 17:28][DEBUG] 主进程结束
+[2021-01-20 17:28][DEBUG] 资源释放完毕
+[2021-01-20 18:01][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 18:01][DEBUG] 主进程初始化完毕
+[2021-01-20 18:01][DEBUG] 初始化物体model/cube
+[2021-01-20 18:01][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 18:01][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 18:01][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 18:01][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 18:01][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 18:01][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 18:01][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 18:01][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 18:01][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 18:01][DEBUG] 初始化物体model/cube
+[2021-01-20 18:01][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 18:01][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 18:01][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 18:01][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 18:01][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 18:02][DEBUG] 主进程结束
+[2021-01-20 18:02][DEBUG] 资源释放完毕
+[2021-01-20 18:02][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 18:02][DEBUG] 主进程初始化完毕
+[2021-01-20 18:02][DEBUG] 初始化物体model/cube
+[2021-01-20 18:02][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 18:02][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 18:02][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 18:02][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 18:02][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 18:02][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 18:02][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 18:02][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 18:02][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 18:02][DEBUG] 初始化物体model/cube
+[2021-01-20 18:02][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 18:02][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 18:02][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 18:02][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 18:02][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 18:04][DEBUG] 主进程结束
+[2021-01-20 18:04][DEBUG] 资源释放完毕
+[2021-01-20 23:19][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:19][DEBUG] 主进程初始化完毕
+[2021-01-20 23:19][DEBUG] 初始化物体model/cube
+[2021-01-20 23:19][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:19][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:19][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:19][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:19][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:79(35): error: `lightdirection' undeclared
+0:79(34): error: operands to arithmetic operators must be numeric
+0:79(51): error: `normal' undeclared
+0:79(26): error: no matching function for call to `reflect(error, error)'; candidates are:
+0:79(26): error:    float reflect(float, float)
+0:79(26): error:    vec2 reflect(vec2, vec2)
+0:79(26): error:    vec3 reflect(vec3, vec3)
+0:79(26): error:    vec4 reflect(vec4, vec4)
+0:80(47): warning: `reflectdirection' used uninitialized
+0:82(2): error: `specular' undeclared
+0:82(2): error: value of type vec3 cannot be assigned to variable of type error
+0:84(2): error: `specular' undeclared
+0:84(2): error: value of type vec3 cannot be assigned to variable of type error
+0:76(1): error: function `calculateSpecular' has non-void return type vec3, but no return statement
+0:116(19): error: cannot access field `ambient' of structure
+0:116(19): error: type mismatch
+0:116(31): error: no matching function for call to `texture(vec3, vec2 
+[2021-01-20 23:19][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:19][ERROR] 物体着色器初始化失败
+[2021-01-20 23:19][DEBUG] 主进程结束
+[2021-01-20 23:19][DEBUG] 资源释放完毕
+[2021-01-20 23:21][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:21][DEBUG] 主进程初始化完毕
+[2021-01-20 23:21][DEBUG] 初始化物体model/cube
+[2021-01-20 23:21][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:21][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:21][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:21][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:21][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:83(51): error: `normal' undeclared
+0:83(26): error: no matching function for call to `reflect(vec3, error)'; candidates are:
+0:83(26): error:    float reflect(float, float)
+0:83(26): error:    vec2 reflect(vec2, vec2)
+0:83(26): error:    vec3 reflect(vec3, vec3)
+0:83(26): error:    vec4 reflect(vec4, vec4)
+0:84(47): warning: `reflectdirection' used uninitialized
+0:86(2): error: `specular' undeclared
+0:86(2): error: value of type vec3 cannot be assigned to variable of type error
+0:88(2): error: `specular' undeclared
+0:88(2): error: value of type vec3 cannot be assigned to variable of type error
+0:80(1): error: function `calculateSpecular' has non-void return type vec3, but no return statement
+0:120(19): error: cannot access field `ambient' of structure
+0:120(19): error: type mismatch
+0:120(31): error: no matching function for call to `texture(vec3, vec2)'; candidates are:
+0:120(31): error:    vec4 texture(sampler1D, float)
+0:120(31): error:    ivec4 texture(isamp 
+[2021-01-20 23:21][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:21][ERROR] 物体着色器初始化失败
+[2021-01-20 23:21][DEBUG] 主进程结束
+[2021-01-20 23:21][DEBUG] 资源释放完毕
+[2021-01-20 23:22][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:22][DEBUG] 主进程初始化完毕
+[2021-01-20 23:22][DEBUG] 初始化物体model/cube
+[2021-01-20 23:22][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:22][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:22][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:22][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:22][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:80(1): error: function `calculateSpecular' has non-void return type vec3, but no return statement
+0:121(19): error: cannot access field `ambient' of structure
+0:121(19): error: type mismatch
+0:121(31): error: no matching function for call to `texture(vec3, vec2)'; candidates are:
+0:121(31): error:    vec4 texture(sampler1D, float)
+0:121(31): error:    ivec4 texture(isampler1D, float)
+0:121(31): error:    uvec4 texture(usampler1D, float)
+0:121(31): error:    vec4 texture(sampler2D, vec2)
+0:121(31): error:    ivec4 texture(isampler2D, vec2)
+0:121(31): error:    uvec4 texture(usampler2D, vec2)
+0:121(31): error:    vec4 texture(sampler3D, vec3)
+0:121(31): error:    ivec4 texture(isampler3D, vec3)
+0:121(31): error:    uvec4 texture(usampler3D, vec3)
+0:121(31): error:    vec4 texture(samplerCube, vec3)
+0:121(31): error:    ivec4 texture(isamplerCube, vec3)
+0:121(31): error:    uvec4 texture(usamplerCube, vec3)
+0:121(31): error:    float texture(sampler1DShadow, vec3)
+ 
+[2021-01-20 23:22][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:22][ERROR] 物体着色器初始化失败
+[2021-01-20 23:22][DEBUG] 主进程结束
+[2021-01-20 23:22][DEBUG] 资源释放完毕
+[2021-01-20 23:25][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:25][DEBUG] 主进程初始化完毕
+[2021-01-20 23:25][DEBUG] 初始化物体model/cube
+[2021-01-20 23:25][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:25][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:25][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:25][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:25][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:90(9): error: `sepcular' undeclared
+0:90(2): error: `return' with wrong type error, in function `calculateSpecular' returning vec3
+0:123(19): error: cannot access field `ambient' of structure
+0:123(19): error: type mismatch
+0:123(39): error: cannot access field `diffTexture' of structure
+0:123(39): error: type mismatch
+0:123(31): error: no matching function for call to `texture(error, vec2)'; candidates are:
+0:123(31): error:    vec4 texture(sampler1D, float)
+0:123(31): error:    ivec4 texture(isampler1D, float)
+0:123(31): error:    uvec4 texture(usampler1D, float)
+0:123(31): error:    vec4 texture(sampler2D, vec2)
+0:123(31): error:    ivec4 texture(isampler2D, vec2)
+0:123(31): error:    uvec4 texture(usampler2D, vec2)
+0:123(31): error:    vec4 texture(sampler3D, vec3)
+0:123(31): error:    ivec4 texture(isampler3D, vec3)
+0:123(31): error:    uvec4 texture(usampler3D, vec3)
+0:123(31): error:    vec4 texture(samplerCube, vec3)
+0:123(31): error:    ivec4 texture(is 
+[2021-01-20 23:25][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:25][ERROR] 物体着色器初始化失败
+[2021-01-20 23:25][DEBUG] 主进程结束
+[2021-01-20 23:25][DEBUG] 资源释放完毕
+[2021-01-20 23:27][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:27][DEBUG] 主进程初始化完毕
+[2021-01-20 23:27][DEBUG] 初始化物体model/cube
+[2021-01-20 23:27][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:27][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:27][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:27][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:27][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:125(36): error: cannot access field `ambient' of structure
+0:125(36): error: type mismatch
+0:125(19): error: operands to arithmetic operators must be numeric
+0:125(19): error: operands to arithmetic operators must be numeric
+0:125(14): error: cannot construct `vec4' from a non-numeric data type
+ 
+ ---------------------------------------- 
+[2021-01-20 23:27][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:27][ERROR] 物体着色器初始化失败
+[2021-01-20 23:27][DEBUG] 主进程结束
+[2021-01-20 23:27][DEBUG] 资源释放完毕
+[2021-01-20 23:29][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:29][DEBUG] 主进程初始化完毕
+[2021-01-20 23:29][DEBUG] 初始化物体model/cube
+[2021-01-20 23:29][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:29][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:29][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:29][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:29][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:123(19): error: cannot access field `ambientlight' of structure
+0:123(19): error: type mismatch
+0:123(19): error: operands to arithmetic operators must be numeric
+0:123(14): error: cannot construct `vec4' from a non-numeric data type
+0:125(19): error: cannot access field `ambientlight' of structure
+0:125(19): error: type mismatch
+0:125(19): error: operands to arithmetic operators must be numeric
+0:125(19): error: operands to arithmetic operators must be numeric
+0:125(14): error: cannot construct `vec4' from a non-numeric data type
+ 
+ ---------------------------------------- 
+[2021-01-20 23:29][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:29][ERROR] 物体着色器初始化失败
+[2021-01-20 23:29][DEBUG] 主进程结束
+[2021-01-20 23:29][DEBUG] 资源释放完毕
+[2021-01-20 23:29][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:29][DEBUG] 主进程初始化完毕
+[2021-01-20 23:29][DEBUG] 初始化物体model/cube
+[2021-01-20 23:29][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:29][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:29][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:29][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:29][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:29][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:29][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 23:29][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:29][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 23:29][DEBUG] 初始化物体model/cube
+[2021-01-20 23:29][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:29][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 23:29][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:29][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:29][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:30][DEBUG] 主进程结束
+[2021-01-20 23:30][DEBUG] 资源释放完毕
+[2021-01-20 23:30][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:30][DEBUG] 主进程初始化完毕
+[2021-01-20 23:30][DEBUG] 初始化物体model/cube
+[2021-01-20 23:30][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:30][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:30][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:30][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:30][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:30][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:30][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 23:30][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:30][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 23:30][DEBUG] 初始化物体model/cube
+[2021-01-20 23:30][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:30][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 23:30][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:30][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:30][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:30][DEBUG] 主进程结束
+[2021-01-20 23:30][DEBUG] 资源释放完毕
+[2021-01-20 23:36][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:36][DEBUG] 主进程初始化完毕
+[2021-01-20 23:36][DEBUG] 初始化物体model/cube
+[2021-01-20 23:36][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:36][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:36][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:36][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:36][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:36][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:36][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 23:36][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:36][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 23:36][DEBUG] 初始化物体model/cube
+[2021-01-20 23:36][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:36][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 23:36][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:36][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:36][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:36][DEBUG] 主进程结束
+[2021-01-20 23:36][DEBUG] 资源释放完毕
+[2021-01-20 23:39][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:39][DEBUG] 主进程初始化完毕
+[2021-01-20 23:39][DEBUG] 初始化物体model/cube
+[2021-01-20 23:39][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:39][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:39][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:39][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 23:39][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:39][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 23:39][DEBUG] 初始化物体model/cube
+[2021-01-20 23:39][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:39][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:39][DEBUG] 主进程结束
+[2021-01-20 23:39][DEBUG] 资源释放完毕
+[2021-01-20 23:39][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:39][DEBUG] 主进程初始化完毕
+[2021-01-20 23:39][DEBUG] 初始化物体model/cube
+[2021-01-20 23:39][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:39][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:39][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:39][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 23:39][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:39][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 23:39][DEBUG] 初始化物体model/cube
+[2021-01-20 23:39][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:39][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:39][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:39][DEBUG] 主进程结束
+[2021-01-20 23:39][DEBUG] 资源释放完毕
+[2021-01-20 23:41][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:41][DEBUG] 主进程初始化完毕
+[2021-01-20 23:41][DEBUG] 初始化物体model/cube
+[2021-01-20 23:41][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:41][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:41][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:41][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:41][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:41][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:41][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 23:41][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:41][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 23:41][DEBUG] 初始化物体model/cube
+[2021-01-20 23:41][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:41][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 23:41][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:41][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:41][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:41][DEBUG] 主进程结束
+[2021-01-20 23:41][DEBUG] 资源释放完毕
+[2021-01-20 23:54][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:54][DEBUG] 主进程初始化完毕
+[2021-01-20 23:54][DEBUG] 初始化物体model/cube
+[2021-01-20 23:54][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:54][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:54][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:54][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:54][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:110(18): error: cannot access field `cutOff' of structure
+0:110(18): error: type mismatch
+0:110(29): error: cannot access field `outerCutOff' of structure
+0:110(29): error: type mismatch
+0:110(18): error: operands to arithmetic operators must be numeric
+0:111(35): error: cannot access field `outerCutOff' of structure
+0:111(35): error: type mismatch
+0:111(27): error: operands to arithmetic operators must be numeric
+0:111(52): warning: `epsilon' used uninitialized
+0:111(26): error: operands to arithmetic operators must be numeric
+0:111(20): error: no matching function for call to `clamp(error, float, float)'; candidates are:
+0:111(20): error:    float clamp(float, float, float)
+0:111(20): error:    vec2 clamp(vec2, float, float)
+0:111(20): error:    vec3 clamp(vec3, float, float)
+0:111(20): error:    vec4 clamp(vec4, float, float)
+0:111(20): error:    vec2 clamp(vec2, vec2, vec2)
+0:111(20): error:    vec3 clamp(vec3, vec3, vec3)
+0:111(20): error:    vec4 clamp(vec 
+[2021-01-20 23:54][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:54][ERROR] 物体着色器初始化失败
+[2021-01-20 23:54][DEBUG] 主进程结束
+[2021-01-20 23:54][DEBUG] 资源释放完毕
+[2021-01-20 23:55][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:55][DEBUG] 主进程初始化完毕
+[2021-01-20 23:55][DEBUG] 初始化物体model/cube
+[2021-01-20 23:55][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:55][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:55][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:55][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:55][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:110(18): error: cannot access field `cutOff' of structure
+0:110(18): error: type mismatch
+0:110(18): error: operands to arithmetic operators must be numeric
+0:111(50): warning: `epsilon' used uninitialized
+0:121(5): error: assignment to read-only variable 'L'
+0:121(5): error: if-statement condition must be scalar boolean
+0:123(2): error: `diffuse' undeclared
+ 
+ ---------------------------------------- 
+[2021-01-20 23:55][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:55][ERROR] 物体着色器初始化失败
+[2021-01-20 23:55][DEBUG] 主进程结束
+[2021-01-20 23:55][DEBUG] 资源释放完毕
+[2021-01-20 23:55][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:55][DEBUG] 主进程初始化完毕
+[2021-01-20 23:55][DEBUG] 初始化物体model/cube
+[2021-01-20 23:55][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:55][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:55][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:55][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:55][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:121(5): error: assignment to read-only variable 'L'
+0:121(5): error: if-statement condition must be scalar boolean
+0:123(2): error: `diffuse' undeclared
+ 
+ ---------------------------------------- 
+[2021-01-20 23:55][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:55][ERROR] 物体着色器初始化失败
+[2021-01-20 23:55][DEBUG] 主进程结束
+[2021-01-20 23:55][DEBUG] 资源释放完毕
+[2021-01-20 23:55][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:55][DEBUG] 主进程初始化完毕
+[2021-01-20 23:55][DEBUG] 初始化物体model/cube
+[2021-01-20 23:55][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:55][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:55][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:55][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:55][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:123(2): error: `diffuse' undeclared
+ 
+ ---------------------------------------- 
+[2021-01-20 23:55][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:55][ERROR] 物体着色器初始化失败
+[2021-01-20 23:55][DEBUG] 主进程结束
+[2021-01-20 23:55][DEBUG] 资源释放完毕
+[2021-01-20 23:56][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:56][DEBUG] 主进程初始化完毕
+[2021-01-20 23:56][DEBUG] 初始化物体model/cube
+[2021-01-20 23:56][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:56][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:56][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:56][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:56][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:126(30): error: `diff' undeclared
+0:126(20): error: operands to arithmetic operators must be numeric
+0:126(20): error: operands to arithmetic operators must be numeric
+0:126(14): error: cannot construct `vec4' from a non-numeric data type
+ 
+ ---------------------------------------- 
+[2021-01-20 23:56][ERROR] [OBJECT] shader初始化失败 
+[2021-01-20 23:56][ERROR] 物体着色器初始化失败
+[2021-01-20 23:56][DEBUG] 主进程结束
+[2021-01-20 23:56][DEBUG] 资源释放完毕
+[2021-01-20 23:56][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-20 23:56][DEBUG] 主进程初始化完毕
+[2021-01-20 23:56][DEBUG] 初始化物体model/cube
+[2021-01-20 23:56][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:56][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-20 23:56][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:56][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:56][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:56][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:56][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-20 23:56][DEBUG] [TEXTURE] format:6408 
+[2021-01-20 23:56][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-20 23:56][DEBUG] 初始化物体model/cube
+[2021-01-20 23:56][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-20 23:56][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-20 23:56][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-20 23:56][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-20 23:56][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-20 23:56][DEBUG] 主进程结束
+[2021-01-20 23:56][DEBUG] 资源释放完毕

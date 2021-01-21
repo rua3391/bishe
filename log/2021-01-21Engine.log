@@ -1,0 +1,119 @@
+[2021-01-21 00:32][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-21 00:32][DEBUG] 主进程初始化完毕
+[2021-01-21 00:32][DEBUG] 初始化物体model/cube
+[2021-01-21 00:32][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:32][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-21 00:32][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:32][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:32][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:47(17): error: array size must be a constant valued expression
+0:108(1): error: function `calculateLight' has non-void return type vec3, but no return statement
+0:134(16): error: no matching function for call to `calculateLight(Light[])'; candidates are:
+0:134(16): error:    vec3 calculateLight(Light)
+0:135(19): warning: `result' used uninitialized
+ 
+ ---------------------------------------- 
+[2021-01-21 00:32][ERROR] [OBJECT] shader初始化失败 
+[2021-01-21 00:32][ERROR] 物体着色器初始化失败
+[2021-01-21 00:32][DEBUG] 主进程结束
+[2021-01-21 00:32][DEBUG] 资源释放完毕
+[2021-01-21 00:33][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-21 00:33][DEBUG] 主进程初始化完毕
+[2021-01-21 00:33][DEBUG] 初始化物体model/cube
+[2021-01-21 00:33][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:33][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-21 00:33][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:33][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:33][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:45(1): error: duplicate storage qualifier
+ 
+ ---------------------------------------- 
+[2021-01-21 00:33][ERROR] [OBJECT] shader初始化失败 
+[2021-01-21 00:33][ERROR] 物体着色器初始化失败
+[2021-01-21 00:33][DEBUG] 主进程结束
+[2021-01-21 00:33][DEBUG] 资源释放完毕
+[2021-01-21 00:39][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-21 00:39][DEBUG] 主进程初始化完毕
+[2021-01-21 00:39][DEBUG] 初始化物体model/cube
+[2021-01-21 00:39][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:39][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-21 00:39][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:39][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:39][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:48(21): error: syntax error, unexpected ';', expecting ']'
+ 
+ ---------------------------------------- 
+[2021-01-21 00:39][ERROR] [OBJECT] shader初始化失败 
+[2021-01-21 00:39][ERROR] 物体着色器初始化失败
+[2021-01-21 00:39][DEBUG] 主进程结束
+[2021-01-21 00:39][DEBUG] 资源释放完毕
+[2021-01-21 00:40][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-21 00:40][DEBUG] 主进程初始化完毕
+[2021-01-21 00:40][DEBUG] 初始化物体model/cube
+[2021-01-21 00:40][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:40][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-21 00:40][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:40][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:40][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:137(16): error: no matching function for call to `calculateLight(Light[4])'; candidates are:
+0:137(16): error:    vec3 calculateLight(Light)
+0:138(19): error: `result' undeclared
+0:138(14): error: cannot construct `vec4' from a non-numeric data type
+ 
+ ---------------------------------------- 
+[2021-01-21 00:40][ERROR] [OBJECT] shader初始化失败 
+[2021-01-21 00:40][ERROR] 物体着色器初始化失败
+[2021-01-21 00:40][DEBUG] 主进程结束
+[2021-01-21 00:40][DEBUG] 资源释放完毕
+[2021-01-21 00:40][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-21 00:40][DEBUG] 主进程初始化完毕
+[2021-01-21 00:40][DEBUG] 初始化物体model/cube
+[2021-01-21 00:40][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:40][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-21 00:40][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:40][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:40][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:138(19): error: `result' undeclared
+0:138(14): error: cannot construct `vec4' from a non-numeric data type
+ 
+ ---------------------------------------- 
+[2021-01-21 00:40][ERROR] [OBJECT] shader初始化失败 
+[2021-01-21 00:40][ERROR] 物体着色器初始化失败
+[2021-01-21 00:40][DEBUG] 主进程结束
+[2021-01-21 00:40][DEBUG] 资源释放完毕
+[2021-01-21 00:41][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-21 00:41][DEBUG] 主进程初始化完毕
+[2021-01-21 00:41][DEBUG] 初始化物体model/cube
+[2021-01-21 00:41][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:41][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-21 00:41][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:41][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:41][ERROR] [SHADER] SHADER_COMPILATION_ERROR of type: fragment 
+ 0:138(10): error: `calculateLight' undeclared
+0:138(25): error: array index must be integer type
+ 
+ ---------------------------------------- 
+[2021-01-21 00:41][ERROR] [OBJECT] shader初始化失败 
+[2021-01-21 00:41][ERROR] 物体着色器初始化失败
+[2021-01-21 00:41][DEBUG] 主进程结束
+[2021-01-21 00:41][DEBUG] 资源释放完毕
+[2021-01-21 00:42][DEBUG] [CAMERA] 摄像机初始化成功 
+[2021-01-21 00:42][DEBUG] 主进程初始化完毕
+[2021-01-21 00:42][DEBUG] 初始化物体model/cube
+[2021-01-21 00:42][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:42][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->8589934592, vao->1, vbo->1 
+[2021-01-21 00:42][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:42][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:42][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-21 00:42][DEBUG] [TEXTURE] format:6408 
+[2021-01-21 00:42][DEBUG] [TEXTURE] 0号纹理初始化成功, 纹理id1 
+[2021-01-21 00:42][DEBUG] [TEXTURE] format:6408 
+[2021-01-21 00:42][DEBUG] [TEXTURE] 1号纹理初始化成功, 纹理id2 
+[2021-01-21 00:42][DEBUG] 初始化物体model/cube
+[2021-01-21 00:42][DEBUG] [OBJECT] 物件初始化成功 
+[2021-01-21 00:42][DEBUG] [OBJECT] 物体加入全局物件管理器完毕, id->34359738368, vao->2, vbo->2 
+[2021-01-21 00:42][DEBUG] [SHADER] 绑定顶点着色器文件 
+[2021-01-21 00:42][DEBUG] [SHADER] 绑定片元着色器文件 
+[2021-01-21 00:42][DEBUG] [SHADER] 着色器程序初始化成功 
+[2021-01-21 00:42][DEBUG] 主进程结束
+[2021-01-21 00:42][DEBUG] 资源释放完毕

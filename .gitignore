@@ -20,14 +20,12 @@
 rediscli.sh
 redisserver.sh
 startdesktop.sh
-pic/*
 .vscode-server/*
 redis-5.0.1/*
 .vscode/*
 protobuf/*
 *.o
 .rpmdb/*
-log/*
 proto/*.cc
 proto/*.h
 assimp-5.0.1/*
