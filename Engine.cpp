@@ -230,7 +230,7 @@ int Engine::mainProcess(void)
             obj1->rotate(20.0f * i, glm::vec3(1.0f, 0.3f, 0.5f));
 			obj1->reflectPosition();
 			obj1->refelctMaterial();
-			obj1->refelctLight(light1);
+			obj1->refelctLight();
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }

@@ -5,6 +5,7 @@
 #include "Engine.h"
 #include "Light.h"
 #include "GObjManager.h"
+#include "GLightManager.h"
 
 Object::Object() : 
     zEntry(),
@@ -227,22 +228,39 @@ void Object::setShiness(FLOAT shiness)
     _material.shiness = shiness;
 }
 
-void Object::refelctLight(Light* light)
+void Object::refelctLight()
 {
     // bindObject();
-    const auto &color = light->getLight();
-    _shader->uniformSetvec3("L.position", color.position);
-    _shader->uniformSetvec3("L.ambient", color.ambient);
-    _shader->uniformSetvec3("L.diffuse", color.diffuse);
-    _shader->uniformSetvec3("L.specular", color.specular);
-    _shader->uniformSet1i("L.type", color.type);
-    _shader->uniformSet1f("L.constant", color.constant);
-    _shader->uniformSet1f("L.linear", color.linear);
-    _shader->uniformSet1f("L.quadratic", color.quadratic);
-    _shader->uniformSetvec3("L.direction", color.direction);
-    _shader->uniformSet1f("L.cutoff", color.cutoff);
-    _shader->uniformSet1f("L.outcutoff", color.outcutoff);
+    DWORD size = GLightManager::getInstance()->size();
+    _shader->uniformSet1i("size", size);
     _shader->uniformSetvec3("camerapos", Camera::getInstance()->getCameraPosition());
+    struct LightCallback : public zCallback<Light>
+    {
+        LightCallback(Object *o) : obj(o){}
+        ~LightCallback(){};
+        bool exec(Light *light)
+        {
+            const auto &color = light->getLight();
+            std::string tmp = "[" + std::to_string(cnt) + "]";
+            obj->_shader->uniformSetvec3("L" + tmp + ".position", color.position);
+            obj->_shader->uniformSetvec3("L" + tmp + ".ambient", color.ambient);
+            obj->_shader->uniformSetvec3("L" + tmp + ".diffuse", color.diffuse);
+            obj->_shader->uniformSetvec3("L" + tmp + ".specular", color.specular);
+            obj->_shader->uniformSet1i("L" + tmp + ".type", color.type);
+            obj->_shader->uniformSet1f("L" + tmp + ".constant", color.constant);
+            obj->_shader->uniformSet1f("L" + tmp + ".linear", color.linear);
+            obj->_shader->uniformSet1f("L" + tmp + ".quadratic", color.quadratic);
+            obj->_shader->uniformSetvec3("L" + tmp + ".direction", color.direction);
+            obj->_shader->uniformSet1f("L" + tmp + ".cutoff", color.cutoff);
+            obj->_shader->uniformSet1f("L" + tmp + ".outcutoff", color.outcutoff);
+            ++cnt;
+            return true;
+        }
+        Object *obj;
+        DWORD cnt;
+    };
+    LightCallback lightcallback(this);
+    GLightManager::getInstance()->execEveryN(lightcallback);
 }
 
 void Object::refelctMaterial()

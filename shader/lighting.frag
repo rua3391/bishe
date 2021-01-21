@@ -42,21 +42,24 @@ struct Light
 	int type;
 };
 
+uniform int size;
+#define NR_POINT_LIGHTS 4
 uniform material M;
-uniform Light L;
+uniform Light L[NR_POINT_LIGHTS];
+
 uniform vec3 camerapos;
 
-vec3 lightdirection;
-
-void calculateLightdirection(int type)
+vec3 calculateLightdirection(Light L)
 {
-	if(type == directionLight)
+	vec3 lightdirection;
+	if(L.type == directionLight)
 		lightdirection = normalize(-L.direction);
 	else
 		lightdirection = normalize(L.position - worldpos);
+	return lightdirection;
 }
 
-vec3 calculateAmbient(int type)
+vec3 calculateAmbient(Light L)
 {
 	vec3 ambient;
 	if(M.diffuseTexture)
@@ -66,7 +69,7 @@ vec3 calculateAmbient(int type)
 	return ambient;
 }
 
-vec3 calculateDiffuse(int type)
+vec3 calculateDiffuse(Light L, vec3 lightdirection)
 {
 	vec3 diff;
 	vec3 normal = normalize(normalvector);
@@ -79,7 +82,7 @@ vec3 calculateDiffuse(int type)
 	return diff;
 }
 
-vec3 calculateSpecular(int type)
+vec3 calculateSpecular(Light L, vec3 lightdirection)
 {
 	vec3 specular;
 	vec3 viewdirection = normalize(camerapos - worldpos);
@@ -92,10 +95,10 @@ vec3 calculateSpecular(int type)
 	return specular;
 }
 
-float calculateAttenuation(int type)
+float calculateAttenuation(Light L)
 {
 	float attenuation = 1.0f;
-	if(type != directionLight)
+	if(L.type != directionLight)
 	{
 		float d = length(L.position - worldpos);
 		attenuation = 1.0 / (L.constant + L.linear * d + L.quadratic * (d * d));
@@ -103,25 +106,37 @@ float calculateAttenuation(int type)
 	return attenuation;
 }
 
-void main()
+vec3 calculateLight(Light L)
 {
-	calculateLightdirection(L.type);
-	float theta = dot(lightdirection, normalize(-L.direction)); 
-	float epsilon   = L.cutoff - L.outcutoff;
-	float intensity = clamp((theta - L.outcutoff) / epsilon, 0.0, 1.0);
+	vec3 lightdirection = calculateLightdirection(L);
+	vec3 ambient = calculateAmbient(L);
+	vec3 diffuse = calculateDiffuse(L, lightdirection);
+	vec3 specular = calculateSpecular(L, lightdirection);
+	float attenuation = calculateAttenuation(L);
 
-	vec3 ambient = calculateAmbient(L.type);
-	vec3 diffuse = calculateDiffuse(L.type);
-	vec3 specular = calculateSpecular(L.type);
-	float attenuation = calculateAttenuation(L.type);
 	//将衰减叠加到光照上
 	ambient *= attenuation;
 	diffuse *= attenuation;
 	specular *= attenuation;
+
+	//如果是聚光, 做平滑操作
 	if(L.type == spotLight)
 	{
+		float theta = dot(lightdirection, normalize(-L.direction)); 
+		float epsilon   = L.cutoff - L.outcutoff;
+		float intensity = clamp((theta - L.outcutoff) / epsilon, 0.0, 1.0);
 		diffuse *= intensity;
     	specular *= intensity;
 	}
-	FragColor = vec4((ambient + diffuse + specular), 1.0f);
+	return (ambient + diffuse + specular);
+}
+
+void main()
+{
+	vec3 result;
+	if(size >= 1)
+		result = calculateLight(L[0]); 
+	for(int i = 1; i < size; ++i)
+		result += calculateLight(L[i]);
+	FragColor = vec4(result, 1.0f);
 }

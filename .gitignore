@@ -20,7 +20,6 @@
 rediscli.sh
 redisserver.sh
 startdesktop.sh
-Engine
 pic/*
 .vscode-server/*
 redis-5.0.1/*

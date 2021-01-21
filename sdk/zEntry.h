@@ -1,7 +1,7 @@
 #ifndef Z_ENTRY_H
 #define Z_ENTRY_H
 
-#include "zType.h"
+#include "zSdk.h"
 
 class zEntry
 {
