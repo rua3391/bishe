@@ -47,7 +47,6 @@ bool Texture::init(const std::string& path, DWORD num, TextureType type)
 			default:
 				break;
 		}
-		debug("format:%d", format);
 		glBindTexture(GL_TEXTURE_2D, Texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);

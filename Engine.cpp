@@ -263,7 +263,7 @@ int main(void)
 		fatal << "窗口初始化失败" << end;
 		return -1;
 	}
-	if(!Camera::getInstance()->init(glm::vec3(0, 0, 3.0f), -15.0f, 180.0f, glm::vec3(0, 1.0f, 0)))
+	if(!Camera::getInstance()->init(glm::vec3(0, 0, 3.0f), 0.0f, -90.0f, glm::vec3(0, 1.0f, 0)))
 	{
 		fatal << "相机初始化失败" << end;
 		return -1;
