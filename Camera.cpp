@@ -6,14 +6,23 @@ Camera::Camera() :
 	cModule("CAMERA"), 
 	_zoom(45.0f), 
 	_speed(3.5f), 
-	_sensitivity(0.02f),
-	_yaw(-90.0f),
-	_pitch(0.0f)
+	_sensitivity(0.03f)
 {
 }
 
 Camera::~Camera()
 {	
+}
+
+bool Camera::init(const glm::vec3 &position, const glm::vec3 &target, const glm::vec3 &upward)
+{
+	_worldup = upward;
+	_position = position;
+	_forward = glm::normalize(target - position);
+	_right = glm::normalize(glm::cross(_forward, _worldup));
+	_up = glm::normalize(glm::cross(_forward, _right));
+	debug("摄像机初始化成功");
+	return true;
 }
 
 bool Camera::init(const glm::vec3 &position, FLOAT pitch, FLOAT yaw, const glm::vec3 &upward)
@@ -23,7 +32,12 @@ bool Camera::init(const glm::vec3 &position, FLOAT pitch, FLOAT yaw, const glm::
 	_pitch = pitch;
 	_yaw = yaw;
 
-	_updateCameraVector();
+	_forward.x = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
+	_forward.y = glm::sin(glm::radians(_pitch));
+	_forward.z = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
+
+	_right = glm::normalize(glm::cross(_worldup, _forward));
+	_up = glm::normalize(glm::cross(_right, _forward));
 	debug("摄像机初始化成功");
 	return true;
 }
@@ -64,15 +78,15 @@ void Camera::final()
 
 glm::mat4 Camera::getViewMatrix() 
 {
-	return glm::lookAt(_position, _position + _forward, _up);
+	return glm::lookAt(_position, _position + _forward, _worldup);
 }
 
 void Camera::processMouseMovement(DFLOAT xoffset, DFLOAT yoffset) 
 {
 	xoffset *= _sensitivity;
 	yoffset *= _sensitivity;
-	_pitch += yoffset;
-	_yaw += xoffset;
+	_pitch -= yoffset;
+	_yaw -= xoffset;
 	if (_pitch > 89.0f)
 		_pitch = 89.0f;
 	if (_pitch < -89.0f)
@@ -105,28 +119,26 @@ void Camera::processKeybordMovement(CameraMove direction, FLOAT delta_time)
 	{
 		_position += _forward * v;
 	}
-	if (direction == BACK) 
+	else if (direction == BACK) 
 	{
 		_position -= _forward * v;
 	}
-	if (direction == LEFT) 
-	{
-		_position -= _right * v;
-	}
-	if (direction == RIGHT)
+	else if (direction == LEFT) 
 	{
 		_position += _right * v;
+	}
+	else 
+	{
+		_position -= _right * v;
 	}
 	//Position.y = 0.0f;//这条让这个摄像机固定在xoz平面，成为一个fps类型摄像头，不能随意飞行
 }
 
 void Camera::_updateCameraVector() 
 {
-	glm::vec3 front;
-	front.x = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
-	front.y = glm::sin(glm::radians(_pitch));						  
-	front.z = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
-	_forward = glm::normalize(front);
+	_forward.x = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
+	_forward.y = glm::sin(glm::radians(_pitch));						  
+	_forward.z = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
 	_right = glm::normalize(glm::cross(_worldup, _forward));
 	_up = glm::normalize(glm::cross(_right, _forward));
 }
