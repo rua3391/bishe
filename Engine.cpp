@@ -33,11 +33,6 @@ void scrollCallback(GLFWwindow* windows, DFLOAT xoffset, DFLOAT yoffset)
 	Engine::getInstance()->processScrollCallback(windows, xoffset, yoffset);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
 void Engine::processMouseCallback(GLFWwindow* windows, DFLOAT xpos, DFLOAT ypos)
 {
     if (_first) 
@@ -46,8 +41,8 @@ void Engine::processMouseCallback(GLFWwindow* windows, DFLOAT xpos, DFLOAT ypos)
 		_lasty = ypos;
 		_first = false;
 	}
-	FLOAT xoffset = xpos - _lastx;
-	FLOAT yoffset = ypos - _lasty;
+	DFLOAT xoffset = xpos - _lastx;
+	DFLOAT yoffset = _lasty - ypos;
 	_lastx = xpos;
 	_lasty = ypos;
 
@@ -92,10 +87,9 @@ GLFWwindow* Engine::initWindow()
 
 	window = glfwCreateWindow(screenx, screeny, "Engine", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouseCallback);
 	glfwSetScrollCallback(window, scrollCallback);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK) 
