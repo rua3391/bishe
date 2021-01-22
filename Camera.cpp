@@ -6,7 +6,7 @@ Camera::Camera() :
 	cModule("CAMERA"), 
 	_zoom(45.0f), 
 	_speed(3.5f), 
-	_sensitivity(0.03f)
+	_sensitivity(0.0003f)
 {
 }
 
@@ -38,6 +38,7 @@ bool Camera::init(const glm::vec3 &position, FLOAT pitch, FLOAT yaw, const glm::
 
 	_right = glm::normalize(glm::cross(_worldup, _forward));
 	_up = glm::normalize(glm::cross(_right, _forward));
+	_updateCameraVector();
 	debug("摄像机初始化成功");
 	return true;
 }

@@ -47,8 +47,7 @@ void Engine::processMouseCallback(GLFWwindow* windows, DFLOAT xpos, DFLOAT ypos)
 		_first = false;
 	}
 	FLOAT xoffset = xpos - _lastx;
-	FLOAT yoffset = _lasty - ypos;
-	debug << "_lastx : "<< _lastx << " _lasty : " << _lasty << end;
+	FLOAT yoffset = ypos - _lasty;
 	_lastx = xpos;
 	_lasty = ypos;
 
