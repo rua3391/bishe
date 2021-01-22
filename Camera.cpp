@@ -6,7 +6,7 @@ Camera::Camera() :
 	cModule("CAMERA"), 
 	_zoom(45.0f), 
 	_speed(3.5f), 
-	_sensitivity(0.03f),
+	_sensitivity(0.02f),
 	_yaw(-90.0f),
 	_pitch(0.0f)
 {
@@ -71,8 +71,8 @@ void Camera::processMouseMovement(DFLOAT xoffset, DFLOAT yoffset)
 {
 	xoffset *= _sensitivity;
 	yoffset *= _sensitivity;
-	_pitch -= yoffset;
-	_yaw -= xoffset;
+	_pitch += yoffset;
+	_yaw += xoffset;
 	if (_pitch > 89.0f)
 		_pitch = 89.0f;
 	if (_pitch < -89.0f)
