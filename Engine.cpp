@@ -13,8 +13,8 @@ Engine::Engine() :
 	_first(true), 
 	_lastx(0.0), 
 	_lasty(0.0), 
-	screenx(1200), 
-	screeny(960)
+	screenx(800), 
+	screeny(800)
 {
 }
 

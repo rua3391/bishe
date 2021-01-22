@@ -32,12 +32,6 @@ bool Camera::init(const glm::vec3 &position, FLOAT pitch, FLOAT yaw, const glm::
 	_pitch = pitch;
 	_yaw = yaw;
 
-	_forward.x = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
-	_forward.y = glm::sin(glm::radians(_pitch));
-	_forward.z = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
-
-	_right = glm::normalize(glm::cross(_worldup, _forward));
-	_up = glm::normalize(glm::cross(_right, _forward));
 	_updateCameraVector();
 	debug("摄像机初始化成功");
 	return true;
