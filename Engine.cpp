@@ -11,16 +11,22 @@
 
 Engine::Engine() : 
 	_first(true), 
-	_lastx(0.0), 
-	_lasty(0.0), 
+	_lastx(400), 
+	_lasty(400), 
 	screenx(800), 
-	screeny(800)
+	screeny(800),
+	window(NULL)
 {
 }
 
 Engine::~Engine()
 {
 
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
 }
 
 void mouseCallback(GLFWwindow* windows, DFLOAT xpos, DFLOAT ypos)
@@ -43,6 +49,8 @@ void Engine::processMouseCallback(GLFWwindow* windows, DFLOAT xpos, DFLOAT ypos)
 	}
 	DFLOAT xoffset = xpos - _lastx;
 	DFLOAT yoffset = _lasty - ypos;
+
+	debug << "xpos" << xpos << " " << "ypos" << ypos <<end; 
 	_lastx = xpos;
 	_lasty = ypos;
 
@@ -86,8 +94,14 @@ GLFWwindow* Engine::initWindow()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	window = glfwCreateWindow(screenx, screeny, "Engine", nullptr, nullptr);
+	if(window == NULL)
+	{
+		error << "窗口句柄初始化失败" <<end;
+		return NULL;
+	}
 	glfwMakeContextCurrent(window);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetCursorPosCallback(window, mouseCallback);
 	glfwSetScrollCallback(window, scrollCallback);
 

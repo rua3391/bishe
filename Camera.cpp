@@ -105,15 +105,15 @@ void Camera::processKeybordMovement(CameraMove direction, FLOAT delta_time)
 	{
 		_position += _forward * v;
 	}
-	if (direction == BACK) 
+	else if (direction == BACK) 
 	{
 		_position -= _forward * v;
 	}
-	if (direction == LEFT) 
+	else if (direction == LEFT) 
 	{
 		_position -= _right * v;
 	}
-	if (direction == RIGHT)
+	else if (direction == RIGHT)
 	{
 		_position += _right * v;
 	}
@@ -123,12 +123,12 @@ void Camera::processKeybordMovement(CameraMove direction, FLOAT delta_time)
 void Camera::_updateCameraVector() 
 {
 	glm::vec3 front;
-	front.x = glm::cos(glm::radians(_pitch)) * glm::cos(glm::radians(_yaw));
-	front.y = glm::sin(glm::radians(_pitch));						  
-	front.z = glm::cos(glm::radians(_pitch)) * glm::sin(glm::radians(_yaw));
+	front.x = cos(glm::radians(_yaw)) * cos(glm::radians(_pitch));
+	front.y = sin(glm::radians(_pitch));
+	front.z = sin(glm::radians(_yaw)) * cos(glm::radians(_pitch));
 	_forward = glm::normalize(front);
-	_right = glm::normalize(glm::cross(_worldup, _forward));
-	_up = glm::normalize(glm::cross(_right, _forward));
+	_right = glm::normalize(glm::cross(_forward, _worldup));
+	_up    = glm::normalize(glm::cross(_right, _forward));
 }
 
 glm::vec3& Camera::getCameraPosition()
