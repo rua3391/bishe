@@ -14,23 +14,23 @@ REDIS = redis-5.0.1/deps/hiredis/
 
 all: $(TARGET)
 $(TARGET):$(OBJS)
-	$(CC) $(OBJS) -o $(TARGET) $(LIB) $(STANDARD)
+	$(CC) -g $(OBJS) -o $(TARGET) $(LIB) $(STANDARD)
 Camera.o: Camera.cpp $(COMMON)cModule.h $(SDK)
-	$(CC) -c Camera.cpp -o Camera.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g Camera.cpp -o Camera.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Shader.o: Shader.cpp $(COMMON)cModule.h $(SDK) 
-	$(CC) -c Shader.cpp -o Shader.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g Shader.cpp -o Shader.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Texture.o: Texture.cpp $(COMMON)cModule.h $(SDK)
-	$(CC) -c Texture.cpp -o Texture.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g Texture.cpp -o Texture.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Light.o: Light.cpp $(COMMON)cModule.h $(SDK)
-	$(CC) -c Light.cpp -o Light.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g Light.cpp -o Light.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 GObjManager.o: GObjManager.cpp Object.cpp $(PROTO)Common.pb.cc $(SDK)
-	$(CC) -c GObjManager.cpp -o GObjManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g GObjManager.cpp -o GObjManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 GLightManager.o: GLightManager.cpp Light.cpp $(PROTO)Common.pb.cc $(SDK)
-	$(CC) -c GLightManager.cpp -o GLightManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g GLightManager.cpp -o GLightManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Object.o: Object.cpp Shader.cpp Texture.cpp Light.cpp $(COMMON)cModule.h $(SDK)
-	$(CC) -c Object.cpp -o Object.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g Object.cpp -o Object.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Engine.o: *.h *.cpp $(SDK) $(PROTO)
-	$(CC) -c Engine.cpp -o Engine.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+	$(CC) -c -g Engine.cpp -o Engine.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 proto:
 	cd $(PROTO) && $(MAKE)
 clean:
@@ -40,3 +40,7 @@ rmtar:
 tar:
 	tar -zcvf $(DESKTOP)code.tar.gz --exclude=stb_image.h\
 		$(SDK) $(LOG) $(SHADER) $(COMMON) $(PROTO) *.h *.cpp makefile *.o Engine
+test: test.cpp
+	$(CC) -g test.cpp -o test $(STANDARD)
+testing: testing.cpp
+	$(CC) -g testing.cpp -o testing $(STANDARD)

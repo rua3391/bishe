@@ -50,7 +50,7 @@ void Engine::processMouseCallback(GLFWwindow* windows, DFLOAT xpos, DFLOAT ypos)
 	DFLOAT xoffset = xpos - _lastx;
 	DFLOAT yoffset = _lasty - ypos;
 
-	debug << "xpos" << xpos << " " << "ypos" << ypos <<end; 
+	// debug << "xpos" << xpos << " " << "ypos" << ypos <<end; 
 	_lastx = xpos;
 	_lasty = ypos;
 
@@ -112,7 +112,6 @@ GLFWwindow* Engine::initWindow()
 		glfwTerminate();
 		return NULL;
 	}
-	glViewport(0, 0, 1200, 960);
 	glEnable(GL_DEPTH_TEST);
     return window;
 }

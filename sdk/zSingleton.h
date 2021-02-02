@@ -18,19 +18,11 @@ class zSingletonBase : private zNoneCopy
          */ 
         static T* getInstance()
         {
-            if(instance == NULL)
+            if(!instance.get())
             {
-                instance = new T();
+                instance.reset(new T());
             }   
-            return instance;
-        }
-        /**
-         * \brief 删除实例对象
-         * 
-         */ 
-        static void deleteInstance()
-        {
-            SAFE_DELETE(instance);
+            return instance.get();
         }
     protected:
         /**
@@ -42,15 +34,15 @@ class zSingletonBase : private zNoneCopy
          * \brief 析构函数
          * 
          */ 
-        ~zSingletonBase() { SAFE_DELETE(instance);}
+        ~zSingletonBase() {}
     protected:
         /**
          * \brief 实例
          * 
          */
-        static T* instance; 
+        static std::shared_ptr<T> instance; 
 };
 
-template <typename T> T* zSingletonBase<T>::instance = NULL;
-
+template<typename T>
+std::shared_ptr<T> zSingletonBase<T>::instance = std::shared_ptr<T>(NULL);
 #endif

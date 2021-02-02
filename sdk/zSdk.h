@@ -27,6 +27,9 @@
 #include <initializer_list>
 #include <typeinfo>
 #include <bitset>
+#include <memory>
+#include <utility>
+#include <type_traits>
 
 #include "zType.h"
 #include "zLog.h"
