@@ -15,13 +15,14 @@ Engine::Engine() :
 	_lasty(400), 
 	screenx(800), 
 	screeny(800),
-	window(NULL)
+	window(NULL),
+	_deleter(),
+	_client(new zTcpClient(), _deleter)
 {
 }
 
 Engine::~Engine()
 {
-
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -269,8 +270,25 @@ void Engine::final()
 	GLightManager::getInstance()->final();
 }
 
+void Terminate(SDWORD i)
+{
+	Engine::getInstance()->final();
+	exit(0);
+}
+
+void ingSingal()
+{
+	for(int i = 0; i < 100; ++i)
+	{
+		signal(i, SIG_IGN);
+	}
+	signal(SIGINT, Terminate);
+	signal(SIGTERM, Terminate);
+}
+
 int main(void)
 {
+	ingSingal();
 	if(Engine::getInstance()->initWindow() == NULL)
 	{
 		fatal << "窗口初始化失败" << end;

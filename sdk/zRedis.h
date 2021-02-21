@@ -62,15 +62,19 @@ class zRedis
          * \param cmd 具体命令
          * 
          */
-        char* readFromRedis(const char* cmd)
+        bool readFromRedis(const char* cmd, char* buffer)
         {
             redisReply* reply =(redisReply*) redisCommand(this->_handle, cmd);
-            std::string value;
-            if(reply->type != REDIS_REPLY_NIL){
-                value = std::string(reply->str,reply->str + reply->len);
+            if(reply->type != REDIS_REPLY_NIL)
+            {
+                strncpy(buffer, reply->str,reply->len);
+            }
+            else
+            {
+                return false;
             }
             freeReplyObject(reply);
-            return const_cast<char* >(value.c_str());
+            return true;
         }
         /**
          * \brief 数据库是否存在key

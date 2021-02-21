@@ -45,8 +45,8 @@ void Camera::serialize(void *out)
 
 void Camera::unserialize()
 {
-	char* buffer = NULL;
-	buffer = readFromRedis();
+	char buffer[MAX_SIZE] = {0};
+	readFromRedis(buffer);
 	Proto::Common::CameraProto camera;
 	camera.ParseFromArray(buffer, MAX_SIZE);
 	

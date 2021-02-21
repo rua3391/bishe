@@ -30,6 +30,11 @@
 #include <memory>
 #include <utility>
 #include <type_traits>
+#include <signal.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netdb.h>
 
 #include "zType.h"
 #include "zLog.h"

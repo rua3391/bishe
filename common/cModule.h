@@ -135,13 +135,12 @@ class cModule
          * \brief 读取当前模块_redis数据库资源
          * 
          */
-        char* readFromRedis()
+        bool readFromRedis(char *buffer)
         {
             _redis->createHandle();
             std::stringstream os;
-            char* buffer = (char* )malloc(MAX_SIZE);
             os << "HGET " << "Engine " << _type;
-            buffer = _redis->readFromRedis(os.str().c_str());
+            _redis->readFromRedis(os.str().c_str(), buffer);
             if(!buffer)
             {
                 error("_redis数据库读出记录失败");

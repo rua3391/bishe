@@ -3,9 +3,18 @@
 
 #include "zSdk.h"
 #include "zSingleton.h"
+#include "zTcpClient.h"
 #include "Light.h"
 
 class Object;
+struct Deleter
+{
+    bool operator()(zTcpClient *cli)
+    {
+        cli->final();
+        return true;
+    }
+};
 class Engine : public zSingletonBase<Engine>
 {
     public:
@@ -113,6 +122,16 @@ class Engine : public zSingletonBase<Engine>
          * 
          */
         GLFWwindow *window; 
+        /**
+         * \brief 客户端链接
+         * 
+         */
+        std::unique_ptr<zTcpClient, Deleter> _client;
+        /**
+         * \brief 释放socket
+         * 
+         */
+        Deleter _deleter; 
 };
 
 #endif
