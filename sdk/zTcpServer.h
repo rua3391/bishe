@@ -60,7 +60,8 @@ class zTcpServer : public zSingletonBase<zTcpServer>
         {
             if(_listenfd == -1)
                 return false;
-            _connectfd=accept(_listenfd,reinterpret_cast<sockaddr *>(&_clientaddr),reinterpret_cast<socklen_t*>(sizeof(sockaddr_in)));
+            socklen_t size = sizeof(sockaddr_in);
+            _connectfd = accept(_listenfd, reinterpret_cast<sockaddr *>(&_clientaddr), &size);
             if(_connectfd <= 0)
                 return false;
             return true;
@@ -89,16 +90,16 @@ class zTcpServer : public zSingletonBase<zTcpServer>
          * \param len 数据长度
          * 
          */
-        bool tcpWrite(char* buffer, DWORD len)
+        bool tcpWrite(const char* buffer, DWORD len)
         {
             if(_connectfd == -1)
                 return false;
-            len = htonl(len);
             char tmpbuffer[len + 4];
+            DWORD netlen = htonl(len);
             memset(tmpbuffer, 0, sizeof(tmpbuffer));
-            memcpy(tmpbuffer, &len, 4);
+            memcpy(tmpbuffer, &netlen, 4);
             memcpy(tmpbuffer + 4, buffer, len);
-            if (!_writeN(tmpbuffer,len+4))
+            if (!_writeN(tmpbuffer,len + 4))
                 return false;
             return true;
         }  

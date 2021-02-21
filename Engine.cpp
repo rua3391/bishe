@@ -114,6 +114,7 @@ GLFWwindow* Engine::initWindow()
 		return NULL;
 	}
 	glEnable(GL_DEPTH_TEST);
+	_client->init("121.4.253.6", 5005);//我的云服务器ip及端口
     return window;
 }
 

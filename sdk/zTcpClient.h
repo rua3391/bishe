@@ -4,7 +4,7 @@
 #include "zSdk.h"
 #include "zSingleton.h"
 
-class zTcpClient : public zSingletonBase<zTcpClient>
+class zTcpClient
 {
     public:
         /**
@@ -30,11 +30,14 @@ class zTcpClient : public zSingletonBase<zTcpClient>
                 close(_socketfd);
                 _socketfd = -1;
             }
+            _ip = name;
             hostent* ip;
             sockaddr_in serveraddr;
             _socketfd = socket(AF_INET, SOCK_STREAM, 0);
             if(_socketfd < 0)
+            {
                 return false;
+            }
             ip = gethostbyname(name);
             if(!ip)
             {
@@ -42,11 +45,14 @@ class zTcpClient : public zSingletonBase<zTcpClient>
                 close(_socketfd);
                 return false;
             }
+            memset(&serveraddr,0,sizeof(serveraddr));
             serveraddr.sin_family = AF_INET;
             serveraddr.sin_port = htons(port);
-            memcpy(&serveraddr.sin_addr, ip->h_addr_list, ip->h_length);
-            if(connect(_socketfd, reinterpret_cast<sockaddr *>(&serveraddr),sizeof(serveraddr)) != 0)
+            memcpy(&serveraddr.sin_addr, ip->h_addr_list[0], ip->h_length);
+
+            if(connect(_socketfd, (sockaddr *)(&serveraddr),sizeof(serveraddr)) != 0)
             {
+                perror("connect");
                 close(_socketfd);  
                 _socketfd = -1; 
                 return false;
@@ -77,7 +83,7 @@ class zTcpClient : public zSingletonBase<zTcpClient>
          * \param len 数据长度
          * 
          */
-        bool tcpWrite(char* buffer, DWORD len)
+        bool tcpWrite(const char* buffer, DWORD len)
         {
             if(_socketfd == -1)
                 return false;
