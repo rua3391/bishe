@@ -1,9 +1,9 @@
 .PHONY:clean proto
-OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o GObjManager.o GLightManager.o
+OBJS = Engine.o Camera.o Shader.o Texture.o Light.o Object.o GObjManager.o GLightManager.o Mesh.o Model.o
 CC = g++
 STANDARD = -std=c++11
 TARGET = Engine.out
-LIB = -lGLEW -lglfw -lGL -lprotobuf -lpthread -lhiredis
+LIB = -lGLEW -lglfw -lGL -lprotobuf -lpthread -lhiredis -lassimp
 SDK = sdk/*.h
 LOG = log/
 SHADER = shader/
@@ -29,6 +29,10 @@ GLightManager.o: GLightManager.cpp Light.cpp $(PROTO)Common.pb.cc $(SDK)
 	$(CC) -c -g GLightManager.cpp -o GLightManager.o -I$(PROTO) -Isdk/ -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Object.o: Object.cpp Shader.cpp Texture.cpp Light.cpp $(COMMON)cModule.h $(SDK)
 	$(CC) -c -g Object.cpp -o Object.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+Mesh.o: Mesh.cpp $(COMMON)cModule.h $(SDK)
+	$(CC) -c -g Mesh.cpp -o Mesh.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
+Model.o: Mesh.cpp Model.cpp $(COMMON)cModule.h $(SDK)
+	$(CC) -c -g Model.cpp -o Model.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 Engine.o: *.h *.cpp $(SDK) $(PROTO)
 	$(CC) -c -g Engine.cpp -o Engine.o -Isdk/ -I$(PROTO) -I$(COMMON) -I$(REDIS) $(LIB) $(STANDARD)
 proto:
@@ -39,7 +43,7 @@ rmtar:
 	rm -rf $(DESKTOP)code.tar.gz
 tar:
 	tar -zcvf $(DESKTOP)code.tar.gz --exclude=stb_image.h\
-		$(SDK) $(LOG) $(SHADER) $(COMMON) $(PROTO) *.h *.cpp makefile *.o Engine
+		$(SDK) $(LOG) $(SHADER) $(COMMON) $(PROTO) *.h *.cpp makefile *.o $(TARGET)
 test: test.cpp
 	$(CC) -g test.cpp -o test $(STANDARD)
 testing: testing.cpp

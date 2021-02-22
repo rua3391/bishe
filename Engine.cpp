@@ -8,6 +8,7 @@
 #include "Light.h"
 #include "GObjManager.h"
 #include "GLightManager.h"
+#include "Model.h"
 
 Engine::Engine() : 
 	_first(true), 
@@ -87,7 +88,7 @@ void Engine::processInput(GLFWwindow* windows)
 	}
 }
 
-GLFWwindow* Engine::initWindow()
+GLFWwindow* Engine::init()
 {
     glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -114,7 +115,7 @@ GLFWwindow* Engine::initWindow()
 		return NULL;
 	}
 	glEnable(GL_DEPTH_TEST);
-	_client->init("121.4.253.6", 5005);//我的云服务器ip及端口
+	_client->init("121.4.253.6", 5005);//云服务器ip及端口
     return window;
 }
 
@@ -195,13 +196,7 @@ int Engine::mainProcess(void)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
 	glEnableVertexAttribArray(0);
 
-	// Light *light1 = initLight(glm::vec3(1.2f, 1.0f, 2.0f), Point);
-	Light *light1 = initLight(Camera::getInstance()->getCameraPosition(), Spot);
-	if(!light1)
-	{
-		return -1;
-	}
-	FLOAT last_time = 0.0;
+	// Light *spotlight = initLight(glm::vec3(1.2f, 1.0f, 2.0f), Point);
 	glm::vec3 cubePositions[] = {
         glm::vec3( 0.0f,  0.0f,  0.0f),
         glm::vec3( 2.0f,  5.0f, -15.0f),
@@ -214,6 +209,20 @@ int Engine::mainProcess(void)
         glm::vec3( 1.5f,  0.2f, -1.5f),
         glm::vec3(-1.3f,  1.0f, -1.5f)
     };
+	glm::vec3 pointLightPositions[] = {
+        glm::vec3( 0.7f,  0.2f,  2.0f),
+        glm::vec3( 2.3f, -3.3f, -4.0f),
+        glm::vec3(-4.0f,  2.0f, -12.0f),
+        glm::vec3( 0.0f,  0.0f, -3.0f)
+    };
+	Light *spotlight = initLight(Camera::getInstance()->getCameraPosition(), Spot);
+	Light *directionLight = initLight(glm::vec3(-0.2f, -1.0f, -0.3f), Direction);
+	Light *PointLight1 = initLight(pointLightPositions[0], Point);
+	Light *PointLight2 = initLight(pointLightPositions[1], Point);
+	Light *PointLight3 = initLight(pointLightPositions[2], Point);
+	Light *PointLight4 = initLight(pointLightPositions[3], Point);
+
+	FLOAT last_time = 0.0;
 	while (!glfwWindowShouldClose(window)) 
 	{
 		Engine::getInstance()->processInput(window);
@@ -223,16 +232,50 @@ int Engine::mainProcess(void)
 		Engine::getInstance()->timepass = cur_time - last_time;
 		last_time = cur_time;
 
-		light1->setAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
-		light1->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
-		light1->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
-		light1->setLightConstant(1.0f);
-		light1->setLightLinear(0.09f);
-		light1->setLightQuadratic(0.032f);
-		light1->setLightCutoff(glm::cos(glm::radians(12.5f)));
-		light1->setLightOutCutoff(glm::cos(glm::radians(17.5f)));
-		light1->setLightDirection(Camera::getInstance()->getCameraForward());
-		light1->setLightPosition(Camera::getInstance()->getCameraPosition());
+		// 点光源设置
+		spotlight->setAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
+		spotlight->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+		spotlight->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+		spotlight->setLightConstant(1.0f);
+		spotlight->setLightLinear(0.09f);
+		spotlight->setLightQuadratic(0.032f);
+		spotlight->setLightCutoff(glm::cos(glm::radians(12.5f)));
+		spotlight->setLightOutCutoff(glm::cos(glm::radians(17.5f)));
+		spotlight->setLightDirection(Camera::getInstance()->getCameraForward());
+		spotlight->setLightPosition(Camera::getInstance()->getCameraPosition());
+		//平行光设置
+		directionLight->setLightDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
+		directionLight->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        directionLight->setDiffuseLight(glm::vec3(0.4f, 0.4f, 0.4f));
+        directionLight->setSpecularLight(glm::vec3(0.5f, 0.5f, 0.5f));
+		//四个点光源设置
+		PointLight1->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        PointLight1->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+        PointLight1->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+        PointLight1->setLightConstant(1.0f);
+        PointLight1->setLightLinear(0.09);
+        PointLight1->setLightQuadratic(0.032);
+
+		PointLight2->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        PointLight2->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+        PointLight2->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+        PointLight2->setLightConstant(1.0f);
+        PointLight2->setLightLinear(0.09);
+        PointLight2->setLightQuadratic(0.032);
+
+		PointLight3->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        PointLight3->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+        PointLight3->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+        PointLight3->setLightConstant(1.0f);
+        PointLight3->setLightLinear(0.09);
+        PointLight3->setLightQuadratic(0.032);
+
+		PointLight4->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        PointLight4->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+        PointLight4->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+        PointLight4->setLightConstant(1.0f);
+        PointLight4->setLightLinear(0.09);
+        PointLight4->setLightQuadratic(0.032);
 
 		obj1->bindObject();
 		obj1->setAmbient(glm::vec3(1.0f, 0.5f, 0.31f));
@@ -249,14 +292,16 @@ int Engine::mainProcess(void)
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-
-		// obj2->bindObject();
-		// obj2->translate(light1->getPosition());
-		// obj2->scaling(glm::vec3(0.2f));
-		// obj2->reflectPosition();
-		// obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
-		// glDrawArrays(GL_TRIANGLES, 0, 36);
-
+		for (unsigned int i = 0; i < 4; i++)
+		{
+			obj2->bindObject();
+			obj2->translate(pointLightPositions[i]);
+			obj2->scaling(glm::vec3(0.2f));
+			obj2->reflectPosition();
+			obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -290,7 +335,7 @@ void ingSingal()
 int main(void)
 {
 	ingSingal();
-	if(Engine::getInstance()->initWindow() == NULL)
+	if(Engine::getInstance()->init() == NULL)
 	{
 		fatal << "窗口初始化失败" << end;
 		return -1;

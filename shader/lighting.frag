@@ -43,7 +43,7 @@ struct Light
 };
 
 uniform int size;
-#define NR_POINT_LIGHTS 4
+#define NR_POINT_LIGHTS 16
 uniform material M;
 uniform Light L[NR_POINT_LIGHTS];
 

@@ -1,10 +1,11 @@
 #include "Texture.h"
+#include "Shader.h"
+#include "Model.h"
+
 #ifndef STB_IMAGE_IMPLEMENTATION
 	#define STB_IMAGE_IMPLEMENTATION
+	#include "stb_image.h"
 #endif
-#include "stb_image.h"
-
-#include "Shader.h"
 
 Texture::Texture() : cModule("TEXTURE")
 {
@@ -126,4 +127,47 @@ SDWORD Texture::getTextureId(DWORD num)
 	if(!_unit.count(num))
 		return -1;
 	return _unit[num];
+}
+
+DWORD Model::TextureFromFile(const std::string &path, const std::string &directory)
+{
+    std::string filename = path;
+    filename = directory + '/' + filename;
+
+    DWORD textureID;
+    glGenTextures(1, &textureID);
+
+    SDWORD width, height, nrchannels;
+	stbi_set_flip_vertically_on_load(true);
+    BYTE* data = stbi_load(filename.c_str(), &width, &height, &nrchannels, 0);
+	if (data) 
+    {
+		GLenum format;
+		switch (nrchannels)
+		{
+			case 1:
+				format = GL_RED; break;
+			case 3:
+				format = GL_RGB; break;
+			case 4:
+				format = GL_RGBA; break;
+			default:
+				break;
+		}
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		// 为当前绑定的纹理对象设置环绕、过滤方式
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
+   else 
+    {
+		error("加载纹理失败");
+        return -1;
+	}
+
+    return textureID;
 }

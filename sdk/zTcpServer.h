@@ -37,7 +37,7 @@ class zTcpServer : public zSingletonBase<zTcpServer>
             _serveraddr.sin_family = AF_INET;
             _serveraddr.sin_port = htons(port);
             _serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
-            if (bind(_listenfd,reinterpret_cast<sockaddr *>(&_serveraddr),sizeof(_serveraddr)) != 0 )
+            if (bind(_listenfd,reinterpret_cast<sockaddr *>(&_serveraddr),sizeof(_serveraddr)) != 0)
             {
                 if(_listenfd != -1)  
                     close(_listenfd);
@@ -108,6 +108,24 @@ class zTcpServer : public zSingletonBase<zTcpServer>
          * 
          */ 
         char *getClientIp(){return inet_ntoa(_clientaddr.sin_addr);}
+        /**
+         * \brief 关闭listenfd
+         * 
+         */ 
+        void closeListenfd()
+        {
+            if(_listenfd != -1)
+                close(_listenfd);
+        }
+        /**
+         * \brief 关闭clientfd
+         * 
+         */ 
+        void closeClientfd()
+        {
+            if(_connectfd != -1)
+                close(_connectfd);
+        }
     private:
         /**
          * \brief 读取n字节

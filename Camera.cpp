@@ -6,7 +6,7 @@ Camera::Camera() :
 	cModule("CAMERA"), 
 	_zoom(45.0f), 
 	_speed(3.5f), 
-	_sensitivity(0.02f),
+	_sensitivity(0.2f),
 	_yaw(-90.0f),
 	_pitch(0.0f)
 {

@@ -39,6 +39,7 @@ bool Light::init(const glm::vec3 &pos)
 {
     _light.position = pos;
     GLightManager::getInstance()->add(this);
+    return true;
 }
 
 void Light::final()

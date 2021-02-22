@@ -60,7 +60,7 @@ class Engine : public zSingletonBase<Engine>
          * \return 窗口句柄指针
          * 
          */ 
-        GLFWwindow* initWindow();
+        GLFWwindow* init();
         /**
          * \brief 初始化物件 
          * \param path 物件模型顶点属性数据
