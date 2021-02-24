@@ -1,1 +1,1 @@
-find . ! -path "*redis-5.0.1*" -a ! -path "*proto*" -a ! -name "stb_image.h" -name "*[.h|.cpp]" | xargs awk 'END{print NR}' 
+find . ! -path "*redis-5.0.1*" -a ! -path "*proto*" -a ! -name "stb_image.h" ! -name "test.cpp" ! -name "testing.cpp" -name "*[.h|.cpp]" | xargs awk 'END{print NR}' 

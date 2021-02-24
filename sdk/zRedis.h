@@ -15,12 +15,12 @@ class zRedis
          * \brief 构造函数
          * 
          */ 
-        zRedis() : _handle(NULL), _ip("127.0.0.1"), _port(6379) {};
+        zRedis(const std::string& ip = "127.0.0.1", SDWORD port = 6379) : _handle(NULL), _ip(ip), _port(port) {}
         /**
          * \brief 析构函数
          * 
          */
-        ~zRedis();
+        ~zRedis(){}
     public:
         /**
          * \brief 获取数据库句柄
@@ -28,7 +28,7 @@ class zRedis
          */
         bool createHandle()
         {
-            _handle = redisConnect(_ip, _port);
+            _handle = redisConnect(_ip.c_str(), _port);
             if(_handle == NULL || _handle->err)
             {
                 ERROR("获取redis句柄失败");
@@ -107,7 +107,7 @@ class zRedis
          * \brief 数据库ip
          * 
          */
-        const char* _ip; 
+        std::string _ip; 
         /**
          * \brief 端口
          * 

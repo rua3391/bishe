@@ -16,7 +16,7 @@ class zTcpServer : public zSingletonBase<zTcpServer>
          * 
          * 
          */
-        ~zTcpServer() {if(_listenfd != -1)  close(_listenfd); if(_connectfd != -1) close(_connectfd);}
+        ~zTcpServer() {close(_listenfd); close(_connectfd);}
         /**
          * \brief 创建socket 
          * \param name 服务器端域名或网址

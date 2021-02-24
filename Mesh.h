@@ -11,6 +11,8 @@ struct vertex
     glm::vec3 position;     //坐标
     glm::vec3 normal;       //法向量
     glm::vec2 texcoords;    //纹理坐标
+    glm::vec3 tangent;
+    glm::vec3 bitangent;
 };
 /**
  * \brief 纹理结构体
@@ -67,7 +69,7 @@ class Mesh : public cModule
         void reflcetMesh(Shader *shader); 
     private:
         /**
-         * \brief 顶点属性数组对象
+         * \brief 顶点数组对象
          * 
          */
         DWORD _vao;
@@ -77,7 +79,7 @@ class Mesh : public cModule
          */
         DWORD _vbo;  
         /**
-         * \brief 索引
+         * \brief 索引缓冲对象
          * 
          */
         DWORD _ebo; 

@@ -179,13 +179,7 @@ int Engine::mainProcess(void)
 	{
 		return -1;
 	}
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-	obj1->initDiffuseTexture("pic/box.png", 0);
+	obj1->initDiffuseTexture("pic/brick.jpg", 0);
 	obj1->initSpecularTexture("pic/box_specular.png", 1);
 
 	Object *obj2 = initObj("model/cube","shader/light.vert", "shader/light.frag");
@@ -193,10 +187,7 @@ int Engine::mainProcess(void)
 	{
 		return -1;
 	}
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
-	glEnableVertexAttribArray(0);
 
-	// Light *spotlight = initLight(glm::vec3(1.2f, 1.0f, 2.0f), Point);
 	glm::vec3 cubePositions[] = {
         glm::vec3( 0.0f,  0.0f,  0.0f),
         glm::vec3( 2.0f,  5.0f, -15.0f),
@@ -221,6 +212,8 @@ int Engine::mainProcess(void)
 	Light *PointLight2 = initLight(pointLightPositions[1], Point);
 	Light *PointLight3 = initLight(pointLightPositions[2], Point);
 	Light *PointLight4 = initLight(pointLightPositions[3], Point);
+	Model *model1 = new Model();
+	model1->loadModel("model/nanosuit/nanosuit.obj");
 
 	FLOAT last_time = 0.0;
 	while (!glfwWindowShouldClose(window)) 
@@ -278,29 +271,28 @@ int Engine::mainProcess(void)
         PointLight4->setLightQuadratic(0.032);
 
 		obj1->bindObject();
-		obj1->setAmbient(glm::vec3(1.0f, 0.5f, 0.31f));
-		obj1->setDiffuse(glm::vec3(1.0f, 0.5f, 0.31f));
-		obj1->setSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
 		obj1->setShiness(32.0f);
 		for (DWORD i = 0; i < 10; i++)
         {
             obj1->translate(cubePositions[i]);
             obj1->rotate(20.0f * i, glm::vec3(1.0f, 0.3f, 0.5f));
 			obj1->reflectPosition();
-			obj1->refelctMaterial();
-			obj1->refelctLight();
-
-            glDrawArrays(GL_TRIANGLES, 0, 36);
+			obj1->reflectMaterial();
+			obj1->reflectLight();
+            obj1->draw();
         }
-		for (unsigned int i = 0; i < 4; i++)
+		for (DWORD i = 0; i < 4; i++)
 		{
 			obj2->bindObject();
 			obj2->translate(pointLightPositions[i]);
 			obj2->scaling(glm::vec3(0.2f));
 			obj2->reflectPosition();
 			obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
-			glDrawArrays(GL_TRIANGLES, 0, 36);
+			obj2->draw();
 		}
+		model1->translate(glm::vec3(0.0f, 0.0f, 0.0f));
+		// model1->scaling(glm::vec3(0.2f, 0.2f, 0.2f));
+		model1->drawModel();
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -314,6 +306,8 @@ void Engine::final()
 	Camera::getInstance()->final();
 	GObjManager::getInstance()->final();
 	GLightManager::getInstance()->final();
+	std::string msg1 = "客户端进程已结束";
+	_client->tcpWrite(msg1.c_str(), msg1.size());
 }
 
 void Terminate(SDWORD i)

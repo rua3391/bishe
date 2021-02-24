@@ -129,16 +129,15 @@ SDWORD Texture::getTextureId(DWORD num)
 	return _unit[num];
 }
 
-DWORD Model::TextureFromFile(const std::string &path, const std::string &directory)
+DWORD Model::_textureFromFile(const std::string &path, const std::string &directory)
 {
     std::string filename = path;
     filename = directory + '/' + filename;
-
     DWORD textureID;
     glGenTextures(1, &textureID);
 
     SDWORD width, height, nrchannels;
-	stbi_set_flip_vertically_on_load(true);
+	// stbi_set_flip_vertically_on_load(true);
     BYTE* data = stbi_load(filename.c_str(), &width, &height, &nrchannels, 0);
 	if (data) 
     {
@@ -165,7 +164,7 @@ DWORD Model::TextureFromFile(const std::string &path, const std::string &directo
 	}
    else 
     {
-		error("加载纹理失败");
+		error("模型加载纹理失败");
         return -1;
 	}
 

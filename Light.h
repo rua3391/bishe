@@ -121,17 +121,17 @@ class Light : public cModule, public zEntry
          */
         void setLightPosition(const glm::vec3 &position);
         /**
-         * \brief 设置光照衰减
+         * \brief 设置光照衰减 常量系数
          * 
          */ 
         void setLightConstant(FLOAT num);
         /**
-         * \brief 设置光照衰减
+         * \brief 设置光照衰减 线性系数
          * 
          */ 
         void setLightLinear(FLOAT num);
         /**
-         * \brief 设置光照衰减
+         * \brief 设置光照衰减 平方系数
          * 
          */ 
         void setLightQuadratic(FLOAT num);

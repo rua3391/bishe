@@ -117,7 +117,7 @@ void Camera::processKeybordMovement(CameraMove direction, FLOAT delta_time)
 	{
 		_position += _right * v;
 	}
-	//Position.y = 0.0f;//这条让这个摄像机固定在xoz平面，成为一个fps类型摄像头，不能随意飞行
+	//_position.y = 0.0f;//这条让这个摄像机固定在xoz平面，成为一个fps类型摄像头，不能随意飞行
 }
 
 void Camera::_updateCameraVector() 

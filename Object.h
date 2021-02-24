@@ -174,17 +174,22 @@ class Object : public cModule, public zEntry
          * \brief 根据冯模型算出物体颜色 
          * 
          */
-        void refelctLight();
+        void reflectLight();
         /**
          * \brief 设置shader中物件材质
          * 
          */
-        void refelctMaterial();
+        void reflectMaterial();
         /**
          * \brief 获取物件shader
          * 
          */
         Shader* getShader(); 
+        /**
+         * \brief 画出物体
+         * 
+         */
+        void draw(); 
     private:
         /**
          * \brief 顶点属性数组对象

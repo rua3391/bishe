@@ -87,12 +87,12 @@ class zTcpClient
         {
             if(_socketfd == -1)
                 return false;
-            len = htonl(len);
             char tmpbuffer[len + 4];
+            DWORD netlen = htonl(len);
             memset(tmpbuffer, 0, sizeof(tmpbuffer));
-            memcpy(tmpbuffer, &len, 4);
+            memcpy(tmpbuffer, &netlen, 4);
             memcpy(tmpbuffer + 4, buffer, len);
-            if (!_writeN(tmpbuffer,len+4))
+            if (!_writeN(tmpbuffer,len + 4))
                 return false;
             return true;
         }

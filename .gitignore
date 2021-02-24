@@ -29,3 +29,11 @@ protobuf/*
 proto/*.cc
 proto/*.h
 assimp-5.0.1/*
+test
+test.cpp
+testing
+testing.cpp
+client.cpp
+client
+redis.cpp
+redis

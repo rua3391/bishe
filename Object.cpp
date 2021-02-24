@@ -46,7 +46,14 @@ bool Object::init(const std::vector<FLOAT> &buf)
     glGenBuffers(1, &_vbo);
     glBindVertexArray(_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	glBufferData(GL_ARRAY_BUFFER, buf.size() * sizeof(FLOAT), (void *)buf.begin().base(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, buf.size() * sizeof(FLOAT), &buf[0], GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(FLOAT), (void *)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
     if(!_shader)
     {
@@ -228,7 +235,7 @@ void Object::setShiness(FLOAT shiness)
     _material.shiness = shiness;
 }
 
-void Object::refelctLight()
+void Object::reflectLight()
 {
     // bindObject();
     DWORD size = GLightManager::getInstance()->size();
@@ -263,7 +270,7 @@ void Object::refelctLight()
     GLightManager::getInstance()->execEveryN(lightcallback);
 }
 
-void Object::refelctMaterial()
+void Object::reflectMaterial()
 {
     _shader->uniformSetvec3("M.ambient", _material.ambient);
     _shader->uniformSetvec3("M.diffuse", _material.diffuse);
@@ -288,4 +295,10 @@ void Object::fill(Proto::Common::ObjectProto &out)
 Shader* Object::getShader()
 {
     return _shader;
+}
+
+void Object::draw()
+{
+    bindObject();
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 }

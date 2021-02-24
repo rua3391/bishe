@@ -7,6 +7,7 @@ Mesh::Mesh(const std::vector<vertex> &vertex, const std::vector<DWORD> &indices,
     _indices(indices),
     _texture(texture)
 {
+    init();
 }
 
 Mesh::~Mesh()
@@ -50,30 +51,40 @@ void Mesh::init()
     glEnableVertexAttribArray(2);   
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, texcoords));
 
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, tangent));
+
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, bitangent));
     glBindVertexArray(0);
 }
 
 void Mesh::reflcetMesh(Shader *shader)
 {
-    DWORD diffuseNr = 1;
-    DWORD specularNr = 1;
+    DWORD diffuseNum = 1;
+    DWORD specularNum = 1;
+    DWORD normalNum = 1;
+    DWORD heightNum = 1;
     for(DWORD i = 0; i < _texture.size(); i++)
     {
-        glActiveTexture(GL_TEXTURE0 + i); // 在绑定之前激活相应的纹理单元
+        glActiveTexture(GL_TEXTURE0 + i); // 激活相应的纹理单元
         // 获取纹理序号（diffuse_textureN 中的 N）
-        std::string number;
+        std::string num;
         std::string type = _texture[i].type;
         if(type == "difftexture")
-            number = std::to_string(diffuseNr++);
+            num = std::to_string(diffuseNum++);
         else if(type == "spectexture")
-            number = std::to_string(specularNr++);
-
-        shader->uniformSet1i(("M." + type + "[" + number + "]"), i);
+            num = std::to_string(specularNum++);
+        else if(type == "normal")
+            num = std::to_string(normalNum++);
+        else if(type == "height")
+            num = std::to_string(heightNum++);
+        shader->uniformSet1i(type + num, i);
         glBindTexture(GL_TEXTURE_2D, _texture[i].id);
     }
-
     // 绘制网格
     glBindVertexArray(_vao);
     glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+    glActiveTexture(GL_TEXTURE0);
 }
