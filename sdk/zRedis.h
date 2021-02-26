@@ -68,6 +68,7 @@ class zRedis
             if(reply->type != REDIS_REPLY_NIL)
             {
                 strncpy(buffer, reply->str,reply->len);
+                buffer[reply->len] = '\0'; 
             }
             else
             {

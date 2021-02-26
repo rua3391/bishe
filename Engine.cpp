@@ -179,7 +179,7 @@ int Engine::mainProcess(void)
 	{
 		return -1;
 	}
-	obj1->initDiffuseTexture("pic/brick.jpg", 0);
+	obj1->initDiffuseTexture("pic/test.jpg", 0);
 	obj1->initSpecularTexture("pic/box_specular.png", 1);
 
 	Object *obj2 = initObj("model/cube","shader/light.vert", "shader/light.frag");
@@ -206,14 +206,14 @@ int Engine::mainProcess(void)
         glm::vec3(-4.0f,  2.0f, -12.0f),
         glm::vec3( 0.0f,  0.0f, -3.0f)
     };
-	Light *spotlight = initLight(Camera::getInstance()->getCameraPosition(), Spot);
-	Light *directionLight = initLight(glm::vec3(-0.2f, -1.0f, -0.3f), Direction);
+	// Light *spotlight = initLight(Camera::getInstance()->getCameraPosition(), Spot);
+	// Light *directionLight = initLight(glm::vec3(-0.2f, -1.0f, -0.3f), Direction);
 	Light *PointLight1 = initLight(pointLightPositions[0], Point);
-	Light *PointLight2 = initLight(pointLightPositions[1], Point);
-	Light *PointLight3 = initLight(pointLightPositions[2], Point);
-	Light *PointLight4 = initLight(pointLightPositions[3], Point);
+	// Light *PointLight2 = initLight(pointLightPositions[1], Point);
+	// Light *PointLight3 = initLight(pointLightPositions[2], Point);
+	// Light *PointLight4 = initLight(pointLightPositions[3], Point);
 	Model *model1 = new Model();
-	model1->loadModel("model/nanosuit/nanosuit.obj");
+	model1->loadModel("model/tail/Tails.obj");
 
 	FLOAT last_time = 0.0;
 	while (!glfwWindowShouldClose(window)) 
@@ -226,22 +226,22 @@ int Engine::mainProcess(void)
 		last_time = cur_time;
 
 		// 点光源设置
-		spotlight->setAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
-		spotlight->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
-		spotlight->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
-		spotlight->setLightConstant(1.0f);
-		spotlight->setLightLinear(0.09f);
-		spotlight->setLightQuadratic(0.032f);
-		spotlight->setLightCutoff(glm::cos(glm::radians(12.5f)));
-		spotlight->setLightOutCutoff(glm::cos(glm::radians(17.5f)));
-		spotlight->setLightDirection(Camera::getInstance()->getCameraForward());
-		spotlight->setLightPosition(Camera::getInstance()->getCameraPosition());
+		// spotlight->setAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
+		// spotlight->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+		// spotlight->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+		// spotlight->setLightConstant(1.0f);
+		// spotlight->setLightLinear(0.09f);
+		// spotlight->setLightQuadratic(0.032f);
+		// spotlight->setLightCutoff(glm::cos(glm::radians(12.5f)));
+		// spotlight->setLightOutCutoff(glm::cos(glm::radians(17.5f)));
+		// spotlight->setLightDirection(Camera::getInstance()->getCameraForward());
+		// spotlight->setLightPosition(Camera::getInstance()->getCameraPosition());
 		//平行光设置
-		directionLight->setLightDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
-		directionLight->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
-        directionLight->setDiffuseLight(glm::vec3(0.4f, 0.4f, 0.4f));
-        directionLight->setSpecularLight(glm::vec3(0.5f, 0.5f, 0.5f));
-		//四个点光源设置
+		// directionLight->setLightDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
+		// directionLight->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        // directionLight->setDiffuseLight(glm::vec3(0.4f, 0.4f, 0.4f));
+        // directionLight->setSpecularLight(glm::vec3(0.5f, 0.5f, 0.5f));
+		// //四个点光源设置
 		PointLight1->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
         PointLight1->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
         PointLight1->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -249,49 +249,67 @@ int Engine::mainProcess(void)
         PointLight1->setLightLinear(0.09);
         PointLight1->setLightQuadratic(0.032);
 
-		PointLight2->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
-        PointLight2->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
-        PointLight2->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
-        PointLight2->setLightConstant(1.0f);
-        PointLight2->setLightLinear(0.09);
-        PointLight2->setLightQuadratic(0.032);
+		// PointLight2->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        // PointLight2->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+        // PointLight2->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+        // PointLight2->setLightConstant(1.0f);
+        // PointLight2->setLightLinear(0.09);
+        // PointLight2->setLightQuadratic(0.032);
 
-		PointLight3->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
-        PointLight3->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
-        PointLight3->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
-        PointLight3->setLightConstant(1.0f);
-        PointLight3->setLightLinear(0.09);
-        PointLight3->setLightQuadratic(0.032);
+		// PointLight3->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        // PointLight3->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+        // PointLight3->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+        // PointLight3->setLightConstant(1.0f);
+        // PointLight3->setLightLinear(0.09);
+        // PointLight3->setLightQuadratic(0.032);
 
-		PointLight4->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
-        PointLight4->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
-        PointLight4->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
-        PointLight4->setLightConstant(1.0f);
-        PointLight4->setLightLinear(0.09);
-        PointLight4->setLightQuadratic(0.032);
+		// PointLight4->setAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+        // PointLight4->setDiffuseLight(glm::vec3(0.8f, 0.8f, 0.8f));
+        // PointLight4->setSpecularLight(glm::vec3(1.0f, 1.0f, 1.0f));
+        // PointLight4->setLightConstant(1.0f);
+        // PointLight4->setLightLinear(0.09);
+        // PointLight4->setLightQuadratic(0.032);
 
-		obj1->bindObject();
-		obj1->setShiness(32.0f);
-		for (DWORD i = 0; i < 10; i++)
-        {
-            obj1->translate(cubePositions[i]);
-            obj1->rotate(20.0f * i, glm::vec3(1.0f, 0.3f, 0.5f));
-			obj1->reflectPosition();
-			obj1->reflectMaterial();
-			obj1->reflectLight();
-            obj1->draw();
-        }
-		for (DWORD i = 0; i < 4; i++)
-		{
-			obj2->bindObject();
-			obj2->translate(pointLightPositions[i]);
-			obj2->scaling(glm::vec3(0.2f));
-			obj2->reflectPosition();
-			obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
-			obj2->draw();
-		}
+		// obj1->bindObject();
+		// obj1->setShiness(32.0f);
+		// obj1->translate(glm::vec3(1.0, 0.0, 0.0));
+		// obj1->scaling(glm::vec3(0.5f, 0.5f, 0.5f));
+		// obj1->reflectPosition();
+		// obj1->reflectMaterial();
+		// obj1->reflectLight();
+		// obj1->draw();
+		// obj1->translate(glm::vec3(-1.0, 0.0, -4.0));
+		// obj1->rotate(20.0f, glm::vec3(1.0f,0.3f, 0.5f));
+		// obj1->reflectPosition();
+		// obj1->reflectMaterial();
+		// obj1->reflectLight();
+		// obj1->draw();
+		// obj2->bindObject();
+		// obj2->translate(pointLightPositions[0]);
+		// obj2->scaling(glm::vec3(0.2f));
+		// obj2->reflectPosition();
+		// obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
+		// obj2->draw();
+		// for (DWORD i = 0; i < 10; ++i)
+        // {
+        //     obj1->translate(cubePositions[i]);
+        //     obj1->rotate(20.0f * i, glm::vec3(1.0f, 0.3f, 0.5f));
+		// 	obj1->reflectPosition();
+		// 	obj1->reflectMaterial();
+		// 	obj1->reflectLight();
+        //     obj1->draw();
+        // }
+		// for (DWORD i = 0; i < 4; ++i)
+		// {
+		// 	obj2->bindObject();
+		// 	obj2->translate(pointLightPositions[i]);
+		// 	obj2->scaling(glm::vec3(0.2f));
+		// 	obj2->reflectPosition();
+		// 	obj2->getShader()->uniformSetvec3("color", glm::vec3(1.0f));
+		// 	obj2->draw();
+		// }
 		model1->translate(glm::vec3(0.0f, 0.0f, 0.0f));
-		// model1->scaling(glm::vec3(0.2f, 0.2f, 0.2f));
+		model1->scaling(glm::vec3(0.5f, 0.5f, 0.5f));
 		model1->drawModel();
 		
 		glfwSwapBuffers(window);

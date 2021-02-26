@@ -124,7 +124,7 @@ vec3 calculateLight(Light L)
 	{
 		float theta = dot(lightdirection, normalize(-L.direction)); 
 		float epsilon   = L.cutoff - L.outcutoff;
-		float intensity = clamp((theta - L.outcutoff) / epsilon, 0.0, 1.0);
+		float intensity = clamp((theta - L.outcutoff) / epsilon, 0.0, 1.0);//将一个参数约束在0.0 - 1.0之内
 		diffuse *= intensity;
     	specular *= intensity;
 	}
@@ -134,9 +134,14 @@ vec3 calculateLight(Light L)
 void main()
 {
 	vec3 result;
-	if(size >= 1)
-		result = calculateLight(L[0]); 
-	for(int i = 1; i < size; ++i)
-		result += calculateLight(L[i]);
-	FragColor = vec4(result, 1.0f);
+	if(size == 0)
+		FragColor = vec4(texture(M.difftexture, textpos));
+	else
+	{
+		if(size >= 1)
+			result = calculateLight(L[0]); 
+		for(int i = 1; i < size; ++i)
+			result += calculateLight(L[i]);
+		FragColor = vec4(result, 1.0f);
+	}
 }

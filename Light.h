@@ -24,17 +24,17 @@ enum LightType
  */ 
 struct Lightcolor
 {
-    glm::vec3 ambient;
-    glm::vec3 diffuse;
-    glm::vec3 specular;
-    glm::vec3 position;
-    glm::vec3 direction;
-    FLOAT constant;
-    FLOAT linear;
-    FLOAT quadratic;
-    FLOAT cutoff;
-    FLOAT outcutoff;
-    LightType type;
+    glm::vec3 ambient;          //环境光强
+    glm::vec3 diffuse;          //漫反射光强
+    glm::vec3 specular;         //镜面高光光强
+    glm::vec3 position;         //光源位置
+    glm::vec3 direction;        //光源朝向
+    FLOAT constant;             //计算衰减中常熟项因子
+    FLOAT linear;               //衰减中一阶项因子
+    FLOAT quadratic;            //衰减中二阶项因子
+    FLOAT cutoff;               //聚光的切光角，角度外不会被照亮
+    FLOAT outcutoff;            //外圆锥、内圆锥与外圆锥之间做平滑处理
+    LightType type;             //类型
 };
 /**
  * \brief 光照

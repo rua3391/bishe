@@ -137,9 +137,8 @@ class zLog
             char *logpath, *timestamp;
             logpath = (char* )malloc(sizeof(char) * 256);
             timestamp = (char* )malloc(sizeof(char) * 256);
-            time_t t;
-            time(&t);
-            struct tm local;
+            time_t t = time(NULL);
+            tm local;
             localtime_r(&t, &local);
             sprintf(logpath,"%04d-%02d-%02d", local.tm_year + 1900, local.tm_mon + 1, local.tm_mday);
             sprintf(timestamp,"[%04d-%02d-%02d %02d:%02d]", local.tm_year + 1900, local.tm_mon + 1, local.tm_mday, local.tm_hour, local.tm_min);

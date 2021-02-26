@@ -124,7 +124,7 @@ class cModule
             std::stringstream os;
             BYTE buffer[MAX_SIZE];
             serialize(buffer);
-            os << "HSET " << "Engine " << _type + " " << buffer;
+            os << "HSET " << "Engine " << (_type + " ") << buffer;
             if(!_redis->execCommand(os.str().c_str()))
             {
                 error("_redis数据库写入失败");

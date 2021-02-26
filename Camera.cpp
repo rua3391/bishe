@@ -59,7 +59,7 @@ void Camera::unserialize()
 
 void Camera::final()
 {
-	//do nothing
+	saveToRedis();
 }
 
 glm::mat4 Camera::getViewMatrix() 

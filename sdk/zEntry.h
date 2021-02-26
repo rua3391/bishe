@@ -145,6 +145,14 @@ class zEntryManager
                     QUICK_RELEASE(_collection, i);
             }
         } 
+        void remove(DWORD id)
+        {
+            for(DWORD i = 0; i < _collection.size(); ++i)
+            {
+                if(_collection[i]->id == id)
+                    QUICK_RELEASE(_collection, i);
+            }
+        }
         /**
          * \brief 遍历物件 返回false时立刻停止
          * 

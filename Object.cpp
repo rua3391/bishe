@@ -243,7 +243,7 @@ void Object::reflectLight()
     _shader->uniformSetvec3("camerapos", Camera::getInstance()->getCameraPosition());
     struct LightCallback : public zCallback<Light>
     {
-        LightCallback(Object *o) : obj(o){}
+        LightCallback(Object *o) : obj(o), cnt(0){}
         ~LightCallback(){};
         bool exec(Light *light)
         {

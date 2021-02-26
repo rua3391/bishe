@@ -31,7 +31,7 @@ class zSnowFlake : public zNoneCopy
         {
             struct timeval tval;
             tval.tv_sec = secs / 1000;
-            tval.tv_usec = (secs * 1000) % 1000000;
+            tval.tv_usec = (secs * 1000) % 1000000; //微秒
             select(0, NULL, NULL, NULL, &tval);
         }
         /**
@@ -42,7 +42,6 @@ class zSnowFlake : public zNoneCopy
         QWORD currentTimeMillisec()
         {
             struct timeb tb;
-            time_t t;
             ftime(&tb);
             return tb.time * 1000 + tb.millitm;
         }
@@ -62,23 +61,22 @@ class zSnowFlake : public zNoneCopy
          */ 
         QWORD generateId() 
         {
-            DWORD sequence = 0;
-            static QWORD lastTimeStamp = 0;//静态无连接性变量
+            static QWORD lastTimeStamp = 0;//静态变量
             QWORD timeStamp = currentTimeMillisec();
             if (lastTimeStamp == timeStamp) 
             {
-                sequence = (sequence + 1) & (_sequenceMask); 
-                if (sequence == 0) 
+                _sequence = (_sequence + 1) & (_sequenceMask); 
+                if (_sequence == 0) 
                 {
                     timeStamp = getNextMsTimeStamp();
                 }
             } 
             else 
             {
-                sequence = 0;
+                _sequence = 0;
             }
             lastTimeStamp = timeStamp;
-            return (timeStamp << 10) | sequence;    //64位id, 1位符号位, 41位时间戳, 10位主机号省去, 剩余22位全部作为id号
+            return (timeStamp << 10) | _sequence;    //64位id, 1位符号位, 41位时间戳, 10位主机号省去, 剩余22位全部作为id号
         }
     private:
         /**
@@ -86,6 +84,11 @@ class zSnowFlake : public zNoneCopy
          * 
          */ 
         DWORD _sequenceMask;
+        /**
+         * \brief 序列号 
+         * 
+         */
+        DWORD _sequence; 
 };
 
 namespace 

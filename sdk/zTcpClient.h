@@ -83,16 +83,21 @@ class zTcpClient
          * \param len 数据长度
          * 
          */
-        bool tcpWrite(const char* buffer, DWORD len)
+        bool tcpWrite(const char* buffer, DWORD len = 0)
         {
             if(_socketfd == -1)
                 return false;
-            char tmpbuffer[len + 4];
-            DWORD netlen = htonl(len);
+            size_t buflen;
+            if(len == 0)
+                buflen = strlen(buffer);
+            else
+                buflen = len;
+            char tmpbuffer[buflen + 4];
+            DWORD netlen = htonl(buflen);
             memset(tmpbuffer, 0, sizeof(tmpbuffer));
             memcpy(tmpbuffer, &netlen, 4);
-            memcpy(tmpbuffer + 4, buffer, len);
-            if (!_writeN(tmpbuffer,len + 4))
+            memcpy(tmpbuffer + 4, buffer, buflen);
+            if (!_writeN(tmpbuffer,buflen + 4))
                 return false;
             return true;
         }
@@ -115,10 +120,9 @@ class zTcpClient
             SDWORD left = len, offset = 0, readnum = 0;
             while(left > 0)
             {
-                readnum = recv(_socketfd,buffer + offset,left,0);
+                readnum = recv(_socketfd, buffer + offset, left, 0);
                 if (readnum <= 0) 
                     return false;
-
                 offset += readnum;
                 left -= readnum;
             }
@@ -135,10 +139,9 @@ class zTcpClient
             SDWORD left = len, offset = 0, readnum = 0;
             while(left > 0)
             {
-                readnum = send(_socketfd,buffer + offset,left,0);
+                readnum = send(_socketfd, buffer + offset, left, 0);
                 if (readnum <= 0) 
                     return false;
-
                 offset += readnum;
                 left -= readnum;
             }
