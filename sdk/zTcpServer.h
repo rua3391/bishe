@@ -96,7 +96,7 @@ class zTcpServer : public zSingletonBase<zTcpServer>
                 return false;
             size_t buflen;
             if(len == 0)
-                buflen = strlen(buffer);
+                buflen = strlen(buffer) + 1;
             else
                 buflen = len;
             char tmpbuffer[buflen + 4];

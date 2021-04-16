@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include "zNoneCopy.h"
 /**
- * \brief 单例模式 懒汉单例模式, 需要自行初始化资源
+ * \brief 单例模式 
  * 
  */ 
 template <typename T>
@@ -44,5 +44,5 @@ class zSingletonBase : private zNoneCopy
 };
 
 template<typename T>
-std::shared_ptr<T> zSingletonBase<T>::instance = std::shared_ptr<T>(NULL);
+std::shared_ptr<T> zSingletonBase<T>::instance = std::shared_ptr<T>(new T());
 #endif

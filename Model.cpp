@@ -160,7 +160,7 @@ std::vector<texture> Model::_processMaterialTextures(aiMaterial* mat, aiTextureT
         mat->GetTexture(type, i, &str);
         // 检查当前路径纹理是否已加载
         bool skip = false;
-        for(unsigned int j = 0; j < _textureLoaded.size(); j++)
+        for(DWORD j = 0; j < _textureLoaded.size(); j++)
         {
             if(std::strcmp(_textureLoaded[j].path.data(), str.C_Str()) == 0)
             {

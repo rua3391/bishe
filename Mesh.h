@@ -11,8 +11,8 @@ struct vertex
     glm::vec3 position;     //坐标
     glm::vec3 normal;       //法向量
     glm::vec2 texcoords;    //纹理坐标
-    glm::vec3 tangent;
-    glm::vec3 bitangent;
+    glm::vec3 tangent;      //切线
+    glm::vec3 bitangent;    //双切线
 };
 /**
  * \brief 纹理结构体

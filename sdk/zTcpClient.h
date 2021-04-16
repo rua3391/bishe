@@ -36,6 +36,7 @@ class zTcpClient
             _socketfd = socket(AF_INET, SOCK_STREAM, 0);
             if(_socketfd < 0)
             {
+                perror("Socket error");
                 return false;
             }
             ip = gethostbyname(name);
@@ -52,7 +53,7 @@ class zTcpClient
 
             if(connect(_socketfd, (sockaddr *)(&serveraddr),sizeof(serveraddr)) != 0)
             {
-                perror("connect");
+                perror("connect error");
                 close(_socketfd);  
                 _socketfd = -1; 
                 return false;
@@ -89,7 +90,7 @@ class zTcpClient
                 return false;
             size_t buflen;
             if(len == 0)
-                buflen = strlen(buffer);
+                buflen = strlen(buffer) + 1;
             else
                 buflen = len;
             char tmpbuffer[buflen + 4];
